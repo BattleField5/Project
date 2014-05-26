@@ -4,21 +4,17 @@ namespace BattleField
 {
     class Battlefield
     {
-        //poLeto za biTka
-
-
         private char[,] gameField;
         public Battlefield()
         {
             gameField = null;
         }
+
         public void Start()
         {
-
             Console.WriteLine(@"Welcome to ""Battle Field"" game. ");
             int size = 0;
             string readBuffer = null;
-
 
             Console.Write("Enter battle field size: n=");
             readBuffer = Console.ReadLine();
@@ -27,13 +23,12 @@ namespace BattleField
             {
                 Console.WriteLine("Wrong format!");
                 Console.Write("Enter battle field size: n=");
-
             }
 
             if (size > 10 || size <= 0)
             { Start(); }
-            else{
-
+            else
+            {
                 gameField = GameServices.GenerateField(size);
                 StartInteraction();
             }
@@ -46,16 +41,12 @@ namespace BattleField
             for (int i = 0; i < 50; i++)
                 Console.WriteLine();
 
-
             while (GameServices.ContainsMines(gameField))
             {
-                GameServices.PokajiMiRezultata(gameField);
+                GameServices.ShowResult(gameField);
                 Console.Write("Please enter coordinates: ");
                 readBuffer = Console.ReadLine();
-                Mine mineToBlow = 
-                    
-                    
-                    GameServices.ExtractMineFromString(readBuffer);
+                Mine mineToBlow = GameServices.ExtractMineFromString(readBuffer);
 
                 while (mineToBlow == null)
                 {
@@ -70,11 +61,11 @@ namespace BattleField
                     continue;
                 }
 
-                GameServices.Гърми(gameField, mineToBlow);
+                GameServices.Detonate(gameField, mineToBlow);
                 blownMines++;
             }
 
-            GameServices.PokajiMiRezultata(gameField);
+            GameServices.ShowResult(gameField);
             Console.WriteLine("Game over. Detonated mines: {0}", blownMines);
         }
     }

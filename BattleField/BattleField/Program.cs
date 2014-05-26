@@ -2,12 +2,10 @@
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            // ei go na pochva
             Battlefield game = new Battlefield();
             game.Start();
-            // i do tuka ne stigam
         }
     }
 }

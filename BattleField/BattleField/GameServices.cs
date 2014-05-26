@@ -5,11 +5,13 @@ namespace BattleField
 {
     public class GameServices
     {
-        // tova e klasa v koito se pravqt magiite
         private static readonly Random rand = new Random();
-        private const double LOWERBOUNDMINES = 0.15;
-        private const double UPPERBOUNTMINES = 0.3;
-        
+        private const double LOWER_BOUND_MINES = 0.15;
+        private const double UPPER_BOUND_MINES = 0.3;
+        private const char FIELD_SYMBOL = '-';
+        private const char DETONATED_FIELD_SYMBOL = 'X';
+        private const int COMMAND_LENGTH = 3;
+
         public static char[,] GenerateField(int size)
         {
             char[,] field = new char[size, size];
@@ -19,7 +21,7 @@ namespace BattleField
             {
                 for (int j = 0; j < size; j++)
                 {
-                    field[i, j] = '-';
+                    field[i, j] = FIELD_SYMBOL;
                 }
             }
 
@@ -28,7 +30,7 @@ namespace BattleField
             {
                 int mineX = rand.Next(0, size);
                 int mineY = rand.Next(0, size);
-                Mine newMine = new Mine() { X = mineX, Y = mineY };
+                Mine newMine = new Mine(mineX, mineY);
 
                 if (GameServices.Contains(mines, newMine))
                 {
@@ -46,24 +48,15 @@ namespace BattleField
         private static int DetermineMineCount(int size)
         {
             double fields = (double)size * size;
-            int lowBound = (int)(LOWERBOUNDMINES * fields);
-            int upperBound = (int)(UPPERBOUNTMINES * fields);
+            int lowBound = (int)(LOWER_BOUND_MINES * fields);
+            int upperBound = (int)(UPPER_BOUND_MINES * fields);
 
             return rand.Next(lowBound, upperBound);
         }
 
         private static bool Contains(List<Mine> list, Mine mine)
         {
-            //abe tui e malko typo napraveno ama pyk bachka
-            foreach (Mine mina in list)
-            {
-                if (mina.X == mine.X && mina.Y == mine.Y)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return list.Contains(mine);
         }
 
         public static bool ContainsMines(char[,] field)
@@ -72,7 +65,7 @@ namespace BattleField
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if (field[i, j] != '-' && field[i, j] != 'X')
+                    if (field[i, j] != FIELD_SYMBOL && field[i, j] != DETONATED_FIELD_SYMBOL)
                     {
                         return true;
                     }
@@ -82,17 +75,13 @@ namespace BattleField
             return false;
         }
 
-        private static bool VPoletoLiE(char[,] field, int x, int y)
+        private static bool IsInsideField(char[,] field, int x, int y)
         {
-            if (x < 0 || y < 0 || x >= field.GetLength(0) || y >= field.GetLength(1))
-            {
-                return false;
-            }
-
-            return true;
+            bool isInsideField = (0 <= x && x < field.GetLength(0) && 0 <= y && y < field.GetLength(1));
+            return isInsideField;
         }
 
-        public static void Гърми(char[,] field, Mine mine)
+        public static void Detonate(char[,] field, Mine mine)
         {
             char mineType = field[mine.X, mine.Y];
 
@@ -128,46 +117,44 @@ namespace BattleField
 
         private static void ExplodeOne(char[,] field, Mine mine)
         {
-            Mine URcorner = new Mine() { X = mine.X - 1, Y = mine.Y - 1 };
-            Mine ULcorner = new Mine() { X = mine.X - 1, Y = mine.Y + 1 };
-            Mine DRcorner = new Mine() { X = mine.X + 1, Y = mine.Y - 1 };
-            Mine DLcorner = new Mine() { X = mine.X + 1, Y = mine.Y + 1 };
+            int x = mine.X;
+            int y = mine.Y;
 
-            if (VPoletoLiE(field, mine.X, mine.Y))
+            if (IsInsideField(field, x, y))
             {
-                field[mine.X, mine.Y] = 'X';
+                field[x, y] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, URcorner.X, URcorner.Y))
+            if (IsInsideField(field, x - 1, y - 1))
             {
-                field[URcorner.X, URcorner.Y] = 'X';
+                field[x - 1, y - 1] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, ULcorner.X, ULcorner.Y))
+            if (IsInsideField(field, x - 1, y + 1))
             {
-                field[ULcorner.X, ULcorner.Y] = 'X';
+                field[x - 1, y + 1] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, DRcorner.X, DRcorner.Y))
+            if (IsInsideField(field, x + 1, y - 1))
             {
-                field[DRcorner.X, DRcorner.Y] = 'X';
+                field[x + 1, y - 1] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, DLcorner.X, DLcorner.Y))
+            if (IsInsideField(field, x + 1, y + 1))
             {
-                field[DLcorner.X, DLcorner.Y] = 'X';
+                field[x + 1, y + 1] = DETONATED_FIELD_SYMBOL;
             }
         }
 
         private static void ExplodeTwo(char[,] field, Mine mine)
         {
-            for (int i = mine.X - 1; i <= mine.X+1; i++)
+            for (int i = mine.X - 1; i <= mine.X + 1; i++)
             {
-                for (int j = mine.Y - 1; j <= mine.Y+1; j++)
+                for (int j = mine.Y - 1; j <= mine.Y + 1; j++)
                 {
-                    if(VPoletoLiE(field, i,j))
+                    if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = 'X';
+                        field[i, j] = DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
@@ -176,29 +163,27 @@ namespace BattleField
         private static void ExplodeThree(char[,] field, Mine mine)
         {
             ExplodeTwo(field, mine);
-            Mine Up = new Mine() { X = mine.X - 2, Y = mine.Y };
-            Mine Down = new Mine() { X = mine.X + 2, Y = mine.Y };
-            Mine Left = new Mine() { X = mine.X, Y = mine.Y - 2 };
-            Mine Right = new Mine() { X = mine.X, Y = mine.Y + 2 };
+            int x = mine.X;
+            int y = mine.Y;
 
-            if (VPoletoLiE(field, Up.X, Up.Y))
+            if (IsInsideField(field, x - 2, y))
             {
-                field[Up.X, Up.Y] = 'X';
+                field[x - 2, y] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, Down.X, Down.Y))
+            if (IsInsideField(field, x + 2, y))
             {
-                field[Down.X, Down.Y] = 'X';
+                field[x + 2, y] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, Left.X, Left.Y))
+            if (IsInsideField(field, x, y - 2))
             {
-                field[Left.X, Left.Y] = 'X';
+                field[x, y - 2] = DETONATED_FIELD_SYMBOL;
             }
 
-            if (VPoletoLiE(field, Right.X, Right.Y))
+            if (IsInsideField(field, x, y + 2))
             {
-                field[Right.X, Right.Y] = 'X';
+                field[x, y + 2] = DETONATED_FIELD_SYMBOL;
             }
         }
 
@@ -218,9 +203,9 @@ namespace BattleField
                     if (DR) continue;
                     if (DL) continue;
 
-                    if (VPoletoLiE(field, i, j))
+                    if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = 'X';
+                        field[i, j] = DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
@@ -233,9 +218,9 @@ namespace BattleField
             {
                 for (int j = mine.Y - 2; j <= mine.Y + 2; j++)
                 {
-                    if (VPoletoLiE(field, i, j))
+                    if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = 'X';
+                        field[i, j] = DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
@@ -243,19 +228,20 @@ namespace BattleField
 
         public static bool IsValidMove(char[,] field, int x, int y)
         {
-            if (!VPoletoLiE(field, x, y))
+            bool isInsideField = IsInsideField(field, x, y);
+            if (isInsideField)
             {
-                return false;
-            }
-            if (field[x, y] == 'X' || field[x, y] == '-')
-            {
-                return false;
+                char symbol = field[x, y];
+                if (symbol != DETONATED_FIELD_SYMBOL && symbol != FIELD_SYMBOL)
+                {
+                    return true;
+                }
             }
 
-            return true;
+            return false;
         }
 
-        public static void PokajiMiRezultata(char[,] field)
+        public static void ShowResult(char[,] field)
         {
             Console.Write("   ");
             int size = field.GetLength(0);
@@ -263,12 +249,14 @@ namespace BattleField
             {
                 Console.Write("{0} ", i);
             }
+
             Console.WriteLine();
             Console.Write("   ");
-            for (int i = 0; i < size*2; i++)
+            for (int i = 0; i < size * 2; i++)
             {
                 Console.Write("-");
             }
+
             Console.WriteLine();
 
             for (int i = 0; i < size; i++)
@@ -276,7 +264,7 @@ namespace BattleField
                 Console.Write("{0} |", i);
                 for (int j = 0; j < size; j++)
                 {
-                    Console.Write("{0} ", field[i,j]);
+                    Console.Write("{0} ", field[i, j]);
                 }
                 Console.WriteLine();
             }
@@ -284,7 +272,7 @@ namespace BattleField
 
         public static Mine ExtractMineFromString(string line)
         {
-            if (line == null || line.Length < 3 || !line.Contains(" "))
+            if (line == null || line.Length < COMMAND_LENGTH || !line.Contains(" "))
             {
                 Console.WriteLine("Invalid index!");
                 return null;
@@ -307,7 +295,7 @@ namespace BattleField
                 return null;
             }
 
-            return new Mine() { X = x, Y = y };
+            return new Mine(x, y);
         }
     }
 }
