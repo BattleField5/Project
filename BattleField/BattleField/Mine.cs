@@ -5,6 +5,12 @@
         private int x;
         private int y;
 
+        public Mine(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
         public int X
         {
             get
@@ -29,12 +35,6 @@
             {
                 this.y = value;
             }
-        }
-
-        public Mine(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
         }
     }
 }

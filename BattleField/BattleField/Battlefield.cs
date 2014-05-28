@@ -1,13 +1,14 @@
-﻿using System;
-
-namespace BattleField
+﻿namespace BattleField
 {
-    class Battlefield
+    using System;
+
+    public class Battlefield
     {
         private char[,] gameField;
+
         public Battlefield()
         {
-            gameField = null;
+            this.gameField = null;
         }
 
         public void Start()
@@ -26,11 +27,13 @@ namespace BattleField
             }
 
             if (size > 10 || size <= 0)
-            { Start(); }
+            {
+                this.Start();
+            }
             else
             {
-                gameField = GameServices.GenerateField(size);
-                StartInteraction();
+                this.gameField = GameServices.GenerateField(size);
+                this.StartInteraction();
             }
         }
 
@@ -39,11 +42,13 @@ namespace BattleField
             string readBuffer = null;
             int blownMines = 0;
             for (int i = 0; i < 50; i++)
-                Console.WriteLine();
-
-            while (GameServices.ContainsMines(gameField))
             {
-                GameServices.ShowResult(gameField);
+                Console.WriteLine();
+            }
+
+            while (GameServices.ContainsMines(this.gameField))
+            {
+                GameServices.ShowResult(this.gameField);
                 Console.Write("Please enter coordinates: ");
                 readBuffer = Console.ReadLine();
                 Mine mineToBlow = GameServices.ExtractMineFromString(readBuffer);
@@ -55,17 +60,17 @@ namespace BattleField
                     mineToBlow = GameServices.ExtractMineFromString(readBuffer);
                 }
 
-                if (!GameServices.IsValidMove(gameField, mineToBlow.X, mineToBlow.Y))
+                if (!GameServices.IsValidMove(this.gameField, mineToBlow.X, mineToBlow.Y))
                 {
                     Console.WriteLine("Invalid move!");
                     continue;
                 }
 
-                GameServices.Detonate(gameField, mineToBlow);
+                GameServices.Detonate(this.gameField, mineToBlow);
                 blownMines++;
             }
 
-            GameServices.ShowResult(gameField);
+            GameServices.ShowResult(this.gameField);
             Console.WriteLine("Game over. Detonated mines: {0}", blownMines);
         }
     }

@@ -1,8 +1,8 @@
 ﻿namespace BattleField
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
             Battlefield game = new Battlefield();
             game.Start();
