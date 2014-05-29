@@ -204,32 +204,16 @@
 
         private static void ExplodeOne(char[,] field, Mine mine)
         {
-            int x = mine.X;
-            int y = mine.Y;
-
-            if (IsInsideField(field, x, y))
+            for (int i = mine.X - 1; i <= mine.X + 1; i += 2)
             {
-                field[x, y] = DETONATED_FIELD_SYMBOL;
-            }
-
-            if (IsInsideField(field, x - 1, y - 1))
-            {
-                field[x - 1, y - 1] = DETONATED_FIELD_SYMBOL;
-            }
-
-            if (IsInsideField(field, x - 1, y + 1))
-            {
-                field[x - 1, y + 1] = DETONATED_FIELD_SYMBOL;
-            }
-
-            if (IsInsideField(field, x + 1, y - 1))
-            {
-                field[x + 1, y - 1] = DETONATED_FIELD_SYMBOL;
-            }
-
-            if (IsInsideField(field, x + 1, y + 1))
-            {
-                field[x + 1, y + 1] = DETONATED_FIELD_SYMBOL;
+                for (int j = mine.Y - 1; j <= mine.Y + 1; j += 2)
+                {
+                    if (IsInsideField(field, i, j))
+                    {
+                        field[mine.X, mine.Y] = DETONATED_FIELD_SYMBOL;
+                        field[i, j] = DETONATED_FIELD_SYMBOL;
+                    }
+                }
             }
         }
 
