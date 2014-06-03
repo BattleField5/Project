@@ -1,11 +1,12 @@
 ﻿namespace BattleField
 {
-    public class Mine
+    public class Cell
     {
         private int x;
         private int y;
+        private char value;
 
-        public Mine(int x, int y)
+        public Cell(int x, int y)
         {
             this.X = x;
             this.Y = y;
@@ -35,6 +36,17 @@
             {
                 this.y = value;
             }
+        }
+
+        public char Value
+        {
+            get { return this.value; }
+            set { this.value = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Value.ToString();
         }
     }
 }

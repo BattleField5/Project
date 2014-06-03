@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battlefield.cs" />
+    <Compile Include="Gameboard.cs" />
+    <Compile Include="GameEngine.cs" />
     <Compile Include="GameServices.cs" />
-    <Compile Include="Mine.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

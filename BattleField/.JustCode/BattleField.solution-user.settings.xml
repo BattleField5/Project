@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<JustCodeSettings Version="0.0" Timestamp="81621499-7878-4497-9a4f-f0b6b178599e">
+  <IgnoredErrorsAndWarningsSettings xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <IgnoredErrorsAndWarnings Version="2">
+      <FilePath>
+        <FileRelativePath>BattleField/Gameboard.cs</FileRelativePath>
+        <ProjectRelativePath>BattleField/BattleField.csproj</ProjectRelativePath>
+        <IgnoredElement>
+          <TextualIdentifier>15031889811299452382</TextualIdentifier>
+        </IgnoredElement>
+      </FilePath>
+    </IgnoredErrorsAndWarnings>
+  </IgnoredErrorsAndWarningsSettings>
+</JustCodeSettings>

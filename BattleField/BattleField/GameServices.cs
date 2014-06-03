@@ -1,57 +1,19 @@
 ﻿namespace BattleField
 {
     using System;
-    using System.Collections.Generic;
 
-    public class GameServices
+    public static class GameServices
     {
-        private const double LOWER_BOUND_MINES = 0.15;
-        private const double UPPER_BOUND_MINES = 0.3;
-        private const char FIELD_SYMBOL = '-';
-        private const char DETONATED_FIELD_SYMBOL = 'X';
         private const int COMMAND_LENGTH = 3;
-        private static readonly Random Rand = new Random();
+        public static readonly Random randomGenerator = new Random();        
 
-        public static char[,] GenerateField(int size)
-        {
-            char[,] field = new char[size, size];
-            int minesCount = DetermineMineCount(size);
-
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    field[i, j] = FIELD_SYMBOL;
-                }
-            }
-
-            List<Mine> mines = new List<Mine>();
-            for (int i = 0; i < minesCount; i++)
-            {
-                int mineX = Rand.Next(0, size);
-                int mineY = Rand.Next(0, size);
-                Mine newMine = new Mine(mineX, mineY);
-
-                if (GameServices.Contains(mines, newMine))
-                {
-                    i--;
-                    continue;
-                }
-
-                int mineType = Rand.Next('1', '6');
-                field[mineX, mineY] = Convert.ToChar(mineType);
-            }
-
-            return field;
-        }
-
-        public static bool ContainsMines(char[,] field)
+        public static bool ContainsMines(Cell[,] field)
         {
             for (int i = 0; i < field.GetLength(0); i++)
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if (field[i, j] != FIELD_SYMBOL && field[i, j] != DETONATED_FIELD_SYMBOL)
+                    if (field[i, j].Value != Gameboard.FIELD_SYMBOL && field[i, j].Value != Gameboard.DETONATED_FIELD_SYMBOL)
                     {
                         return true;
                     }
@@ -61,9 +23,9 @@
             return false;
         }
 
-        public static void Detonate(char[,] field, Mine mine)
+        public static void Detonate(Cell[,] field, Cell mine)
         {
-            char mineType = field[mine.X, mine.Y];
+            char mineType = field[mine.X, mine.Y].Value;
 
             switch (mineType)
             {
@@ -100,13 +62,13 @@
             }
         }
 
-        public static bool IsValidMove(char[,] field, int x, int y)
+        public static bool IsValidMove(Cell[,] field, int x, int y)
         {
             bool isInsideField = IsInsideField(field, x, y);
             if (isInsideField)
             {
-                char symbol = field[x, y];
-                if (symbol != DETONATED_FIELD_SYMBOL && symbol != FIELD_SYMBOL)
+                char symbol = field[x, y].Value;
+                if (symbol != Gameboard.DETONATED_FIELD_SYMBOL && symbol != Gameboard.FIELD_SYMBOL)
                 {
                     return true;
                 }
@@ -115,7 +77,7 @@
             return false;
         }
 
-        public static void ShowResult(char[,] field)
+        public static void ShowResult(Cell[,] field)
         {
             Console.Write("   ");
             int size = field.GetLength(0);
@@ -145,7 +107,7 @@
             }
         }
 
-        public static Mine ExtractMineFromString(string line)
+        public static Cell ExtractMineFromString(string line)
         {
             if (line == null || line.Length < COMMAND_LENGTH || !line.Contains(" "))
             {
@@ -170,24 +132,10 @@
                 return null;
             }
 
-            return new Mine(x, y);
+            return new Cell(x, y);
         }
 
-        private static int DetermineMineCount(int size)
-        {
-            double fields = (double)size * size;
-            int lowBound = (int)(LOWER_BOUND_MINES * fields);
-            int upperBound = (int)(UPPER_BOUND_MINES * fields);
-
-            return Rand.Next(lowBound, upperBound);
-        }
-
-        private static bool Contains(List<Mine> list, Mine mine)
-        {
-            return list.Contains(mine);
-        }
-
-        private static bool IsInsideField(char[,] field, int x, int y)
+        private static bool IsInsideField(Cell[,] field, int x, int y)
         {
             bool isInsideField = false;
 
@@ -202,7 +150,7 @@
             return isInsideField;
         }
 
-        private static void ExplodeOne(char[,] field, Mine mine)
+        private static void ExplodeOne(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i += 2)
             {
@@ -210,14 +158,14 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[mine.X, mine.Y] = DETONATED_FIELD_SYMBOL;
-                        field[i, j] = DETONATED_FIELD_SYMBOL;
+                        field[mine.X, mine.Y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
         }
 
-        private static void ExplodeTwo(char[,] field, Mine mine)
+        private static void ExplodeTwo(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i++)
             {
@@ -225,13 +173,13 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
         }
 
-        private static void ExplodeThree(char[,] field, Mine mine)
+        private static void ExplodeThree(Cell[,] field, Cell mine)
         {
             ExplodeTwo(field, mine);
             int x = mine.X;
@@ -239,26 +187,26 @@
 
             if (IsInsideField(field, x - 2, y))
             {
-                field[x - 2, y] = DETONATED_FIELD_SYMBOL;
+                field[x - 2, y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
             }
 
             if (IsInsideField(field, x + 2, y))
             {
-                field[x + 2, y] = DETONATED_FIELD_SYMBOL;
+                field[x + 2, y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
             }
 
             if (IsInsideField(field, x, y - 2))
             {
-                field[x, y - 2] = DETONATED_FIELD_SYMBOL;
+                field[x, y - 2].Value = Gameboard.DETONATED_FIELD_SYMBOL;
             }
 
             if (IsInsideField(field, x, y + 2))
             {
-                field[x, y + 2] = DETONATED_FIELD_SYMBOL;
+                field[x, y + 2].Value = Gameboard.DETONATED_FIELD_SYMBOL;
             }
         }
 
-        private static void ExplodeFour(char[,] field, Mine mine)
+        private static void ExplodeFour(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {
@@ -291,13 +239,13 @@
 
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
         }
 
-        private static void ExplodeFive(char[,] field, Mine mine)
+        private static void ExplodeFive(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {
@@ -305,7 +253,7 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j] = DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
                     }
                 }
             }
