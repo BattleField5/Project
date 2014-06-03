@@ -1,16 +1,16 @@
 ﻿namespace BattleField
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     public class Gameboard
     {
-        public const char FIELD_SYMBOL = '-';
-        public const char DETONATED_FIELD_SYMBOL = 'X';
-        private const double LOWER_BOUND_MINES = 0.15;
-        private const double UPPER_BOUND_MINES = 0.3;
-        private static Gameboard instance;
+        public const char FieldSymbol = '-';
+        public const char DetonatedFieldSymbol = 'X';
+        private const double LowerBoundMines = 0.15;
+        private const double UpperBoundMines = 0.3;
+        private static Gameboard instance = null;
         private Cell[,] field = null;
         private int minesCount = 0;
         private int size = 0;
@@ -19,7 +19,6 @@
         {
             this.Field = new Cell[size, size];
             this.Size = size;
-            DetermineMineCount();
             GenerateGameboard();
         }
 
@@ -52,47 +51,49 @@
 
         private void GenerateGameboard()
         {
-            for (int i = 0; i < this.Size; i++)
+            GenerateField();
+            GenerateMines();          
+        }
+
+        private void GenerateField()
+        {
+            for (int row = 0; row < this.Size; row++)
             {
-                for (int j = 0; j < this.Size; j++)
+                for (int col = 0; col < this.Size; col++)
                 {
-                    Cell currentCell = new Cell(i, j);
-                    currentCell.Value = FIELD_SYMBOL;
-                    this.Field[i, j] = currentCell;
+                    this.Field[row, col] = new Cell(row, col, FieldSymbol);
                 }
             }
+        }
 
+        private void GenerateMines()
+        {
+            DetermineMineCount();
             List<Cell> mines = new List<Cell>();
-            for (int i = 0; i < this.MinesCount; i++)
+            for (int counter = 0; counter < this.MinesCount; counter++)
             {
-                int cellX = GameServices.randomGenerator.Next(0, this.Size);
-                int cellY = GameServices.randomGenerator.Next(0, this.Size);
-                Cell newMine = new Cell(cellX, cellY);
+                int cellX = GameServices.RandomGenerator.Next(0, this.Size);
+                int cellY = GameServices.RandomGenerator.Next(0, this.Size);
+                int cellType = GameServices.RandomGenerator.Next('1', '6');
+                Cell currentCell = new Cell(cellX, cellY, Convert.ToChar(cellType));
 
-                if (Contains(mines, newMine))
+                if (mines.Contains(currentCell))
                 {
-                    i--;
+                    counter--;
                     continue;
                 }
 
-                int cellType = GameServices.randomGenerator.Next('1', '6');
-                this.Field[cellX, cellY].Value = Convert.ToChar(cellType);
+                mines.Add(currentCell);
+                this.Field[cellX, cellY] = currentCell;
             }
         }
 
         private void DetermineMineCount()
         {
-            double fields = (double)this.Size * this.Size;
-            int lowBound = (int)(LOWER_BOUND_MINES * fields);
-            int upperBound = (int)(UPPER_BOUND_MINES * fields);
-
-            this.MinesCount = GameServices.randomGenerator.Next(lowBound, upperBound);
+            double totalCells = (double)this.Size * this.Size;
+            int lowBound = (int)(LowerBoundMines * totalCells);
+            int upperBound = (int)(UpperBoundMines * totalCells);
+            this.MinesCount = GameServices.RandomGenerator.Next(lowBound, upperBound);
         }
-
-        private static bool Contains(List<Cell> list, Cell mine)
-        {
-            return list.Contains(mine);
-        }
-
     }
 }

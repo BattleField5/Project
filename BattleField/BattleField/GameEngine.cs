@@ -24,7 +24,6 @@
 
             Gameboard board = Gameboard.Initialize(size);
             StartInteraction(board);
-
         }
 
         private static void StartInteraction(Gameboard board)

@@ -4,16 +4,17 @@
 
     public static class GameServices
     {
-        private const int COMMAND_LENGTH = 3;
-        public static readonly Random randomGenerator = new Random();        
+        private const int CommandLength = 3;
+        public static readonly Random RandomGenerator = new Random();        
 
         public static bool ContainsMines(Cell[,] field)
         {
-            for (int i = 0; i < field.GetLength(0); i++)
+            for (int row = 0; row < field.GetLength(0); row++)
             {
-                for (int j = 0; j < field.GetLength(1); j++)
+                for (int col = 0; col < field.GetLength(1); col++)
                 {
-                    if (field[i, j].Value != Gameboard.FIELD_SYMBOL && field[i, j].Value != Gameboard.DETONATED_FIELD_SYMBOL)
+                    Cell currentCell = field[row, col];
+                    if (currentCell.IsMine())
                     {
                         return true;
                     }
@@ -30,35 +31,32 @@
             switch (mineType)
             {
                 case '1':
-                    {
-                        ExplodeOne(field, mine);
-                    }
-
+                {
+                    ExplodeOne(field, mine);
                     break;
+                }
                 case '2':
-                    {
-                        ExplodeTwo(field, mine);
-                    }
-
+                {
+                    ExplodeTwo(field, mine);
                     break;
+                }
                 case '3':
-                    {
-                        ExplodeThree(field, mine);
-                    }
-
+                {
+                    ExplodeThree(field, mine);
                     break;
+                }
                 case '4':
-                    {
-                        ExplodeFour(field, mine);
-                    }
-
+                {
+                    ExplodeFour(field, mine);
                     break;
+                }
                 case '5':
-                    {
-                        ExplodeFive(field, mine);
-                    }
-
+                {
+                    ExplodeFive(field, mine);
                     break;
+                }
+                default:
+                break;
             }
         }
 
@@ -68,7 +66,7 @@
             if (isInsideField)
             {
                 char symbol = field[x, y].Value;
-                if (symbol != Gameboard.DETONATED_FIELD_SYMBOL && symbol != Gameboard.FIELD_SYMBOL)
+                if (symbol != Gameboard.DetonatedFieldSymbol && symbol != Gameboard.FieldSymbol)
                 {
                     return true;
                 }
@@ -109,7 +107,7 @@
 
         public static Cell ExtractMineFromString(string line)
         {
-            if (line == null || line.Length < COMMAND_LENGTH || !line.Contains(" "))
+            if (line == null || line.Length < CommandLength || !line.Contains(" "))
             {
                 Console.WriteLine("Invalid index!");
                 return null;
@@ -158,8 +156,8 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[mine.X, mine.Y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
-                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                        field[mine.X, mine.Y].Value = Gameboard.DetonatedFieldSymbol;
+                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
                     }
                 }
             }
@@ -173,7 +171,7 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
                     }
                 }
             }
@@ -187,22 +185,22 @@
 
             if (IsInsideField(field, x - 2, y))
             {
-                field[x - 2, y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                field[x - 2, y].Value = Gameboard.DetonatedFieldSymbol;
             }
 
             if (IsInsideField(field, x + 2, y))
             {
-                field[x + 2, y].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                field[x + 2, y].Value = Gameboard.DetonatedFieldSymbol;
             }
 
             if (IsInsideField(field, x, y - 2))
             {
-                field[x, y - 2].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                field[x, y - 2].Value = Gameboard.DetonatedFieldSymbol;
             }
 
             if (IsInsideField(field, x, y + 2))
             {
-                field[x, y + 2].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                field[x, y + 2].Value = Gameboard.DetonatedFieldSymbol;
             }
         }
 
@@ -239,7 +237,7 @@
 
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
                     }
                 }
             }
@@ -253,7 +251,7 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DETONATED_FIELD_SYMBOL;
+                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
                     }
                 }
             }
