@@ -30,20 +30,24 @@
         {
             string readBuffer = null;
             int blownMines = 0;
+            string message;
 
             while (GameServices.ContainsMines(board.Field))
             {
                 Console.WriteLine(GameServices.ShowResult(board.Field));
                 Console.Write("Please enter coordinates: ");
                 readBuffer = Console.ReadLine();
-                Cell mineToBlow = GameServices.ExtractMineFromString(readBuffer);
+                bool isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
 
-                while (mineToBlow == null)
+                while(!isValidCommand)
                 {
+                    Console.WriteLine(message);
                     Console.Write("Please enter coordinates: ");
                     readBuffer = Console.ReadLine();
-                    mineToBlow = GameServices.ExtractMineFromString(readBuffer);
+                    isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
                 }
+
+                Cell mineToBlow = GameServices.ExtractMineFromString(readBuffer);
 
                 if (!GameServices.IsValidMove(board.Field, mineToBlow.X, mineToBlow.Y))
                 {

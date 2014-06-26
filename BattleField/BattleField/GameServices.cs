@@ -109,30 +109,52 @@
             return result.ToString();
         }
 
-        public static Cell ExtractMineFromString(string line)
+        public static bool ValidateCommand(string input, out string message)
         {
-            if (line == null || line.Length < CommandLength || !line.Contains(" "))
+            if (input == null)
             {
-                Console.WriteLine("Invalid index!");
-                return null;
+                message = "Command can not be null!";
+                return false;
             }
 
-            string[] splited = line.Split(' ');
+            if (input.Length < CommandLength)
+            {
+                message = "Command length must be " + CommandLength + "!";
+                return false;
+            }
+
+            if (!input.Contains(" "))
+            {
+                message = "Indexes must be separated by space!";
+                return false;
+            }
+
+            string[] splited = input.Split(' ');
 
             int x = 0;
             int y = 0;
 
             if (!int.TryParse(splited[0], out x))
             {
-                Console.WriteLine("Invalid index!");
-                return null;
+                message = "Invalid index!";
+                return false;
             }
 
             if (!int.TryParse(splited[1], out y))
             {
-                Console.WriteLine("Invalid index!");
-                return null;
+                message = "Invalid index!";
+                return false;
             }
+
+            message = "";
+            return true;
+        }
+
+        public static Cell ExtractMineFromString(string line)
+        {
+            string[] splited = line.Split(' ');
+            int x = int.Parse(splited[0]);
+            int y = int.Parse(splited[1]);
 
             return new Cell(x, y);
         }
