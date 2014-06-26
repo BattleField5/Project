@@ -25,7 +25,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateOneWithAllMinesInsideFieldDetonatesFiveCells()
+        public void TestDetonate1WithAllMinesInsideFieldDetonates5Cells()
         {
             Cell[,] field = GenerateMatrix(5);
             field[1, 1].Value = '1';
@@ -41,7 +41,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateOneWithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
+        public void TestDetonate1WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
@@ -77,7 +77,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateOneWithThreeMinesOutsideFieldDetonatesTwoCells()
+        public void TestDetonate1With2MinesInsideFieldDetonates2Cells()
         {
             Cell[,] field = GenerateMatrix(5);
             field[0, 0].Value = '1';
@@ -88,7 +88,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateOneWithThreeMinesOutsideFieldDoesNotDetonateUnnecessaryCells()
+        public void TestDetonate1With2MinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
@@ -118,7 +118,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateTwoWithAllMinesInsideFieldDetonatesNineCells()
+        public void TestDetonate2WithAllMinesInsideFieldDetonates9Cells()
         {
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
@@ -146,7 +146,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateTwoWithAllMinesInsideFieldDoesNotDetonateMoreThanNineCells()
+        public void TestDetonate2WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
@@ -179,7 +179,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateTwoWithFourMinesInsideFieldDetonatesFourCells()
+        public void TestDetonate2With4MinesInsideFieldDetonates4Cells()
         {
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
@@ -195,7 +195,7 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateThreeWithThirteenMinesInsideFieldDetonatesThirteedCells()
+        public void TestDetonate3WithAllMinesInsideFieldDetonates13Cells()
         {
             int n = 7;
             Cell[,] field = GenerateMatrix(n);
@@ -229,7 +229,208 @@ namespace BattleFieldTests
         }
 
         [TestMethod]
-        public void TestDetonateThreeWithThirteenMinesInsideFieldDoesNotDetonateUnnecessaryCells()
-        { }
+        public void TestDetonate3WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
+        {
+            int n = 9;
+            Cell[,] field = GenerateMatrix(n);
+            field[4, 4].Value = '3';
+            GameServices.Detonate(field, field[4, 4]);
+            bool moreThanThirteenCellsDetonated = false;
+            int i = 0;
+            int j = 0;
+            for (; i < n; i++)
+            {
+                for (; j < n; j++)
+                {
+                    if (! ((3 <= i) && (i <= 5) && (3 <= j) && (j <= 5)) &&
+                        (i != 2 && j != 4) &&
+                        (i != 4 && j != 6) &&
+                        (i != 6 && j != 4) &&
+                        (i != 2 && j != 2))
+                    {
+                        if (field[i, j].Value == DetonatedSymbol)
+                        {
+                            moreThanThirteenCellsDetonated = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (moreThanThirteenCellsDetonated)
+                {
+                    break;
+                }
+            }
+
+            Assert.IsFalse(moreThanThirteenCellsDetonated, String.Format("A cell was detonated at {0}, {1}", i, j));
+        }
+
+        [TestMethod]
+        public void TestDetonate3With6MinesInsideFieldDetonates6Cells()
+        {
+            int n = 7;
+            Cell[,] field = GenerateMatrix(n);
+            field[6, 6].Value = '3';
+            GameServices.Detonate(field, field[6, 6]);
+            bool cellsAreDetonated =
+                    field[4, 6].Value == field[5, 5].Value &&
+                    field[5, 5].Value == field[5, 6].Value &&
+                    field[5, 6].Value == field[6, 4].Value &&
+                    field[6, 4].Value == field[6, 5].Value &&
+                    field[6, 5].Value == field[6, 6].Value &&
+                    field[6, 6].Value == DetonatedSymbol;
+
+            Assert.IsTrue(cellsAreDetonated);
+        }
+
+        [TestMethod]
+        public void TestDetonate4WithAllMinesInsideFieldDetonates21Cells()
+        { 
+            int n = 7;
+            Cell[,] field = GenerateMatrix(n);
+            field[3, 3].Value = '4';
+            GameServices.Detonate(field, field[3, 3]);
+            bool cellsAreDetonated = true;
+            for (int i = 2; i <= 4; i++)
+            {
+                for (int j = 1; j <= 5; j++)
+                {
+                    if (field[i, j].Value != DetonatedSymbol)
+                    {
+                        cellsAreDetonated = false;
+                        break;
+                    }
+                }
+
+                if (!cellsAreDetonated)
+                {
+                    break;
+                }
+            }
+
+            cellsAreDetonated = cellsAreDetonated &&
+                    field[1, 2].Value == field[1, 3].Value &&
+                    field[1, 3].Value == field[1, 4].Value &&
+                    field[1, 4].Value == field[5, 2].Value &&
+                    field[5, 2].Value == field[5, 3].Value &&
+                    field[5, 3].Value == field[5, 4].Value &&
+                    field[5, 4].Value == DetonatedSymbol;
+
+            Assert.IsTrue(cellsAreDetonated);
+        }
+
+        [TestMethod]
+        public void TestDetonate4WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
+        {
+            int n = 9;
+            Cell[,] field = GenerateMatrix(n);
+            field[4, 4].Value = '4';
+            GameServices.Detonate(field, field[4, 4]);
+            bool moreThan21CellsAreDetonated = false;
+            int i = 0;
+            int j = 0;
+            for (; i < n; i++)
+            {
+                for (; j < n; j++)
+                {
+                    if (! ((2 <= i) && (i <= 6) && (2 <= j) && (j <= 6)) || 
+                            (i ==  2 && j == 2) ||
+                            (i ==  2 && j == 6) ||
+                            (i ==  6 && j == 6) ||
+                            (i ==  6 && j == 2))
+                    {
+                        if (field[i, j].Value == DetonatedSymbol)
+                        {
+                            moreThan21CellsAreDetonated = false;
+                            break;
+                        }                        
+                    }
+                }
+
+                if (!moreThan21CellsAreDetonated)
+                {
+                    break;
+                }
+            }
+
+            Assert.IsFalse(moreThan21CellsAreDetonated);
+        }
+
+        [TestMethod]
+        public void TestDetonate4With8MinesInsideFieldDetonates8Cells()
+        {
+            int n = 7;
+            Cell[,] field = GenerateMatrix(n);
+            field[0, 6].Value = '4';
+            GameServices.Detonate(field, field[0, 6]);
+            bool cellsAreDetonated =
+                    field[0, 4].Value == field[0, 5].Value &&
+                    field[0, 5].Value == field[0, 6].Value &&
+                    field[0, 6].Value == field[1, 4].Value &&
+                    field[1, 4].Value == field[1, 5].Value &&
+                    field[1, 5].Value == field[1, 6].Value &&
+                    field[1, 6].Value == field[2, 5].Value &&
+                    field[2, 5].Value == field[2, 6].Value &&
+                    field[2, 6].Value == DetonatedSymbol;
+
+            Assert.IsTrue(cellsAreDetonated);
+        }
+
+        [TestMethod]
+        public void TestDetonate5WithAllMinesInsideFieldDetonates25Cells()
+        {
+            int n = 9;
+            Cell[,] field = GenerateMatrix(n);
+            field[4, 4].Value = '5';
+            GameServices.Detonate(field, field[4, 4]);
+            bool cellsAreDetonated = true;
+            for (int i = 2; i <= 6; i++)
+            {
+                for (int j = 2; j <= 6; j++)
+                {
+                    if (field[i, j].Value != DetonatedSymbol)
+                    {
+                        cellsAreDetonated = false;
+                        break;
+                    }
+                }
+
+                if (!cellsAreDetonated)
+                {
+                    break;
+                }
+            }
+            Assert.IsTrue(cellsAreDetonated);
+        }
+
+        [TestMethod]
+        public void TestDetonate5WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
+        {
+            int n = 9;
+            Cell[,] field = GenerateMatrix(n);
+            field[4, 4].Value = '5';
+            GameServices.Detonate(field, field[4, 4]);
+            bool cellsAreDetonated = false;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (!((2 <= i) && (i <= 6) && (2 <= j) && (j <= 6)))
+                    {
+                        if (field[i, j].Value == DetonatedSymbol)
+                        {
+                            cellsAreDetonated = true;
+                            break;
+                        }                        
+                    }
+                }
+
+                if (cellsAreDetonated)
+                {
+                    break;
+                }
+            }
+            Assert.IsFalse(cellsAreDetonated);
+        }
     }
 }
