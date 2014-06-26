@@ -1,6 +1,7 @@
 ﻿namespace BattleField
 {
     using System;
+    using System.Text;
 
     public static class GameServices
     {
@@ -75,34 +76,37 @@
             return false;
         }
 
-        public static void ShowResult(Cell[,] field)
+        public static string ShowResult(Cell[,] field)
         {
-            Console.Write("   ");
+            StringBuilder result = new StringBuilder();
+            result.Append("   ");
             int size = field.GetLength(0);
             for (int i = 0; i < size; i++)
             {
-                Console.Write("{0} ", i);
+                result.Append(i + " ");
             }
 
-            Console.WriteLine();
-            Console.Write("   ");
+            result.AppendLine();
+            result.Append("   ");
             for (int i = 0; i < size * 2; i++)
             {
-                Console.Write("-");
+                result.Append("-");
             }
 
-            Console.WriteLine();
+            result.AppendLine();
 
             for (int i = 0; i < size; i++)
             {
-                Console.Write("{0} |", i);
+                result.Append(i + " |");
                 for (int j = 0; j < size; j++)
                 {
-                    Console.Write("{0} ", field[i, j]);
+                    result.Append(field[i, j] + " ");
                 }
 
-                Console.WriteLine();
+                result.AppendLine();
             }
+
+            return result.ToString();
         }
 
         public static Cell ExtractMineFromString(string line)

@@ -33,7 +33,7 @@
 
             while (GameServices.ContainsMines(board.Field))
             {
-                GameServices.ShowResult(board.Field);
+                Console.WriteLine(GameServices.ShowResult(board.Field));
                 Console.Write("Please enter coordinates: ");
                 readBuffer = Console.ReadLine();
                 Cell mineToBlow = GameServices.ExtractMineFromString(readBuffer);
@@ -55,7 +55,7 @@
                 blownMines++;
             }
 
-            GameServices.ShowResult(board.Field);
+            Console.WriteLine(GameServices.ShowResult(board.Field));
             Console.WriteLine("Game over. Detonated mines: {0}", blownMines);
         }
 
