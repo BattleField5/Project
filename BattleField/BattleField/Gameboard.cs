@@ -6,9 +6,6 @@
 
     public class Gameboard : IGameboard
     {
-        private const char FieldSymbol = '-';
-        private const char DetonatedFieldSymbol = 'X';
-
         private const double LowerBoundMines = 0.15;
         private const double UpperBoundMines = 0.3;
         private Cell[,] field = null;
@@ -52,10 +49,7 @@
             {
                 for (int col = 0; col < this.Size; col++)
                 {
-                    this.Field[row, col] = new Cell(row, col, FieldSymbol);
-                    this.Field[row, col].IsMine = false;
-                    this.Field[row, col].IsEmpty = true;
-                    this.Field[row, col].IsDetonated = false;
+                    this.Field[row, col] = new Cell(row, col, false);
                 }
             }
         }
@@ -68,11 +62,8 @@
             {
                 int cellX = GameServices.RandomGenerator.Next(0, this.Size);
                 int cellY = GameServices.RandomGenerator.Next(0, this.Size);
-                int cellType = GameServices.RandomGenerator.Next('1', '6');
-                Cell currentCell = new Cell(cellX, cellY, Convert.ToChar(cellType));
-                currentCell.IsMine = true;
-                currentCell.IsEmpty = false;
-                currentCell.IsDetonated = false;
+                int cellType = GameServices.RandomGenerator.Next(1, 6);
+                Cell currentCell = new Cell(cellX, cellY, true, cellType);
 
                 if (mines.Contains(currentCell))
                 {

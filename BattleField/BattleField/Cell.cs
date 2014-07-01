@@ -11,16 +11,25 @@
         private int y;
         private char value;
         private bool isMine;
-        private bool isEmpty;
         private bool isDetonated;
 
-        public Cell(int x, int y) : this(x, y, '\0') { }
-
-        public Cell(int x, int y, char value)
+        public Cell(int x, int y) : this(x, y, false) { }
+        
+        public Cell(int x, int y, bool isMine, int mineCount = 0)
         {
             this.X = x;
             this.Y = y;
-            this.Value = value;
+            if (isMine)
+            {
+                this.IsMine = true;
+                this.IsDetonated = false;
+                this.Value = (char)(mineCount + 48);
+            }
+            else
+            {
+                this.IsMine = false;
+                this.Value = FieldSymbol;
+            }
         }
 
         public int X
@@ -50,15 +59,6 @@
             }
         }
 
-        public bool IsEmpty
-        {
-            get { return this.isEmpty; }
-            set
-            {
-                this.isEmpty = value;
-            }
-        }
-
         public bool IsDetonated
         {
             get { return this.isDetonated; }
@@ -71,8 +71,7 @@
         public void Detonate()
         {
             this.IsDetonated = true;
-            this.IsMine = false;
-            this.IsEmpty = false;
+            this.IsMine = false;//TODO: remove and test and fix the other code
             this.Value = DetonatedFieldSymbol;
         }
 
