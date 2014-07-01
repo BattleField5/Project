@@ -22,11 +22,11 @@
                 Start();
             }
 
-            Gameboard board = Gameboard.Initialize(size);
+            IGameboard board = GameboardProxy.Initialize(size);
             StartInteraction(board);
         }
 
-        private static void StartInteraction(Gameboard board)
+        private static void StartInteraction(IGameboard board)
         {
             string readBuffer = null;
             int blownMines = 0;

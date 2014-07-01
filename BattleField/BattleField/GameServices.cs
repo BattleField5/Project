@@ -15,7 +15,7 @@
                 for (int col = 0; col < field.GetLength(1); col++)
                 {
                     Cell currentCell = field[row, col];
-                    if (currentCell.IsMine())
+                    if (currentCell.IsMine)
                     {
                         return true;
                     }
@@ -66,8 +66,7 @@
             bool isInsideField = IsInsideField(field, x, y);
             if (isInsideField)
             {
-                char symbol = field[x, y].Value;
-                if (symbol != Gameboard.DetonatedFieldSymbol && symbol != Gameboard.FieldSymbol)
+                if (field[x, y].IsMine)
                 {
                     return true;
                 }
@@ -182,8 +181,8 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[mine.X, mine.Y].Value = Gameboard.DetonatedFieldSymbol;
-                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
+                        field[mine.X, mine.Y].Detonate();
+                        field[i, j].Detonate();
                     }
                 }
             }
@@ -197,7 +196,7 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
+                        field[i, j].Detonate();
                     }
                 }
             }
@@ -211,22 +210,22 @@
 
             if (IsInsideField(field, x - 2, y))
             {
-                field[x - 2, y].Value = Gameboard.DetonatedFieldSymbol;
+                field[x - 2, y].Detonate();
             }
 
             if (IsInsideField(field, x + 2, y))
             {
-                field[x + 2, y].Value = Gameboard.DetonatedFieldSymbol;
+                field[x + 2, y].Detonate();
             }
 
             if (IsInsideField(field, x, y - 2))
             {
-                field[x, y - 2].Value = Gameboard.DetonatedFieldSymbol;
+                field[x, y - 2].Detonate();
             }
 
             if (IsInsideField(field, x, y + 2))
             {
-                field[x, y + 2].Value = Gameboard.DetonatedFieldSymbol;
+                field[x, y + 2].Detonate();
             }
         }
 
@@ -263,7 +262,7 @@
 
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
+                        field[i, j].Detonate();
                     }
                 }
             }
@@ -277,7 +276,7 @@
                 {
                     if (IsInsideField(field, i, j))
                     {
-                        field[i, j].Value = Gameboard.DetonatedFieldSymbol;
+                        field[i, j].Detonate();
                     }
                 }
             }

@@ -7,8 +7,8 @@ namespace BattleFieldTests
     [TestClass]
     public class TestDetonation
     {
-        private const char FieldSymbol = Gameboard.FieldSymbol;
-        private const char DetonatedSymbol = Gameboard.DetonatedFieldSymbol;
+        private const char FieldSymbol = '-';
+        private const char DetonatedSymbol = 'X';
 
         private Cell[,] GenerateMatrix(int n)
         {

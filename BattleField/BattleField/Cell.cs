@@ -4,9 +4,15 @@
 
     public class Cell : IEquatable<Cell>
     {
+        private const char FieldSymbol = '-';
+        private const char DetonatedFieldSymbol = 'X';
+
         private int x;
         private int y;
         private char value;
+        private bool isMine;
+        private bool isEmpty;
+        private bool isDetonated;
 
         public Cell(int x, int y) : this(x, y, '\0') { }
 
@@ -35,22 +41,44 @@
             set { this.value = value; }
         }
 
+        public bool IsMine
+        {
+            get { return this.isMine; }
+            set
+            {
+                this.isMine = value;
+            }
+        }
+
+        public bool IsEmpty
+        {
+            get { return this.isEmpty; }
+            set
+            {
+                this.isEmpty = value;
+            }
+        }
+
+        public bool IsDetonated
+        {
+            get { return this.isDetonated; }
+            set
+            {
+                this.isDetonated = value;
+            }
+        }
+
+        public void Detonate()
+        {
+            this.IsDetonated = true;
+            this.IsMine = false;
+            this.IsEmpty = false;
+            this.Value = DetonatedFieldSymbol;
+        }
+
         public override string ToString()
         {
             return this.Value.ToString();
-        }
-
-        public bool IsMine()
-        {
-            if (this.Value != Gameboard.FieldSymbol && this.Value != Gameboard.DetonatedFieldSymbol)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
         }
 
         public bool Equals(Cell other)
