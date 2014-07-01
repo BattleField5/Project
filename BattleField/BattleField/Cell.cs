@@ -71,7 +71,6 @@
         public void Detonate()
         {
             this.IsDetonated = true;
-            this.IsMine = false;//TODO: remove and test and fix the other code
             this.Value = DetonatedFieldSymbol;
         }
 

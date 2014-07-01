@@ -15,7 +15,7 @@
                 for (int col = 0; col < field.GetLength(1); col++)
                 {
                     Cell currentCell = field[row, col];
-                    if (currentCell.IsMine)
+                    if (currentCell.IsMine && !currentCell.IsDetonated)
                     {
                         return true;
                     }
@@ -66,7 +66,7 @@
             bool isInsideField = IsInsideField(field, x, y);
             if (isInsideField)
             {
-                if (field[x, y].IsMine)
+                if (field[x, y].IsMine && !field[x, y].IsDetonated)
                 {
                     return true;
                 }
