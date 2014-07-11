@@ -31,9 +31,11 @@
             string readBuffer = null;
             int blownMines = 0;
             string message;
-
+           
             while (GameServices.ContainsMines(board.Field))
             {
+                //todo : add Memento pattern for an Undo option if move is not the first one or the game is over!
+                //to save state and offer option for undo
                 Console.WriteLine(GameServices.ShowResult(board.Field));
                 Console.Write("Please enter coordinates: ");
                 readBuffer = Console.ReadLine();

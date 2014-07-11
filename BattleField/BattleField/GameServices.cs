@@ -33,27 +33,27 @@
             {
                 case '1':
                 {
-                    ExplodeOne(field, mine);
+                    ExplodeMineTypeOne(field, mine);
                     break;
                 }
                 case '2':
                 {
-                    ExplodeTwo(field, mine);
+                    ExplodeMineTypeTwo(field, mine);
                     break;
                 }
                 case '3':
                 {
-                    ExplodeThree(field, mine);
+                    ExplodeMineTypeThree(field, mine);
                     break;
                 }
                 case '4':
                 {
-                    ExplodeFour(field, mine);
+                    ExplodeMineTypeFour(field, mine);
                     break;
                 }
                 case '5':
                 {
-                    ExplodeFive(field, mine);
+                    ExplodeMineTypeFive(field, mine);
                     break;
                 }
                 default:
@@ -173,7 +173,7 @@
             return isInsideField;
         }
 
-        private static void ExplodeOne(Cell[,] field, Cell mine)
+        private static void ExplodeMineTypeOne(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i += 2)
             {
@@ -188,7 +188,7 @@
             }
         }
 
-        private static void ExplodeTwo(Cell[,] field, Cell mine)
+        private static void ExplodeMineTypeTwo(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i++)
             {
@@ -202,9 +202,9 @@
             }
         }
 
-        private static void ExplodeThree(Cell[,] field, Cell mine)
+        private static void ExplodeMineTypeThree(Cell[,] field, Cell mine)
         {
-            ExplodeTwo(field, mine);
+            ExplodeMineTypeTwo(field, mine);
             int x = mine.X;
             int y = mine.Y;
 
@@ -229,7 +229,7 @@
             }
         }
 
-        private static void ExplodeFour(Cell[,] field, Cell mine)
+        private static void ExplodeMineTypeFour(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {
@@ -268,7 +268,7 @@
             }
         }
 
-        private static void ExplodeFive(Cell[,] field, Cell mine)
+        private static void ExplodeMineTypeFive(Cell[,] field, Cell mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {

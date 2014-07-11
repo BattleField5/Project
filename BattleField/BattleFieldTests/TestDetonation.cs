@@ -17,7 +17,7 @@ namespace BattleFieldTests
             {
                 for (int j = 0; j < n; j++)
                 {
-                    matrix[i, j] = new Cell(i, j, FieldSymbol);
+                    matrix[i, j] = new Cell(i, j, false);
                 }
             }
 
