@@ -5,8 +5,7 @@
 
     public static class GameServices
     {
-        private const int CommandLength = 3;
-        public static readonly Random RandomGenerator = new Random();        
+        private const int CommandLength = 3;       
 
         public static bool ContainsMines(Cell[,] field)
         {

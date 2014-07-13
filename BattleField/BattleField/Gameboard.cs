@@ -8,6 +8,7 @@
     {
         private const double LowerBoundMines = 0.15;
         private const double UpperBoundMines = 0.3;
+        private readonly IRandomGenerator rand = RandomGenerator.Instance;
         private Cell[,] field = null;
         private int minesCount = 0;
         private int size = 0;
@@ -40,7 +41,7 @@
         private void GenerateGameboard()
         {
             GenerateField();
-            GenerateMines();          
+            GenerateMines(rand);          
         }
 
         private void GenerateField()
@@ -54,15 +55,15 @@
             }
         }
 
-        private void GenerateMines()
+        private void GenerateMines(IRandomGenerator rand)
         {
-            DetermineMineCount();
+            DetermineMineCount(rand);
             List<Cell> mines = new List<Cell>();
             for (int counter = 0; counter < this.MinesCount; counter++)
             {
-                int cellX = GameServices.RandomGenerator.Next(0, this.Size);
-                int cellY = GameServices.RandomGenerator.Next(0, this.Size);
-                int cellType = GameServices.RandomGenerator.Next(1, 6);
+                int cellX = rand.GetRandom(0, this.Size);
+                int cellY = rand.GetRandom(0, this.Size);
+                int cellType = rand.GetRandom(1, 6);
                 Cell currentCell = new Cell(cellX, cellY, true, cellType);
 
                 if (mines.Contains(currentCell))
@@ -76,12 +77,12 @@
             }
         }
 
-        private void DetermineMineCount()
+        private void DetermineMineCount(IRandomGenerator rand)
         {
             double totalCells = (double)this.Size * this.Size;
             int lowBound = (int)(LowerBoundMines * totalCells);
             int upperBound = (int)(UpperBoundMines * totalCells);
-            this.MinesCount = GameServices.RandomGenerator.Next(lowBound, upperBound);
+            this.MinesCount = rand.GetRandom(lowBound, upperBound);
         }
     }
 }
