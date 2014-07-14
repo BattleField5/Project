@@ -16,6 +16,16 @@ namespace BattleField
             inputReader = new ConsoleReader();
             uiRender = new ConsoleWriter();
         }
+
+        public void SetReader(IInputReader reader)
+        {
+            this.inputReader = reader;
+        }
+
+        public void SetWriter(IUiRender writer)
+        {
+            this.uiRender = writer;
+        }
         public int GetPlaygroundSizeFromUser()
         {
             this.uiRender.Write("Please enter the size of the gameboard: ");
