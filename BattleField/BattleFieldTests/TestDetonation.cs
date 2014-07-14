@@ -29,7 +29,9 @@ namespace BattleFieldTests
         {
             Cell[,] field = GenerateMatrix(5);
             field[1, 1].Value = '1';
-            GameServices.Detonate(field, field[1, 1]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[1, 1]);
             bool patternOneDetonatesFiveCells =
                     field[1, 1].Value == DetonatedSymbol &&
                     field[0, 0].Value == DetonatedSymbol &&
@@ -46,7 +48,9 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[1, 1].Value = '1';
-            GameServices.Detonate(field, field[1, 1]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[1, 1]);
             bool patternOneDetonatesMoreThanFiveCells = false;
             int i = 0;
             int j = 0;
@@ -81,7 +85,9 @@ namespace BattleFieldTests
         {
             Cell[,] field = GenerateMatrix(5);
             field[0, 0].Value = '1';
-            GameServices.Detonate(field, field[0, 0]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[0, 0]);
             bool twoCellsAreDetonated = (field[0, 0].Value == DetonatedSymbol && field[1, 1].Value == DetonatedSymbol);
 
             Assert.IsTrue(twoCellsAreDetonated);
@@ -93,7 +99,9 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[0, 0].Value = '1';
-            GameServices.Detonate(field, field[0, 0]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[0, 0]);
             int i = 0;
             int j = 0;
             bool moreThanOneCellIsDetonated = false;
@@ -123,7 +131,9 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[2, 2].Value = '2';
-            GameServices.Detonate(field, field[2, 2]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[2, 2]);
             bool nineCellsAreDetonated = true;
             for (int i = 1; i <= 3; i++)
             {
@@ -151,7 +161,9 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[2, 2].Value = '2';
-            GameServices.Detonate(field, field[2, 2]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[2, 2]);
             bool moreThanNineCellsAreDetonated = false;
             int i = 0;
             int j = 0;
@@ -184,7 +196,9 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[4, 0].Value = '2';
-            GameServices.Detonate(field, field[4, 0]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[4, 0]);
             bool fourCellsAreDetonated = 
                     field[3, 0].Value == DetonatedSymbol &&
                     field[3, 1].Value == DetonatedSymbol &&
@@ -200,7 +214,9 @@ namespace BattleFieldTests
             int n = 7;
             Cell[,] field = GenerateMatrix(n);
             field[3, 3].Value = '3';
-            GameServices.Detonate(field, field[3, 3]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[3, 3]);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
@@ -234,7 +250,9 @@ namespace BattleFieldTests
             int n = 9;
             Cell[,] field = GenerateMatrix(n);
             field[4, 4].Value = '3';
-            GameServices.Detonate(field, field[4, 4]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[4, 4]);
             bool moreThanThirteenCellsDetonated = false;
             int i = 0;
             int j = 0;
@@ -271,7 +289,9 @@ namespace BattleFieldTests
             int n = 7;
             Cell[,] field = GenerateMatrix(n);
             field[6, 6].Value = '3';
-            GameServices.Detonate(field, field[6, 6]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[6, 6]);
             bool cellsAreDetonated =
                     field[4, 6].Value == field[5, 5].Value &&
                     field[5, 5].Value == field[5, 6].Value &&
@@ -289,7 +309,9 @@ namespace BattleFieldTests
             int n = 7;
             Cell[,] field = GenerateMatrix(n);
             field[3, 3].Value = '4';
-            GameServices.Detonate(field, field[3, 3]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[3, 3]);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
@@ -325,7 +347,9 @@ namespace BattleFieldTests
             int n = 9;
             Cell[,] field = GenerateMatrix(n);
             field[4, 4].Value = '4';
-            GameServices.Detonate(field, field[4, 4]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[4, 4]);
             bool moreThan21CellsAreDetonated = false;
             int i = 0;
             int j = 0;
@@ -362,7 +386,9 @@ namespace BattleFieldTests
             int n = 7;
             Cell[,] field = GenerateMatrix(n);
             field[0, 6].Value = '4';
-            GameServices.Detonate(field, field[0, 6]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[0, 6]);
             bool cellsAreDetonated =
                     field[0, 4].Value == field[0, 5].Value &&
                     field[0, 5].Value == field[0, 6].Value &&
@@ -382,7 +408,9 @@ namespace BattleFieldTests
             int n = 9;
             Cell[,] field = GenerateMatrix(n);
             field[4, 4].Value = '5';
-            GameServices.Detonate(field, field[4, 4]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[4, 4]);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 6; i++)
             {
@@ -409,7 +437,9 @@ namespace BattleFieldTests
             int n = 9;
             Cell[,] field = GenerateMatrix(n);
             field[4, 4].Value = '5';
-            GameServices.Detonate(field, field[4, 4]);
+            IDetonator detonator = new Detonator();
+            detonator.Field = field;
+            detonator.Detonate(field[4, 4]);
             bool cellsAreDetonated = false;
             for (int i = 0; i < n; i++)
             {
