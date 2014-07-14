@@ -14,7 +14,7 @@ namespace BattleField
         {
             if (gameboard == null)
             {
-                gameboard = new Gameboard(size);
+                //gameboard = new Gameboard(size);
             }
             return gameboard;
         }

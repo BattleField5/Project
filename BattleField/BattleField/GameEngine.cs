@@ -22,7 +22,7 @@
                 Start();
             }
 
-            IGameboard board = GameboardProxy.Initialize(size);
+            IGameboard board = Gameboard.Initialize(size);
             StartInteraction(board);
         }
 

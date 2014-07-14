@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldGenerator.cs" />
     <Compile Include="Gameboard.cs" />
     <Compile Include="GameboardProxy.cs" />
     <Compile Include="GameEngine.cs" />
