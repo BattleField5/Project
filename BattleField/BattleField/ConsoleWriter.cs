@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    public class ConsoleWriter : IUIRender
+    public class ConsoleWriter : IUiRender
     {
         public void WriteLine(string text)
         {

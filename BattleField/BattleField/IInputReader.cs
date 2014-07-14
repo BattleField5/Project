@@ -8,6 +8,6 @@ namespace BattleField
 {
     interface IInputReader
     {
-        public string GetUserInput();
+        string GetUserInput();
     }
 }

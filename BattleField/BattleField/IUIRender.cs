@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    interface IUIRender
+    public interface IUiRender
     {
-        public void WriteLine(string text);
-        public void Write(string text);
+        void WriteLine(string text);
+        void Write(string text);
     }
 }

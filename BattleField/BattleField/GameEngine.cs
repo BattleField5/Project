@@ -2,21 +2,18 @@
 {
     using System;
 
-    public static class GameEngine
+    public class GameEngine
     {
-        private static void Start()
-        {
-            Console.WriteLine(@"Welcome to ""BattleField"" game.");
-            Console.Write("Please enter the size of the gameboard: ");
-            string userInput = Console.ReadLine();
+        private UserController userController;
 
-            while (!IsValidInput(userInput))
-            {
-                Console.WriteLine("Wrong input! Size must be number between 2-10");
-                Console.Write("Please enter the size of the game board: ");
-                userInput = Console.ReadLine();
-            }
-            int size = int.Parse(userInput);
+        public GameEngine()
+        {
+            this.userController = new UserController();
+        }
+        public void Start()
+        {
+
+            int size = this.userController.GetPlaygroundSizeFromUser();
             IGameboard board = Gameboard.Initialize(size);
             StartInteraction(board);
         }
@@ -93,7 +90,8 @@
         /// </summary>
         public static void Main()
         {
-            Start();
+            var gameEngine = new GameEngine();
+            gameEngine.Start();
         }
     }
 }

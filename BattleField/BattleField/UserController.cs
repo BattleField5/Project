@@ -8,9 +8,25 @@ namespace BattleField
 {
     public class UserController
     {
+        private IInputReader inputReader;
+        private IUiRender uiRender;
+
+        public UserController()
+        {
+            inputReader = new ConsoleReader();
+            uiRender = new ConsoleWriter();
+        }
         public int GetPlaygroundSizeFromUser()
         {
-            return 0;
+            this.uiRender.Write("Please enter the size of the gameboard: ");
+            string userInput = this.inputReader.GetUserInput();
+            while (!InputValidator.IsValidInputForPlaygroundSize(userInput))
+            {
+                this.uiRender.WriteLine("Wrong input! Size must be number between 2-10");
+                this.uiRender.Write("Please enter the size of the game board: ");
+                userInput = this.inputReader.GetUserInput();
+            }
+            return int.Parse(userInput);
         }
 
         public string GetNextPositionForPlayFromUser()
