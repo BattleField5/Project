@@ -9,21 +9,33 @@
             Console.WriteLine(@"Welcome to ""BattleField"" game.");
             Console.Write("Please enter the size of the gameboard: ");
             string userInput = Console.ReadLine();
-            int size = 0;
 
-            while (!int.TryParse(userInput, out size))
+            while (!IsValidInput(userInput))
             {
-                Console.WriteLine("Wrong format!");
+                Console.WriteLine("Wrong input! Size must be number between 2-10");
                 Console.Write("Please enter the size of the game board: ");
+                userInput = Console.ReadLine();
             }
-
-            if (size > 10 || size <= 0)
-            {
-                Start();
-            }
-
+            int size = int.Parse(userInput);
             IGameboard board = Gameboard.Initialize(size);
             StartInteraction(board);
+        }
+
+        private static bool IsValidInput(string userInput)
+        {
+            int size = 0;
+            if (!int.TryParse(userInput, out size))
+            {
+                return false;
+            }
+            if (1 < size && size <= 10)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static void StartInteraction(IGameboard board)
@@ -31,8 +43,8 @@
             string readBuffer = null;
             int blownMines = 0;
             string message;
-           // int count = 0;
-           // IGameboard storedBoard = new Gameboard(board.Size);
+            // int count = 0;
+            // IGameboard storedBoard = new Gameboard(board.Size);
             while (GameServices.ContainsMines(board.Field))
             {
                 //todo : add Memento pattern for an Undo option if move is not the first one or the game is over!
@@ -40,7 +52,7 @@
                 //if (count == 1)
                 //{
                 //  storedBoard.Field = board.Field;
-                  
+
                 //}
                 //Console.Write("This is the stored board");
                 //Console.WriteLine(GameServices.ShowResult(storedBoard.Field));
@@ -49,7 +61,7 @@
                 readBuffer = Console.ReadLine();
                 bool isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
 
-                while(!isValidCommand)
+                while (!isValidCommand)
                 {
                     Console.WriteLine(message);
                     Console.Write("Please enter coordinates: ");
@@ -69,7 +81,7 @@
                 blownMines++;
                 //count++;
                 //Console.WriteLine("Moves count: {0}",count);
-                
+
             }
 
             Console.WriteLine(GameServices.ShowResult(board.Field));

@@ -13,9 +13,9 @@
 
         protected Gameboard(int size)
         {
-            var feildGenerator = new FieldGenerator();
+            var fieldGenerator = new FieldGenerator();
             this.Size = size;
-            this.Field = feildGenerator.GenerateField(this.Size);
+            this.Field = fieldGenerator.GenerateField(this.Size);
         }
 
         public static IGameboard Initialize(int size)
