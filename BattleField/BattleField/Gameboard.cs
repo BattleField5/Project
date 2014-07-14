@@ -6,9 +6,6 @@
 
     public class Gameboard : IGameboard
     {
-        //private const double LowerBoundMines = 0.15;
-        //private const double UpperBoundMines = 0.3;
-        //private readonly IRandomGenerator rand = RandomGenerator.Instance;
         private static IGameboard gameboard = null;
         private Cell[,] field = null;
         private int minesCount = 0;

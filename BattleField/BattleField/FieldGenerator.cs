@@ -66,7 +66,7 @@ namespace BattleField
             double totalCells = (double)size * size;
             int lowBound = (int)(Math.Round(LowerBoundMines * totalCells));
             int upperBound = (int)(Math.Round(UpperBoundMines * totalCells));
-            int minesCount = rand.GetRandom(lowBound, upperBound+1);
+            int minesCount = rand.GetRandom(lowBound, upperBound + 1);
 
             return minesCount;
         }
