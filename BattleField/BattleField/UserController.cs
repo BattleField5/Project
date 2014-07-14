@@ -39,17 +39,68 @@ namespace BattleField
             return int.Parse(userInput);
         }
 
-        public string GetNextPositionForPlayFromUser()
+        public Cell GetNextPositionForPlayFromUser(Cell[,] field)
         {
-            this.uiRender.Write("Please enter coordinates: ");
-            string userInput = this.inputReader.GetUserInput();
-            while (!InputValidator.IsValidInputForNextPosition(userInput))
+            Cell validCell = null;
+            while (true)
             {
-                this.uiRender.WriteLine("Wrong input! Coordinates must be 2 numbers between 0-9 , separated by space");
                 this.uiRender.Write("Please enter coordinates: ");
-                userInput = this.inputReader.GetUserInput();
+                string userInput = this.inputReader.GetUserInput();
+                while (!InputValidator.IsValidInputForNextPosition(userInput))
+                {
+                    this.uiRender.WriteLine("Wrong input! Coordinates must be 2 numbers between 0-9 , separated by space");
+                    this.uiRender.Write("Please enter coordinates: ");
+                    userInput = this.inputReader.GetUserInput();
+                }
+
+                validCell = this.ExtractMineFromString(userInput);
+                if (IsValidMove(field, validCell.X, validCell.Y))
+                {
+                    return validCell;
+                }
+                else
+                {
+                    this.uiRender.WriteLine("Invalid move!");
+                }
             }
-            return userInput;
+        }
+
+        private bool IsValidMove(Cell[,] field, int x, int y)
+        {
+            bool isInsideField = IsInsideField(field, x, y);
+            if (isInsideField)
+            {
+                if (field[x, y].IsMine && !field[x, y].IsDetonated)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public Cell ExtractMineFromString(string line)
+        {
+            string[] splited = line.Split(' ');
+            int x = int.Parse(splited[0]);
+            int y = int.Parse(splited[1]);
+
+            return new Cell(x, y);
+        }
+
+        private bool IsInsideField(Cell[,] field, int x, int y)
+        {
+            bool isInsideField = false;
+
+            if (0 <= x && x < field.GetLength(0))
+            {
+                if (0 <= y && y < field.GetLength(1))
+                {
+                    isInsideField = true;
+                }
+            }
+
+            return isInsideField;
         }
 
     }
