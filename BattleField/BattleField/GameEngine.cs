@@ -43,32 +43,12 @@
         {
             string readBuffer = null;
             int blownMines = 0;
-            string message;
             // int count = 0;
             // IGameboard storedBoard = new Gameboard(board.Size);
             while (GameServices.ContainsMines(board.Field))
             {
-                //todo : add Memento pattern for an Undo option if move is not the first one or the game is over!
-                //to save state and offer option for undo
-                //if (count == 1)
-                //{
-                //  storedBoard.Field = board.Field;
-
-                //}
-                //Console.Write("This is the stored board");
-                //Console.WriteLine(GameServices.ShowResult(storedBoard.Field));
                 Console.WriteLine(GameServices.ShowResult(board.Field));
-                Console.Write("Please enter coordinates: ");
-                readBuffer = Console.ReadLine();
-                bool isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
-
-                while (!isValidCommand)
-                {
-                    Console.WriteLine(message);
-                    Console.Write("Please enter coordinates: ");
-                    readBuffer = Console.ReadLine();
-                    isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
-                }
+                readBuffer = this.userController.GetNextPositionForPlayFromUser();
 
                 Cell mineToBlow = GameServices.ExtractMineFromString(readBuffer);
 
