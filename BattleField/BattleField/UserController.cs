@@ -31,7 +31,15 @@ namespace BattleField
 
         public string GetNextPositionForPlayFromUser()
         {
-            return "";
+            this.uiRender.Write("Please enter coordinates: ");
+            string userInput = this.inputReader.GetUserInput();
+            while (!InputValidator.IsValidInputForNextPosition(userInput))
+            {
+                this.uiRender.WriteLine("Wrong input! Coordinates must be 2 numbers between 0-9 , separated by space");
+                this.uiRender.Write("Please enter coordinates: ");
+                userInput = this.inputReader.GetUserInput();
+            }
+            return userInput;
         }
 
     }

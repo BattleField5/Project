@@ -15,56 +15,20 @@
 
             int size = this.userController.GetPlaygroundSizeFromUser();
             IGameboard board = Gameboard.Initialize(size);
-            StartInteraction(board);
+            this.StartInteraction(board);
         }
 
-        private static bool IsValidInput(string userInput)
-        {
-            int size = 0;
-            if (!int.TryParse(userInput, out size))
-            {
-                return false;
-            }
-            if (1 < size && size <= 10)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private static void StartInteraction(IGameboard board)
+        private void StartInteraction(IGameboard board)
         {
             string readBuffer = null;
             int blownMines = 0;
-            string message;
             // int count = 0;
             // IGameboard storedBoard = new Gameboard(board.Size);
             while (GameServices.ContainsMines(board.Field))
             {
-                //todo : add Memento pattern for an Undo option if move is not the first one or the game is over!
-                //to save state and offer option for undo
-                //if (count == 1)
-                //{
-                //  storedBoard.Field = board.Field;
-
-                //}
-                //Console.Write("This is the stored board");
-                //Console.WriteLine(GameServices.ShowResult(storedBoard.Field));
                 Console.WriteLine(GameServices.ShowResult(board.Field));
-                Console.Write("Please enter coordinates: ");
-                readBuffer = Console.ReadLine();
-                bool isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
+                readBuffer = this.userController.GetNextPositionForPlayFromUser();
 
-                while (!isValidCommand)
-                {
-                    Console.WriteLine(message);
-                    Console.Write("Please enter coordinates: ");
-                    readBuffer = Console.ReadLine();
-                    isValidCommand = GameServices.ValidateCommand(readBuffer, out message);
-                }
 
                 Cell mineToBlow = GameServices.ExtractMineFromString(readBuffer);
 
