@@ -79,7 +79,7 @@ namespace BattleField
             return false;
         }
 
-        public Cell ExtractMineFromString(string line)
+        private Cell ExtractMineFromString(string line)
         {
             string[] splited = line.Split(' ');
             int x = int.Parse(splited[0]);
