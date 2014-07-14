@@ -24,6 +24,42 @@
             return false;
         }
 
+        public static void Detonate(Cell[,] field, Cell mine)
+        {
+            char mineType = field[mine.X, mine.Y].Value;
+
+            switch (mineType)
+            {
+                case '1':
+                {
+                    ExplodeMineTypeOne(field, mine);
+                    break;
+                }
+                case '2':
+                {
+                    ExplodeMineTypeTwo(field, mine);
+                    break;
+                }
+                case '3':
+                {
+                    ExplodeMineTypeThree(field, mine);
+                    break;
+                }
+                case '4':
+                {
+                    ExplodeMineTypeFour(field, mine);
+                    break;
+                }
+                case '5':
+                {
+                    ExplodeMineTypeFive(field, mine);
+                    break;
+                }
+                default:
+                break;
+            }
+        }
+
         public static bool IsValidMove(Cell[,] field, int x, int y)
         {
             bool isInsideField = IsInsideField(field, x, y);
@@ -136,5 +172,113 @@
             return isInsideField;
         }
 
+        private static void ExplodeMineTypeOne(Cell[,] field, Cell mine)
+        {
+            for (int i = mine.X - 1; i <= mine.X + 1; i += 2)
+            {
+                for (int j = mine.Y - 1; j <= mine.Y + 1; j += 2)
+                {
+                    if (IsInsideField(field, i, j))
+                    {
+                        field[mine.X, mine.Y].Detonate();
+                        field[i, j].Detonate();
+                    }
+                }
+            }
+        }
+
+        private static void ExplodeMineTypeTwo(Cell[,] field, Cell mine)
+        {
+            for (int i = mine.X - 1; i <= mine.X + 1; i++)
+            {
+                for (int j = mine.Y - 1; j <= mine.Y + 1; j++)
+                {
+                    if (IsInsideField(field, i, j))
+                    {
+                        field[i, j].Detonate();
+                    }
+                }
+            }
+        }
+
+        private static void ExplodeMineTypeThree(Cell[,] field, Cell mine)
+        {
+            ExplodeMineTypeTwo(field, mine);
+            int x = mine.X;
+            int y = mine.Y;
+
+            if (IsInsideField(field, x - 2, y))
+            {
+                field[x - 2, y].Detonate();
+            }
+
+            if (IsInsideField(field, x + 2, y))
+            {
+                field[x + 2, y].Detonate();
+            }
+
+            if (IsInsideField(field, x, y - 2))
+            {
+                field[x, y - 2].Detonate();
+            }
+
+            if (IsInsideField(field, x, y + 2))
+            {
+                field[x, y + 2].Detonate();
+            }
+        }
+
+        private static void ExplodeMineTypeFour(Cell[,] field, Cell mine)
+        {
+            for (int i = mine.X - 2; i <= mine.X + 2; i++)
+            {
+                for (int j = mine.Y - 2; j <= mine.Y + 2; j++)
+                {
+                    bool ur = i == mine.X - 2 && j == mine.Y - 2;
+                    bool ul = i == mine.X - 2 && j == mine.Y + 2;
+                    bool dr = i == mine.X + 2 && j == mine.Y - 2;
+                    bool dl = i == mine.X + 2 && j == mine.Y + 2;
+
+                    if (ur)
+                    {
+                        continue;
+                    }
+
+                    if (ul)
+                    {
+                        continue;
+                    }
+
+                    if (dr)
+                    {
+                        continue;
+                    }
+
+                    if (dl)
+                    {
+                        continue;
+                    }
+
+                    if (IsInsideField(field, i, j))
+                    {
+                        field[i, j].Detonate();
+                    }
+                }
+            }
+        }
+
+        private static void ExplodeMineTypeFive(Cell[,] field, Cell mine)
+        {
+            for (int i = mine.X - 2; i <= mine.X + 2; i++)
+            {
+                for (int j = mine.Y - 2; j <= mine.Y + 2; j++)
+                {
+                    if (IsInsideField(field, i, j))
+                    {
+                        field[i, j].Detonate();
+                    }
+                }
+            }
+        }
     }
 }

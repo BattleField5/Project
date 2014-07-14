@@ -5,21 +5,17 @@
     public class GameEngine
     {
         private UserController userController;
-        private IDetonator detonator;
-        private IGameboard board;
 
         public GameEngine()
         {
             this.userController = new UserController();
         }
-
-        public void Start(IDetonator detonator)
+        public void Start()
         {
+
             int size = this.userController.GetPlaygroundSizeFromUser();
-            this.board = Gameboard.Initialize(size);
-            this.detonator = detonator;
-            this.detonator.Field = board.Field;
-            StartInteraction();
+            IGameboard board = Gameboard.Initialize(size);
+            StartInteraction(board);
         }
 
         private static bool IsValidInput(string userInput)
@@ -39,7 +35,7 @@
             }
         }
 
-        private void StartInteraction()
+        private static void StartInteraction(IGameboard board)
         {
             string readBuffer = null;
             int blownMines = 0;
@@ -78,8 +74,7 @@
                     continue;
                 }
 
-                this.detonator.Detonate(mineToBlow);
-                //GameServices.Detonate(board.Field, mineToBlow);
+                GameServices.Detonate(board.Field, mineToBlow);
                 blownMines++;
                 //count++;
                 //Console.WriteLine("Moves count: {0}",count);
@@ -88,6 +83,15 @@
 
             Console.WriteLine(GameServices.ShowResult(board.Field));
             Console.WriteLine("Game over. Detonated mines: {0}", blownMines);
+        }
+
+        /// <summary>
+        /// Main function of the program and starting point of the "BattleField" game.
+        /// </summary>
+        public static void Main()
+        {
+            var gameEngine = new GameEngine();
+            gameEngine.Start();
         }
     }
 }
