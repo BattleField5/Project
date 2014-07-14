@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    interface IInputReader
+    public interface IInputReader
     {
         string GetUserInput();
     }

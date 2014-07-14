@@ -5,17 +5,21 @@
     public class GameEngine
     {
         private UserController userController;
+        private IGameboard board;
+        private IDetonator detonator;
 
         public GameEngine()
         {
             this.userController = new UserController();
         }
-        public void Start()
-        {
 
+        public void Start(IDetonator detonator)
+        {
             int size = this.userController.GetPlaygroundSizeFromUser();
-            IGameboard board = Gameboard.Initialize(size);
-            StartInteraction(board);
+            this.board = Gameboard.Initialize(size);
+            this.detonator = detonator;
+            this.detonator.Field = board.Field;
+            StartInteraction();
         }
 
         private static bool IsValidInput(string userInput)
@@ -35,7 +39,7 @@
             }
         }
 
-        private static void StartInteraction(IGameboard board)
+        private void StartInteraction()
         {
             string readBuffer = null;
             int blownMines = 0;
@@ -74,7 +78,7 @@
                     continue;
                 }
 
-                GameServices.Detonate(board.Field, mineToBlow);
+                detonator.Detonate(mineToBlow);
                 blownMines++;
                 //count++;
                 //Console.WriteLine("Moves count: {0}",count);
@@ -91,7 +95,7 @@
         public static void Main()
         {
             var gameEngine = new GameEngine();
-            gameEngine.Start();
+            gameEngine.Start(new Detonator());
         }
     }
 }
