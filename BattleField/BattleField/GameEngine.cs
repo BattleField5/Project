@@ -4,37 +4,55 @@
 
     public class GameEngine
     {
-        private GameController userController;
+        private IGameController gameController;
         private IGameboard board;
         private IDetonator detonator;
+        private int blownMines;
 
         public GameEngine()
+            : this(new Detonator() , new GameController())
         {
-            this.userController = new GameController();
         }
 
-        public void Start(IDetonator detonator)
+        public GameEngine(IDetonator detonator , IGameController gameController)
         {
-            int size = this.userController.GetPlaygroundSizeFromUser();
-            this.board = Gameboard.Initialize(size);
+            this.gameController = gameController;
             this.detonator = detonator;
+            int size = this.gameController.GetPlaygroundSizeFromUser();
+            this.board = Gameboard.Initialize(size);
             this.detonator.Field = board.Field;
-            StartInteraction();
+            this.blownMines = 0;
         }
 
-        private void StartInteraction()
+        public void Start()
         {
-            int blownMines = 0;
-            while (GameServices.ContainsMines(board.Field))
+            while (this.ContainsMines(board.Field))
             {
-                Console.WriteLine(GameServices.ShowResult(board.Field));
-                Cell mineToBlow = this.userController.GetNextPositionForPlayFromUser(board.Field);
+                this.gameController.ShowPlayground(board.Field);
+                Cell mineToBlow = this.gameController.GetNextPositionForPlayFromUser(board.Field);
                 detonator.Detonate(mineToBlow);
-                blownMines++;
+                this.blownMines++;
             }
 
-            Console.WriteLine(GameServices.ShowResult(board.Field));
-            Console.WriteLine("Game over. Detonated mines: {0}", blownMines);
+            this.gameController.ShowPlayground(board.Field);
+            this.gameController.GameOver(this.blownMines);
+        }
+
+        private bool ContainsMines(Cell[,] field)
+        {
+            for (int row = 0; row < field.GetLength(0); row++)
+            {
+                for (int col = 0; col < field.GetLength(1); col++)
+                {
+                    Cell currentCell = field[row, col];
+                    if (currentCell.IsMine && !currentCell.IsDetonated)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
     }

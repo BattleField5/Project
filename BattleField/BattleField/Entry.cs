@@ -14,7 +14,7 @@ namespace BattleField
         public static void Main()
         {
             var gameEngine = new GameEngine();
-            gameEngine.Start(new Detonator());
+            gameEngine.Start();
         }
     }
 }

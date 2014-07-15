@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    public class GameController
+    public class GameController : IGameController
     {
         private IInputReader inputReader;
         private IControllerMessenger messenger;
+        private IPlaygroundRender playgroundRender;
 
         public GameController()
         {
             this.inputReader = new ConsoleReader();
             this.messenger = new GameControllerMessenger();
+            this.playgroundRender = new PlaygroundRender(new ConsoleWriter());
         }
 
         public void SetReader(IInputReader reader)
@@ -25,6 +27,21 @@ namespace BattleField
         public void SetWriter(IControllerMessenger messenger)
         {
             this.messenger = messenger;
+        }
+
+        public void SetPlaygourndRender(IPlaygroundRender playgroundRender)
+        {
+            this.playgroundRender = playgroundRender;
+        }
+
+        public void ShowPlayground(Cell[,] field)
+        {
+            this.playgroundRender.RenderPlayground(field);
+        }
+
+        public void GameOver(int detonatedMines)
+        {
+            this.messenger.MessageForGameOver(detonatedMines);
         }
         public int GetPlaygroundSizeFromUser()
         {

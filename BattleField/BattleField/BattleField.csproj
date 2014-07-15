@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleMessenger.cs" />
+    <Compile Include="GameControllerMessenger.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="Detonator.cs" />
     <Compile Include="FieldGenerator.cs" />
@@ -51,16 +51,19 @@
     <Compile Include="Cell.cs" />
     <Compile Include="IDetonator.cs" />
     <Compile Include="IGameboard.cs" />
+    <Compile Include="IGameController.cs" />
     <Compile Include="IInputReader.cs" />
-    <Compile Include="IMessenger.cs" />
+    <Compile Include="IControllerMessenger.cs" />
     <Compile Include="InputValidator.cs" />
+    <Compile Include="IPlaygroundRender.cs" />
     <Compile Include="IRandomGenerator.cs" />
     <Compile Include="IUIRender.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="PlaygroundRender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="UserController.cs" />
+    <Compile Include="GameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
