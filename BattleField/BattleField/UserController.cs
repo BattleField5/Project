@@ -9,12 +9,12 @@ namespace BattleField
     public class UserController
     {
         private IInputReader inputReader;
-        private IUiRender uiRender;
+        private IMessenger messenger;
 
         public UserController()
         {
-            inputReader = new ConsoleReader();
-            uiRender = new ConsoleWriter();
+            this.inputReader = new ConsoleReader();
+            this.messenger = new ConsoleMessenger();
         }
 
         public void SetReader(IInputReader reader)
@@ -22,18 +22,18 @@ namespace BattleField
             this.inputReader = reader;
         }
 
-        public void SetWriter(IUiRender writer)
+        public void SetWriter(IMessenger messenger)
         {
-            this.uiRender = writer;
+            this.messenger = messenger;
         }
         public int GetPlaygroundSizeFromUser()
         {
-            this.uiRender.Write("Please enter the size of the gameboard: ");
+            this.messenger.AskForGameboardSize();
             string userInput = this.inputReader.GetUserInput();
             while (!InputValidator.IsValidInputForPlaygroundSize(userInput))
             {
-                this.uiRender.WriteLine("Wrong input! Size must be number between 2-10");
-                this.uiRender.Write("Please enter the size of the game board: ");
+                this.messenger.MessageForWrongGameboardSize();
+                this.messenger.AskForGameboardSize();
                 userInput = this.inputReader.GetUserInput();
             }
             return int.Parse(userInput);
@@ -44,12 +44,12 @@ namespace BattleField
             Cell validCell = null;
             while (true)
             {
-                this.uiRender.Write("Please enter coordinates: ");
+                this.messenger.AskForNewCoordinates();
                 string userInput = this.inputReader.GetUserInput();
                 while (!InputValidator.IsValidInputForNextPosition(userInput))
                 {
-                    this.uiRender.WriteLine("Wrong input! Coordinates must be 2 numbers between 0-9 , separated by space");
-                    this.uiRender.Write("Please enter coordinates: ");
+                    this.messenger.MessageForWrongCoordinates();
+                    this.messenger.AskForNewCoordinates();
                     userInput = this.inputReader.GetUserInput();
                 }
 
@@ -60,7 +60,7 @@ namespace BattleField
                 }
                 else
                 {
-                    this.uiRender.WriteLine("Invalid move!");
+                    this.messenger.MessageForInvalidMove();
                 }
             }
         }

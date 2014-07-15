@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleMessenger.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="Detonator.cs" />
     <Compile Include="FieldGenerator.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="IDetonator.cs" />
     <Compile Include="IGameboard.cs" />
     <Compile Include="IInputReader.cs" />
+    <Compile Include="IMessenger.cs" />
     <Compile Include="InputValidator.cs" />
     <Compile Include="IRandomGenerator.cs" />
     <Compile Include="IUIRender.cs" />
