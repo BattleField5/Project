@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleField.UserController" Collapsed="true">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAACAACAAAAAAAgAAAEAEIAACBAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.RandomGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>RandomGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.InputValidator" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>InputValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.GameServices" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameServices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.GameEngine" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAgAAAAAAAIAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>GameEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Gameboard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgQAAAIAAAAAEAAAAAAAAAAEAAAABgAA=</HashCode>
+      <FileName>Gameboard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.FieldGenerator" Collapsed="true">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAIAAAAAAAAAAAAEAQAAQAAAAAAAAAAAAAQgAAAg=</HashCode>
+      <FileName>FieldGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Entry" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Entry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECAAAAAAAAAAAAAAAAAEAAAAAAAAAIICAAAACAAkAA=</HashCode>
+      <FileName>Detonator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.ConsoleWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ConsoleWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.ConsoleReader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConsoleReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Cell" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAgAAAAAAAAEgAAAAAAAAAQAAKIAIABgACAAYAA=</HashCode>
+      <FileName>Cell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="BattleField.IUiRender" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>IUIRender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.IRandomGenerator" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRandomGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.IInputReader" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IInputReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.IGameboard" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAgAA=</HashCode>
+      <FileName>IGameboard.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.IDetonator" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgAA=</HashCode>
+      <FileName>IDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
