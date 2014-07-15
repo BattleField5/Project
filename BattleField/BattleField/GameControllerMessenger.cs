@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    public class ConsoleMessenger : IMessenger
+    public class GameControllerMessenger : IMessenger
     {
         private IUiRender render;
-        public ConsoleMessenger()
+        public GameControllerMessenger()
             : this(new ConsoleWriter())
         {
 
         }
 
-        public ConsoleMessenger(IUiRender render)
+        public GameControllerMessenger(IUiRender render)
         {
             this.render = render;
         }

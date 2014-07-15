@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    public class UserController
+    public class GameController
     {
         private IInputReader inputReader;
         private IMessenger messenger;
 
-        public UserController()
+        public GameController()
         {
             this.inputReader = new ConsoleReader();
-            this.messenger = new ConsoleMessenger();
+            this.messenger = new GameControllerMessenger();
         }
 
         public void SetReader(IInputReader reader)

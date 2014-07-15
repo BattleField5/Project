@@ -4,13 +4,13 @@
 
     public class GameEngine
     {
-        private UserController userController;
+        private GameController userController;
         private IGameboard board;
         private IDetonator detonator;
 
         public GameEngine()
         {
-            this.userController = new UserController();
+            this.userController = new GameController();
         }
 
         public void Start(IDetonator detonator)
