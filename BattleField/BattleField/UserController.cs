@@ -54,7 +54,7 @@ namespace BattleField
                 }
 
                 validCell = this.ExtractMineFromString(userInput);
-                if (IsValidMove(field, validCell.X, validCell.Y))
+                if (InputValidator.IsValidMove(field, validCell.X, validCell.Y))
                 {
                     return validCell;
                 }
@@ -65,20 +65,6 @@ namespace BattleField
             }
         }
 
-        private bool IsValidMove(Cell[,] field, int x, int y)
-        {
-            bool isInsideField = IsInsideField(field, x, y);
-            if (isInsideField)
-            {
-                if (field[x, y].IsMine && !field[x, y].IsDetonated)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         private Cell ExtractMineFromString(string line)
         {
             string[] splited = line.Split(' ');
@@ -86,21 +72,6 @@ namespace BattleField
             int y = int.Parse(splited[1]);
 
             return new Cell(x, y);
-        }
-
-        private bool IsInsideField(Cell[,] field, int x, int y)
-        {
-            bool isInsideField = false;
-
-            if (0 <= x && x < field.GetLength(0))
-            {
-                if (0 <= y && y < field.GetLength(1))
-                {
-                    isInsideField = true;
-                }
-            }
-
-            return isInsideField;
         }
 
     }
