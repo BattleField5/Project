@@ -47,7 +47,6 @@
     <Compile Include="FieldGenerator.cs" />
     <Compile Include="Gameboard.cs" />
     <Compile Include="GameEngine.cs" />
-    <Compile Include="GameServices.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="IDetonator.cs" />
     <Compile Include="IGameboard.cs" />
