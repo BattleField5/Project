@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
-    public class GameControllerMessenger : IMessenger
+    public class GameControllerMessenger : IControllerMessenger
     {
         private IUiRender render;
         public GameControllerMessenger()

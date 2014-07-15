@@ -9,7 +9,7 @@ namespace BattleField
     public class GameController
     {
         private IInputReader inputReader;
-        private IMessenger messenger;
+        private IControllerMessenger messenger;
 
         public GameController()
         {
@@ -22,7 +22,7 @@ namespace BattleField
             this.inputReader = reader;
         }
 
-        public void SetWriter(IMessenger messenger)
+        public void SetWriter(IControllerMessenger messenger)
         {
             this.messenger = messenger;
         }
