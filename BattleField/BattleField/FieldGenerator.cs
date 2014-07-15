@@ -10,6 +10,8 @@ namespace BattleField
     {
         private const double LowerBoundMines = 0.15;
         private const double UpperBoundMines = 0.3;
+        private const int FirstCellTypeIndex = 1;
+        private const int LastCellTypeIndex = 5;
         private readonly IRandomGenerator rand;
         public FieldGenerator()
         {
@@ -45,7 +47,7 @@ namespace BattleField
             {
                 int cellX = rand.GetRandom(0, size);
                 int cellY = rand.GetRandom(0, size);
-                int cellType = rand.GetRandom(1, 6);
+                int cellType = rand.GetRandom(FirstCellTypeIndex, LastCellTypeIndex+1);
                 Cell currentCell = new Cell(cellX, cellY, true, cellType);
 
                 if (mines.Contains(currentCell))
