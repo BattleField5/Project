@@ -20,5 +20,18 @@ namespace BattleFieldTests
 
             return field;
         }
+
+        internal static Cell[,] GenerateFieldWithSizeTenWithEmptyCells()
+        {
+            var field = new Cell[10, 10];
+            for (int i = 0; i < field.GetLength(0); i++)
+            {
+                for (int k = 0; k < field.GetLength(1); k++)
+                {
+                    field[i, k] = new Cell(i, k);
+                }
+            }
+            return field;
+        }
     }
 }
