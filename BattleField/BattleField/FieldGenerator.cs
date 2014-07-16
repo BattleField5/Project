@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BattleField
 {
+    /// <summary>
+    /// Can generate fields of cells.
+    /// </summary>
     public class FieldGenerator
     {
         private const double LowerBoundMines = 0.15;
@@ -13,11 +16,19 @@ namespace BattleField
         private const int FirstCellTypeIndex = 1;
         private const int LastCellTypeIndex = 5;
         private readonly IRandomGenerator rand;
+
+        /// <summary>
+        /// Creates a new instance of FieldGenerator
+        /// </summary>
         public FieldGenerator()
         {
             rand = RandomGenerator.Instance;
         }
 
+        /// <summary>
+        /// Generates a field
+        /// </summary>
+        /// <param name="size">Number of cells in width and height</param>
         public Cell[,] GenerateField(int size)
         {
             var field = GenerateEmptyField(size);

@@ -2,10 +2,16 @@
 
 namespace BattleField
 {
+    /// <summary>
+    /// Represent a field. Can detonate mines.
+    /// </summary>
     public class Detonator : IDetonator
     {
         private Cell[,] field;
 
+        /// <summary>
+        /// Get/Sets the field
+        /// </summary>
         public Cell[,] Field
         {
             get
@@ -18,10 +24,15 @@ namespace BattleField
             }
         }
 
+        /// <summary>
+        /// Detonates the specified mine.
+        /// </summary>
+        /// <param name="cell">The mine to be detonated</param>
         public void Detonate(Cell cell)
         {
             char mineType = this.field[cell.X, cell.Y].Value;
 
+            // TODO: Make method to work without switch.
             switch (mineType)
             {
                 case '1':
