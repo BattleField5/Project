@@ -5,7 +5,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// 
+    /// Represents the Gameboard with a field.
     /// </summary>
     public class Gameboard : IGameboard
     {
