@@ -63,7 +63,6 @@ namespace BattleField
 
         public Cell GetNextPositionForPlayFromUser(Cell[,] field)
         {
-            Cell validCell = null;
             while (true)
             {
                 this.messenger.AskForNewCoordinates();
@@ -75,7 +74,7 @@ namespace BattleField
                     userInput = this.inputReader.GetUserInput();
                 }
 
-                validCell = this.ExtractMineFromString(userInput);
+                Cell validCell = this.ExtractMineFromString(userInput);
                 if (InputValidator.IsValidMove(field, validCell.X, validCell.Y))
                 {
                     return validCell;

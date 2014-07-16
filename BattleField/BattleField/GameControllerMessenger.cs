@@ -14,16 +14,16 @@ namespace BattleField
         {
 
         }
+        public GameControllerMessenger(IUiRender render)
+        {
+            this.render = render;
+        }
 
         public void MessageForGameOver(int detonatedMines)
         {
             this.render.WriteLine(String.Format("Game over. Detonated mines: {0}", detonatedMines));
         }
 
-        public GameControllerMessenger(IUiRender render)
-        {
-            this.render = render;
-        }
 
         public void AskForGameboardSize()
         {
