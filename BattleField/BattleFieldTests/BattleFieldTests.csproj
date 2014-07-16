@@ -53,10 +53,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GenerateTestField.cs" />
     <Compile Include="TestDetonation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGameBoardGeneration.cs" />
     <Compile Include="TestGameController.cs" />
+    <Compile Include="TestGameControllerMessenger.cs" />
+    <Compile Include="TestPlaygroundRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BattleField\BattleField.csproj">

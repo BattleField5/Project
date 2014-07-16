@@ -12,17 +12,7 @@ namespace BattleFieldTests
         private Mock<IControllerMessenger> messenger;
         private Mock<IPlaygroundRender> playgroundRender;
         private IGameController gameController;
-        private static Cell[,] GenerateTestField()
-        {
-            var field = new Cell[2, 2];
-            field[0, 0] = new Cell(0, 0, true, 1);
-            field[0, 1] = new Cell(0, 1);
-            field[0, 1].Detonate();
-            field[1, 0] = new Cell(1, 0);
-            field[1, 1] = new Cell(1, 1);
 
-            return field;
-        }
         [TestInitialize]
         public void InitilizeController()
         {
@@ -66,7 +56,7 @@ namespace BattleFieldTests
         [TestMethod]
         public void GetNextPositionForPlayFromUserTestForCorrectPositionWithMine()
         {
-            var field = GenerateTestField();
+            var field = GenerateTestField.GenerateFieldWithSizeTwo();
             inputReader.Setup(x => x.GetUserInput()).Returns("0 0");
             messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
             messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
@@ -81,7 +71,7 @@ namespace BattleFieldTests
         {
             try
             {
-                var field = GenerateTestField();
+                var field = GenerateTestField.GenerateFieldWithSizeTwo();
                 inputReader.Setup(x => x.GetUserInput()).Returns("1 1");
                 messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
                 messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
@@ -100,7 +90,7 @@ namespace BattleFieldTests
         {
             try
             {
-                var field = GenerateTestField();
+                var field = GenerateTestField.GenerateFieldWithSizeTwo();
                 inputReader.Setup(x => x.GetUserInput()).Returns("111");
                 messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
                 messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
@@ -118,7 +108,7 @@ namespace BattleFieldTests
         {
             var arrayWithCoordinates = new String[] {"111" , "" , "1 1" , "-5 5" , "0 0" };
             var currentIndex = 0;
-            var field = GenerateTestField();
+            var field = GenerateTestField.GenerateFieldWithSizeTwo();
             inputReader.Setup(x => x.GetUserInput())
                 .Returns(() =>arrayWithCoordinates[currentIndex])
                 .Callback(()=>currentIndex++);
