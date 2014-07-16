@@ -15,7 +15,7 @@
         private char value;
         private bool isMine;
         private bool isDetonated;
-]       // TODO: Maybe extract IMine and Mine child class.
+       // TODO: Maybe extract IMine and Mine child class.
 
         public Cell(int x, int y) : this(x, y, false) { }
 

@@ -60,6 +60,7 @@
     <Compile Include="TestGameController.cs" />
     <Compile Include="TestGameControllerMessenger.cs" />
     <Compile Include="TestPlaygroundRender.cs" />
+    <Compile Include="TestRandomGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BattleField\BattleField.csproj">
