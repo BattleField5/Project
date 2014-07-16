@@ -13,10 +13,15 @@ namespace BattleField
         private IPlaygroundRender playgroundRender;
 
         public GameController()
+            : this(new ConsoleReader(), new GameControllerMessenger(), new PlaygroundRender(new ConsoleWriter()))
         {
-            this.inputReader = new ConsoleReader();
-            this.messenger = new GameControllerMessenger();
-            this.playgroundRender = new PlaygroundRender(new ConsoleWriter());
+        }
+
+        public GameController(IInputReader reader, IControllerMessenger messenger, IPlaygroundRender playgroundRender)
+        {
+            this.inputReader = reader;
+            this.messenger = messenger;
+            this.playgroundRender = playgroundRender;
         }
 
         public void SetReader(IInputReader reader)

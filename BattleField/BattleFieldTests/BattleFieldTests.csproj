@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,12 +56,16 @@
     <Compile Include="TestDetonation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGameBoardGeneration.cs" />
+    <Compile Include="TestGameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BattleField\BattleField.csproj">
       <Project>{641f20ae-b25e-467c-aa51-2971219dcf88}</Project>
       <Name>BattleField</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
