@@ -114,7 +114,7 @@ namespace BattleFieldTests
                 .Returns(() =>arrayWithCoordinates[currentIndex])
                 .Callback(()=>currentIndex++);
             Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = field[0, 0].Equals(returnedPosition);
+            bool isTheSameCell = (field[0, 0].X == returnedPosition.X && field[0, 0].Y == returnedPosition.Y);
             Assert.IsTrue(isTheSameCell);
         }
     }

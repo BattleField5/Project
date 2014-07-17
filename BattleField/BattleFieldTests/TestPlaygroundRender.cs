@@ -25,7 +25,7 @@ namespace BattleFieldTests
             var expectedString = "   0 1 \r\n   ----\r\n0 |1 X \r\n1 |- - \r\n";
 
             this.playgroundRender.RenderPlayground(field);
-            this.iURender.Verify(w => w.WriteLine(It.Is<string>(fieldString =>fieldString == expectedString)), Times.Once);
+            this.iURender.Verify(w => w.WriteLine(It.Is<string>(fieldString => fieldString == expectedString)), Times.Once);
         }
 
         [TestMethod]

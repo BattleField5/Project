@@ -7,9 +7,6 @@ namespace BattleFieldTests
     [TestClass]
     public class TestDetonation
     {
-        private const char FieldSymbol = '-';
-        private const char DetonatedSymbol = 'X';
-
         private Cell[,] GenerateMatrix(int n)
         {
             Cell[,] matrix = new Cell[n, n];
