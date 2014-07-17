@@ -7,5 +7,7 @@ namespace BattleField
         void WriteLine(string text);
 
         void Write(string text);
+
+        void RenderField(Cell[,] field);
     }
 }
