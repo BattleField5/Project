@@ -2,11 +2,19 @@
 
 namespace BattleField
 {
+    /// <summary>
+    /// Represents a Cell that is a Mine.
+    /// </summary>
     public class Mine: Cell
     {
         private MineRadius radius;
         private bool isDetonated;
 
+        /// <summary>
+        /// Creates a Mine with position.
+        /// </summary>
+        /// <param name="position">Position of the Mine</param>
+        /// <param name="radius">Mine explode radius</param>
         public Mine(Position position, MineRadius radius)
             : base(position)
         {
@@ -24,6 +32,9 @@ namespace BattleField
             this.Radius = radius;
         }
 
+        /// <summary>
+        /// Get/Sets the Mine's explode radius.
+        /// </summary>
         public MineRadius Radius
         {
             get
@@ -62,6 +73,9 @@ namespace BattleField
             this.Exploded = true;
         }
 
+        /// <summary>
+        /// Detonates the Mine.
+        /// </summary>
         public override void Explode()
         {
             base.Explode();

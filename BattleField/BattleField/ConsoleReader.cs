@@ -8,7 +8,7 @@ namespace BattleField
     public class ConsoleReader : IInputReader
     {
         /// <summary>
-        /// Waits for user input.
+        /// Waits for user input from the Console.
         /// </summary>
         public string GetUserInput()
         {

@@ -2,11 +2,17 @@
 
 namespace BattleField
 {
+    /// <summary>
+    /// Represents a x, y position.
+    /// </summary>
     public struct Position
     {
         private int x;
         private int y;
 
+        /// <summary>
+        /// Get's sets X position.
+        /// </summary>
         public int X
         {
             get
@@ -20,6 +26,9 @@ namespace BattleField
             }
         }
 
+        /// <summary>
+        /// Get's sets Y position
+        /// </summary>
         public int Y
         {
             get
@@ -33,6 +42,11 @@ namespace BattleField
             }
         }
 
+        /// <summary>
+        /// Creates a Position with X and Y.
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
         public Position(int x, int y)
         {
             this.x = x;

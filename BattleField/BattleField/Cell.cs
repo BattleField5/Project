@@ -3,13 +3,17 @@
 namespace BattleField
 {
     /// <summary>
-    /// A single cell. Can be a mine.
+    /// A single cell.
     /// </summary>
     public abstract class Cell : IEquatable<Cell>
     {
         private Position position;
         private bool exploded;
 
+        /// <summary>
+        /// Creates a Cell with given Position object
+        /// </summary>
+        /// <param name="position">Position of the Cell</param>
         public Cell(Position position)
         {
             this.position = position;
@@ -61,6 +65,9 @@ namespace BattleField
             }
         }
 
+        /// <summary>
+        /// Explodes the current cell.
+        /// </summary>
         public virtual void Explode()
         {
             this.Exploded = true;
