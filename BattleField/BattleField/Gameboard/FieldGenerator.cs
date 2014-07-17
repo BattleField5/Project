@@ -10,8 +10,8 @@ namespace BattleField
     {
         private const double LowerBoundMines = 0.15;
         private const double UpperBoundMines = 0.3;
-        private const int FirstCellTypeIndex = 1;
-        private const int LastCellTypeIndex = 5;
+        private const int FirstCellTypeIndex = 0;
+        private const int LastCellTypeIndex = 4;
         private readonly IRandomGenerator rand;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BattleField
             {
                 for (int col = 0; col < size; col++)
                 {
-                    field[row, col] = new Cell(row, col, false);
+                    field[row, col] = new EmptyCell(row, col);
                 }
             }
 
@@ -50,13 +50,16 @@ namespace BattleField
 
         private Cell[,] GenerateMinesInField(Cell[,] field, int minesCount, int size, IRandomGenerator rand)
         {
+            Array mineRadiusValues = Enum.GetValues(typeof(MineRadius));
+
             List<Cell> mines = new List<Cell>();
             for (int counter = 0; counter < minesCount; counter++)
             {
                 int cellX = rand.GetRandom(0, size);
                 int cellY = rand.GetRandom(0, size);
                 int cellType = rand.GetRandom(FirstCellTypeIndex, LastCellTypeIndex + 1);
-                Cell currentCell = new Cell(cellX, cellY, true, cellType);
+                MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
+                Cell currentCell = new Mine(cellX, cellY, randomRadius);
 
                 if (mines.Contains(currentCell))
                 {

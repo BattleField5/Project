@@ -28,37 +28,37 @@ namespace BattleField
         /// <summary>
         /// Detonates the specified mine.
         /// </summary>
-        /// <param name="cell">The mine to be detonated</param>
-        public void Detonate(Cell cell)
+        /// <param name="mine">The mine to be detonated</param>
+        public void Detonate(Position position)
         {
-            char mineType = this.field[cell.X, cell.Y].Value;
-
+            Mine mine = (Mine) this.field[position.X, position.Y];
+            mine.Detonate();
             // TODO: Make method to work without switch.
-            switch (mineType)
+            switch (mine.Radius)
             {
-                case '1':
+                case MineRadius.MineRadiusOne:
                     {
-                        this.ExplodeMineTypeOne(cell);
+                        this.DetonateMineTypeOne(mine);
                         break;
                     }
-                case '2':
+                case MineRadius.MineRadiusTwo:
                     {
-                        this.ExplodeMineTypeTwo(cell);
+                        this.DetonateMineTypeTwo(mine);
                         break;
                     }
-                case '3':
+                case MineRadius.MineRadiusThree:
                     {
-                        this.ExplodeMineTypeThree(cell);
+                        this.DetonateMineTypeThree(mine);
                         break;
                     }
-                case '4':
+                case MineRadius.MineRadiusFour:
                     {
-                        this.ExplodeMineTypeFour(cell);
+                        this.DetonateMineTypeFour(mine);
                         break;
                     }
-                case '5':
+                case MineRadius.MineRadiusFive:
                     {
-                        this.ExplodeMineTypeFive(cell);
+                        this.DetonateMineTypeFive(mine);
                         break;
                     }
                 default:
@@ -66,7 +66,7 @@ namespace BattleField
             }
         }
 
-        private void ExplodeMineTypeOne(Cell mine)
+        private void DetonateMineTypeOne(Mine mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i += 2)
             {
@@ -74,14 +74,14 @@ namespace BattleField
                 {
                     if (this.IsInsideField(i, j))
                     {
-                        this.field[mine.X, mine.Y].Detonate();
-                        this.field[i, j].Detonate();
+                        this.field[mine.X, mine.Y].Explode();
+                        this.field[i, j].Explode();
                     }
                 }
             }
         }
 
-        private void ExplodeMineTypeTwo(Cell mine)
+        private void DetonateMineTypeTwo(Mine mine)
         {
             for (int i = mine.X - 1; i <= mine.X + 1; i++)
             {
@@ -89,40 +89,40 @@ namespace BattleField
                 {
                     if (this.IsInsideField(i, j))
                     {
-                        this.field[i, j].Detonate();
+                        this.field[i, j].Explode();
                     }
                 }
             }
         }
 
-        private void ExplodeMineTypeThree(Cell mine)
+        private void DetonateMineTypeThree(Mine mine)
         {
-            this.ExplodeMineTypeTwo(mine);
+            this.DetonateMineTypeTwo(mine);
             int x = mine.X;
             int y = mine.Y;
 
             if (this.IsInsideField(x - 2, y))
             {
-                this.field[x - 2, y].Detonate();
+                this.field[x - 2, y].Explode();
             }
 
             if (this.IsInsideField(x + 2, y))
             {
-                this.field[x + 2, y].Detonate();
+                this.field[x + 2, y].Explode();
             }
 
             if (this.IsInsideField(x, y - 2))
             {
-                this.field[x, y - 2].Detonate();
+                this.field[x, y - 2].Explode();
             }
 
             if (this.IsInsideField(x, y + 2))
             {
-                this.field[x, y + 2].Detonate();
+                this.field[x, y + 2].Explode();
             }
         }
 
-        private void ExplodeMineTypeFour(Cell mine)
+        private void DetonateMineTypeFour(Mine mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {
@@ -155,13 +155,13 @@ namespace BattleField
 
                     if (this.IsInsideField(i, j))
                     {
-                        this.field[i, j].Detonate();
+                        this.field[i, j].Explode();
                     }
                 }
             }
         }
 
-        private void ExplodeMineTypeFive(Cell mine)
+        private void DetonateMineTypeFive(Mine mine)
         {
             for (int i = mine.X - 2; i <= mine.X + 2; i++)
             {
@@ -169,7 +169,7 @@ namespace BattleField
                 {
                     if (this.IsInsideField(i, j))
                     {
-                        this.field[i, j].Detonate();
+                        this.field[i, j].Explode();
                     }
                 }
             }

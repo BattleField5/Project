@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmptyCell.cs" />
     <Compile Include="GameControllerMessenger.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="Detonator.cs" />
@@ -58,7 +59,10 @@
     <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Interfaces\IUIRender.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Mine.cs" />
+    <Compile Include="MineRadius.cs" />
     <Compile Include="PlaygroundRender.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="ConsoleWriter.cs" />

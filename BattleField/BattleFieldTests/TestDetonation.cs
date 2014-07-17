@@ -17,7 +17,7 @@ namespace BattleFieldTests
             {
                 for (int j = 0; j < n; j++)
                 {
-                    matrix[i, j] = new Cell(i, j, false);
+                    matrix[i, j] = new EmptyCell(i, j);
                 }
             }
 
@@ -28,16 +28,16 @@ namespace BattleFieldTests
         public void TestDetonate1WithAllMinesInsideFieldDetonates5Cells()
         {
             Cell[,] field = GenerateMatrix(5);
-            field[1, 1].Value = '1';
+            field[1, 1] = new Mine(1, 1, MineRadius.MineRadiusOne);
             IDetonator detonator = new Detonator();
             detonator.Field = field;
-            detonator.Detonate(field[1, 1]);
+            detonator.Detonate(new Position(1, 1));
             bool patternOneDetonatesFiveCells =
-                    field[1, 1].Value == DetonatedSymbol &&
-                    field[0, 0].Value == DetonatedSymbol &&
-                    field[0, 2].Value == DetonatedSymbol &&
-                    field[2, 2].Value == DetonatedSymbol &&
-                    field[2, 0].Value == DetonatedSymbol;
+                    field[1, 1].Exploded &&
+                    field[0, 0].Exploded &&
+                    field[0, 2].Exploded &&
+                    field[2, 2].Exploded &&
+                    field[2, 0].Exploded;
 
             Assert.IsTrue(patternOneDetonatesFiveCells);
         }
@@ -64,7 +64,7 @@ namespace BattleFieldTests
                             (i != 0 && j != 2) &&
                             (i != 2 && j != 2) &&
                             (i != 2 && j != 0))
-                            && field[i, j].Value == DetonatedSymbol)
+                            && field[i, j].Exploded)
                     {
                         patternOneDetonatesMoreThanFiveCells = true;
                         break;

@@ -59,7 +59,7 @@ namespace BattleField
             return int.Parse(userInput);
         }
 
-        public Cell GetNextPositionForPlayFromUser(Cell[,] field)
+        public Position GetNextPositionForPlayFromUser(Cell[,] field)
         {
             while (true)
             {
@@ -72,10 +72,10 @@ namespace BattleField
                     userInput = this.inputReader.GetUserInput();
                 }
 
-                Cell validCell = this.ExtractMineFromString(userInput);
-                if (InputValidator.IsValidMove(field, validCell.X, validCell.Y))
+                Position validPosition = this.ExtractPositionFromString(userInput);
+                if (InputValidator.IsValidMove(field, validPosition.X, validPosition.Y))
                 {
-                    return validCell;
+                    return validPosition;
                 }
                 else
                 {
@@ -84,13 +84,13 @@ namespace BattleField
             }
         }
 
-        private Cell ExtractMineFromString(string line)
+        private Position ExtractPositionFromString(string line)
         {
             string[] splited = line.Split(' ');
             int x = int.Parse(splited[0]);
             int y = int.Parse(splited[1]);
 
-            return new Cell(x, y);
+            return new Position(x, y);
         }
     }
 }

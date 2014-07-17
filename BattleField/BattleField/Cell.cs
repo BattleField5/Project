@@ -5,44 +5,20 @@ namespace BattleField
     /// <summary>
     /// A single cell. Can be a mine.
     /// </summary>
-    public class Cell : IEquatable<Cell>
+    public abstract class Cell : IEquatable<Cell>
     {
-        private const char FieldSymbol = '-';
-        private const char DetonatedFieldSymbol = 'X';
-
-        private int x;
-        private int y;
-        private char value;
-        private bool isMine;
-        private bool isDetonated;
-       // TODO: Maybe extract IMine and Mine child class.
-
-        public Cell(int x, int y) : this(x, y, false)
-        {
-        }
-
+        private Position position;
+        private bool exploded;
+        
         /// <summary>
         /// Creates a Cell.
         /// </summary>
         /// <param name="x">X position</param>
         /// <param name="y">Y position</param>
-        /// <param name="isMine">If should be a mine</param>
-        /// <param name="mineCount">Mine radius</param>
-        public Cell(int x, int y, bool isMine, int mineCount = 0)
+        public Cell(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
-            if (isMine)
-            {
-                this.IsMine = true;
-                this.IsDetonated = false;
-                this.Value = (char)(mineCount + 48);
-            }
-            else
-            {
-                this.IsMine = false;
-                this.Value = FieldSymbol;
-            }
+            this.position = new Position(x, y);
+            this.Exploded = false;
         }
 
         /// <summary>
@@ -50,8 +26,10 @@ namespace BattleField
         /// </summary>
         public int X
         {
-            get { return this.x; }
-            set { this.x = value; }
+            get
+            {
+                return this.position.X;
+            }
         }
 
         /// <summary>
@@ -59,73 +37,35 @@ namespace BattleField
         /// </summary>
         public int Y
         {
-            get { return this.y; }
-            set { this.y = value; }
+            get
+            {
+                return this.position.Y;
+            }
         }
 
-        /// <summary>
-        /// Returns the symbol of the cell
-        /// </summary>
-        public char Value
-        {
-            get { return this.value; }
-            set { this.value = value; }
-        }
-
-        /// <summary>
-        /// Returns true if the cell is a mine
-        /// </summary>
-        public bool IsMine
+        public bool Exploded
         {
             get
             {
-                return this.isMine;
+                return this.exploded;
             }
 
-            set
+            protected set
             {
-                this.isMine = value;
+                this.exploded = value;
             }
         }
 
-        /// <summary>
-        /// Returns if cell is detonated
-        /// </summary>
-        public bool IsDetonated
+        public virtual void Explode()
         {
-            get
-            {
-                return this.isDetonated;
-            }
-
-            set
-            {
-                this.isDetonated = value;
-            }
-        }
-
-        /// <summary>
-        /// Changes the cell's Symbol. Turns IsDetonated to true.
-        /// </summary>
-        public void Detonate()
-        {
-            this.IsDetonated = true;
-            this.Value = DetonatedFieldSymbol;
-        }
-
-        /// <summary>
-        /// Returns cell's char value
-        /// </summary>
-        public override string ToString()
-        {
-            return this.Value.ToString();
+            this.Exploded = true;
         }
 
         /// <summary>
         /// Returns if coordinates are equal
         /// </summary>
         /// <param name="other">Comapring Cell</param>
-        public bool Equals(Cell other)
+        public virtual bool Equals(Cell other)
         {
             if (this.X == other.X && this.Y == other.Y)
             {

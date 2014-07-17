@@ -6,6 +6,6 @@ namespace BattleField
     {
         Cell[,] Field { get; set; }
 
-        void Detonate(Cell cell);
+        void Detonate(Position position);
     }
 }

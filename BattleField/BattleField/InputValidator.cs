@@ -40,7 +40,8 @@ namespace BattleField
             bool isInsideField = IsInsideField(field, x, y);
             if (isInsideField)
             {
-                if (field[x, y].IsMine && !field[x, y].IsDetonated)
+                Mine mine = field[x, y] as Mine;
+                if (mine != null && !mine.IsDetonated)
                 {
                     return true;
                 }

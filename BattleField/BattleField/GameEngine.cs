@@ -29,8 +29,8 @@ namespace BattleField
             while (this.ContainsMines(this.board.Field))
             {
                 this.gameController.ShowPlayground(this.board.Field);
-                Cell mineToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
-                this.detonator.Detonate(mineToBlow);
+                Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
+                this.detonator.Detonate(positionToBlow);
                 this.blownMines++;
             }
 
@@ -44,8 +44,8 @@ namespace BattleField
             {
                 for (int col = 0; col < field.GetLength(1); col++)
                 {
-                    Cell currentCell = field[row, col];
-                    if (currentCell.IsMine && !currentCell.IsDetonated)
+                    Mine mine = field[row, col] as Mine;
+                    if (mine != null && !mine.IsDetonated)
                     {
                         return true;
                     }

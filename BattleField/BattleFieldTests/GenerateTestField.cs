@@ -11,12 +11,7 @@ namespace BattleFieldTests
     {
         internal static Cell[,] GenerateFieldWithSizeTwo()
         {
-            var field = new Cell[2, 2];
-            field[0, 0] = new Cell(0, 0, true, 1);
-            field[0, 1] = new Cell(0, 1);
-            field[0, 1].Detonate();
-            field[1, 0] = new Cell(1, 0);
-            field[1, 1] = new Cell(1, 1);
+            Cell[,] field = new EmptyCell[2, 2];
 
             return field;
         }
@@ -28,9 +23,10 @@ namespace BattleFieldTests
             {
                 for (int k = 0; k < field.GetLength(1); k++)
                 {
-                    field[i, k] = new Cell(i, k);
+                    field[i, k] = new EmptyCell(i, k);
                 }
             }
+
             return field;
         }
     }
