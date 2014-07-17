@@ -60,8 +60,8 @@ namespace BattleFieldTests
             inputReader.Setup(x => x.GetUserInput()).Returns("0 0");
             messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
             messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-            Cell returnedCell = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = field[0, 0].Equals(returnedCell);
+            Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
+            bool isTheSameCell = (field[0, 0].X == returnedPosition.X && field[0, 0].Y == returnedPosition.Y);
             Assert.IsTrue(isTheSameCell);
         }
 
@@ -75,7 +75,7 @@ namespace BattleFieldTests
                 inputReader.Setup(x => x.GetUserInput()).Returns("1 1");
                 messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
                 messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-                Cell returnedCell = gameController.GetNextPositionForPlayFromUser(field);
+                Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
             }
             catch (ArgumentException ex)
             {
@@ -94,7 +94,7 @@ namespace BattleFieldTests
                 inputReader.Setup(x => x.GetUserInput()).Returns("111");
                 messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
                 messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-                Cell returnedCell = gameController.GetNextPositionForPlayFromUser(field);
+                Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
             }
             catch (ArgumentException ex)
             {
@@ -102,6 +102,7 @@ namespace BattleFieldTests
                 throw;
             }
         }
+
         [Timeout(5000)]
         [TestMethod]
         public void GetNextPositionForPlayFromUserTestForAskUntilGetCorrectCoordinate()
@@ -112,8 +113,8 @@ namespace BattleFieldTests
             inputReader.Setup(x => x.GetUserInput())
                 .Returns(() =>arrayWithCoordinates[currentIndex])
                 .Callback(()=>currentIndex++);
-            Cell returnedCell = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = field[0, 0].Equals(returnedCell);
+            Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
+            bool isTheSameCell = field[0, 0].Equals(returnedPosition);
             Assert.IsTrue(isTheSameCell);
         }
     }

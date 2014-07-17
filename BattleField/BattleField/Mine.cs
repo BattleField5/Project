@@ -6,7 +6,13 @@ namespace BattleField
     {
         private MineRadius radius;
         private bool isDetonated;
-        
+
+        public Mine(Position position, MineRadius radius)
+            : base(position)
+        {
+            this.radius = radius;
+        }
+
         /// <summary>
         /// Creates a Cell.
         /// </summary>

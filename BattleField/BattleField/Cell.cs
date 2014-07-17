@@ -9,6 +9,11 @@ namespace BattleField
     {
         private Position position;
         private bool exploded;
+
+        public Cell(Position position)
+        {
+            this.position = position;
+        }
         
         /// <summary>
         /// Creates a Cell.

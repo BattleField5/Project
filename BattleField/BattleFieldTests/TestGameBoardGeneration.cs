@@ -38,7 +38,7 @@ namespace BattleFieldTests
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if ('1' <= field[i, j].Value && field[i, j].Value <= '5')
+                    if (field[i, j] is Mine)
                     {
                         count++;
                     }
