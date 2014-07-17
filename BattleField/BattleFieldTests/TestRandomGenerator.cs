@@ -41,7 +41,7 @@ namespace BattleFieldTests
             for (int i = 0; i < 1000; i++)
             {
                 testValue = rand.GetRandom(1, 5);
-                if (testValue >= 5)
+                if (testValue > 5)
                 {
                     counter++;
                 }
