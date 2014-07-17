@@ -10,8 +10,6 @@ namespace BattleField
     {
         private const double LowerBoundMines = 0.15;
         private const double UpperBoundMines = 0.3;
-        private const int FirstCellTypeIndex = 0;
-        private const int LastCellTypeIndex = 4;
         private readonly IRandomGenerator rand;
 
         /// <summary>
@@ -51,23 +49,23 @@ namespace BattleField
         private Cell[,] GenerateMinesInField(Cell[,] field, int minesCount, int size, IRandomGenerator rand)
         {
             Array mineRadiusValues = Enum.GetValues(typeof(MineRadius));
+            int mineRadiusMaxIndex = mineRadiusValues.Length - 1;
 
-            List<Cell> mines = new List<Cell>();
-            for (int counter = 0; counter < minesCount; counter++)
+            List<Position> usedPositions = new List<Position>();
+            while (usedPositions.Count < minesCount)
             {
-                int cellX = rand.GetRandom(0, size);
-                int cellY = rand.GetRandom(0, size);
-                int cellType = rand.GetRandom(FirstCellTypeIndex, LastCellTypeIndex + 1);
-                MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
-                Cell currentCell = new Mine(cellX, cellY, randomRadius);
-
-                if (mines.Contains(currentCell))
+                int cellX = rand.GetRandom(0, size - 1);
+                int cellY = rand.GetRandom(0, size - 1);
+                Position position = new Position(cellX, cellY);
+                if (usedPositions.Contains(position))
                 {
-                    counter--;
                     continue;
                 }
 
-                mines.Add(currentCell);
+                usedPositions.Add(position);
+                int cellType = rand.GetRandom(0, mineRadiusMaxIndex);
+                MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
+                Cell currentCell = new Mine(position, randomRadius);
                 field[cellX, cellY] = currentCell;
             }
 

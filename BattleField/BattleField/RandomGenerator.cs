@@ -22,7 +22,7 @@ namespace BattleField
 
         public int GetRandom(int min, int max)
         {
-            return this.random.Next(min, max);
+            return this.random.Next(min, max + 1);
         }
     }
 }
