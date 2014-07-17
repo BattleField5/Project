@@ -33,6 +33,7 @@ namespace BattleField
         {
             Mine mine = (Mine) this.field[position.X, position.Y];
             mine.Detonate();
+
             // TODO: Make method to work without switch.
             switch (mine.Radius)
             {

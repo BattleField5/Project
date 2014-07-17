@@ -3,7 +3,7 @@
 namespace BattleField
 {
     /// <summary>
-    /// Knows the events of the game.
+    /// Knows the events messages of the game.
     /// Uses a IUiRender for rendering.
     /// </summary>
     public class GameControllerMessenger : IControllerMessenger
