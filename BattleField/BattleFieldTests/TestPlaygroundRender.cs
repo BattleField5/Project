@@ -9,12 +9,12 @@ namespace BattleFieldTests
     [TestClass]
     public class TestPlaygroundRender
     {
-        private Mock<ConsoleWriter> iURender;
+        private Mock<IUiRender> iURender;
         private IPlaygroundRender playgroundRender;
         [TestInitialize]
         public void InitializeRender()
         {
-            this.iURender = new Mock<ConsoleWriter>();
+            this.iURender = new Mock<IUiRender>();
             this.playgroundRender = new PlaygroundRender(this.iURender.Object);
         }
 
