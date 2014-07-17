@@ -1,7 +1,7 @@
-﻿namespace BattleField
-{
-    using System;
+﻿using System;
 
+namespace BattleField
+{
     public class GameEngine
     {
         private IGameController gameController;
@@ -10,31 +10,31 @@
         private int blownMines;
 
         public GameEngine()
-            : this(new Detonator() , new GameController())
+            : this(new Detonator(), new GameController())
         {
         }
 
-        public GameEngine(IDetonator detonator , IGameController gameController)
+        public GameEngine(IDetonator detonator, IGameController gameController)
         {
             this.gameController = gameController;
             this.detonator = detonator;
             int size = this.gameController.GetPlaygroundSizeFromUser();
             this.board = Gameboard.Initialize(size);
-            this.detonator.Field = board.Field;
+            this.detonator.Field = this.board.Field;
             this.blownMines = 0;
         }
 
         public void Start()
         {
-            while (this.ContainsMines(board.Field))
+            while (this.ContainsMines(this.board.Field))
             {
-                this.gameController.ShowPlayground(board.Field);
-                Cell mineToBlow = this.gameController.GetNextPositionForPlayFromUser(board.Field);
-                detonator.Detonate(mineToBlow);
+                this.gameController.ShowPlayground(this.board.Field);
+                Cell mineToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
+                this.detonator.Detonate(mineToBlow);
                 this.blownMines++;
             }
 
-            this.gameController.ShowPlayground(board.Field);
+            this.gameController.ShowPlayground(this.board.Field);
             this.gameController.GameOver(this.blownMines);
         }
 
@@ -54,6 +54,5 @@
 
             return false;
         }
-
     }
 }

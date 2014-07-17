@@ -1,8 +1,8 @@
-﻿namespace BattleField
-{
-    using System;
-    using System.Linq;
-    
+﻿using System;
+using System.Linq;
+
+namespace BattleField
+{    
     /// <summary>
     /// Writes on the Console.
     /// </summary>

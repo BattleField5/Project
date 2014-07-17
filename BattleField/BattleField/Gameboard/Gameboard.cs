@@ -1,9 +1,9 @@
-﻿namespace BattleField
-{
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace BattleField
+{
     /// <summary>
     /// Represents the Gameboard with a field.
     /// </summary>
@@ -20,19 +20,6 @@
             var fieldGenerator = new FieldGenerator();
             this.Size = size;
             this.Field = fieldGenerator.GenerateField(this.Size);
-        }
-
-        /// <summary>
-        /// Creates or returns the instanced Gameboard
-        /// </summary>
-        /// <param name="size">Field's size</param>
-        public static IGameboard Initialize(int size)
-        {
-            if (gameboard == null)
-            {
-                gameboard = new Gameboard(size);
-            }
-            return gameboard;
         }
 
         /// <summary>
@@ -62,5 +49,18 @@
             private set { this.size = value; }
         }
 
+        /// <summary>
+        /// Creates or returns the instanced Gameboard
+        /// </summary>
+        /// <param name="size">Field's size</param>
+        public static IGameboard Initialize(int size)
+        {
+            if (gameboard == null)
+            {
+                gameboard = new Gameboard(size);
+            }
+
+            return gameboard;
+        }        
     }
 }

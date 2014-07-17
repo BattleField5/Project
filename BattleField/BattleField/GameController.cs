@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleField
 {
@@ -48,6 +44,7 @@ namespace BattleField
         {
             this.messenger.MessageForGameOver(detonatedMines);
         }
+        
         public int GetPlaygroundSizeFromUser()
         {
             this.messenger.AskForGameboardSize();
@@ -58,6 +55,7 @@ namespace BattleField
                 this.messenger.AskForGameboardSize();
                 userInput = this.inputReader.GetUserInput();
             }
+
             return int.Parse(userInput);
         }
 
@@ -94,6 +92,5 @@ namespace BattleField
 
             return new Cell(x, y);
         }
-
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BattleField
 {
@@ -16,6 +12,7 @@ namespace BattleField
             {
                 return false;
             }
+
             if (1 < size && size <= 10)
             {
                 return true;
@@ -25,6 +22,7 @@ namespace BattleField
                 return false;
             }
         }
+        
         internal static bool IsValidInputForNextPosition(string input)
         {
             if (input.Length != 3)
@@ -53,15 +51,7 @@ namespace BattleField
 
         private static bool IsInsideField(Cell[,] field, int x, int y)
         {
-            bool isInsideField = false;
-
-            if (0 <= x && x < field.GetLength(0))
-            {
-                if (0 <= y && y < field.GetLength(1))
-                {
-                    isInsideField = true;
-                }
-            }
+            bool isInsideField = (0 <= x && x < field.GetLength(0)) && (0 <= y && y < field.GetLength(1));
 
             return isInsideField;
         }

@@ -4,7 +4,8 @@ namespace BattleField
 {
     public interface IDetonator
     {
-        void Detonate(Cell cell);
         Cell[,] Field { get; set; }
+
+        void Detonate(Cell cell);
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleField
 {
@@ -22,7 +19,7 @@ namespace BattleField
         /// </summary>
         public FieldGenerator()
         {
-            rand = RandomGenerator.Instance;
+            this.rand = RandomGenerator.Instance;
         }
 
         /// <summary>
@@ -31,9 +28,9 @@ namespace BattleField
         /// <param name="size">Number of cells in width and height</param>
         public Cell[,] GenerateField(int size)
         {
-            var field = GenerateEmptyField(size);
-            int minesCount = DetermineMineCount(size, rand);
-            field = GenerateMinesInField(field, minesCount, size, rand);
+            var field = this.GenerateEmptyField(size);
+            int minesCount = this.DetermineMineCount(size, this.rand);
+            field = this.GenerateMinesInField(field, minesCount, size, this.rand);
             return field;
         }
 
@@ -58,7 +55,7 @@ namespace BattleField
             {
                 int cellX = rand.GetRandom(0, size);
                 int cellY = rand.GetRandom(0, size);
-                int cellType = rand.GetRandom(FirstCellTypeIndex, LastCellTypeIndex+1);
+                int cellType = rand.GetRandom(FirstCellTypeIndex, LastCellTypeIndex + 1);
                 Cell currentCell = new Cell(cellX, cellY, true, cellType);
 
                 if (mines.Contains(currentCell))
@@ -77,8 +74,8 @@ namespace BattleField
         private int DetermineMineCount(int size, IRandomGenerator rand)
         {
             double totalCells = (double)size * size;
-            int lowBound = (int)(Math.Round(LowerBoundMines * totalCells));
-            int upperBound = (int)(Math.Round(UpperBoundMines * totalCells));
+            int lowBound = (int)Math.Round(LowerBoundMines * totalCells);
+            int upperBound = (int)Math.Round(UpperBoundMines * totalCells);
             int minesCount = rand.GetRandom(lowBound, upperBound);
 
             return minesCount;

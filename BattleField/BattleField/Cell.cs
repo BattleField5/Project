@@ -1,7 +1,7 @@
-﻿namespace BattleField
-{
-    using System;
+﻿using System;
 
+namespace BattleField
+{
     /// <summary>
     /// A single cell. Can be a mine.
     /// </summary>
@@ -17,7 +17,9 @@
         private bool isDetonated;
        // TODO: Maybe extract IMine and Mine child class.
 
-        public Cell(int x, int y) : this(x, y, false) { }
+        public Cell(int x, int y) : this(x, y, false)
+        {
+        }
 
         /// <summary>
         /// Creates a Cell.
@@ -42,6 +44,7 @@
                 this.Value = FieldSymbol;
             }
         }
+
         /// <summary>
         /// Returns the X position of the Cell
         /// </summary>
@@ -59,6 +62,7 @@
             get { return this.y; }
             set { this.y = value; }
         }
+
         /// <summary>
         /// Returns the symbol of the cell
         /// </summary>
@@ -73,18 +77,27 @@
         /// </summary>
         public bool IsMine
         {
-            get { return this.isMine; }
+            get
+            {
+                return this.isMine;
+            }
+
             set
             {
                 this.isMine = value;
             }
         }
+
         /// <summary>
         /// Returns if cell is detonated
         /// </summary>
         public bool IsDetonated
         {
-            get { return this.isDetonated; }
+            get
+            {
+                return this.isDetonated;
+            }
+
             set
             {
                 this.isDetonated = value;

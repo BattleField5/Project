@@ -18,6 +18,7 @@ namespace BattleField
             {
                 return this.field;
             }
+
             set
             {
                 this.field = value;
@@ -37,27 +38,27 @@ namespace BattleField
             {
                 case '1':
                     {
-                        ExplodeMineTypeOne(cell);
+                        this.ExplodeMineTypeOne(cell);
                         break;
                     }
                 case '2':
                     {
-                        ExplodeMineTypeTwo(cell);
+                        this.ExplodeMineTypeTwo(cell);
                         break;
                     }
                 case '3':
                     {
-                        ExplodeMineTypeThree(cell);
+                        this.ExplodeMineTypeThree(cell);
                         break;
                     }
                 case '4':
                     {
-                        ExplodeMineTypeFour(cell);
+                        this.ExplodeMineTypeFour(cell);
                         break;
                     }
                 case '5':
                     {
-                        ExplodeMineTypeFive(cell);
+                        this.ExplodeMineTypeFive(cell);
                         break;
                     }
                 default:
@@ -71,10 +72,10 @@ namespace BattleField
             {
                 for (int j = mine.Y - 1; j <= mine.Y + 1; j += 2)
                 {
-                    if (IsInsideField(i, j))
+                    if (this.IsInsideField(i, j))
                     {
-                        field[mine.X, mine.Y].Detonate();
-                        field[i, j].Detonate();
+                        this.field[mine.X, mine.Y].Detonate();
+                        this.field[i, j].Detonate();
                     }
                 }
             }
@@ -86,9 +87,9 @@ namespace BattleField
             {
                 for (int j = mine.Y - 1; j <= mine.Y + 1; j++)
                 {
-                    if (IsInsideField(i, j))
+                    if (this.IsInsideField(i, j))
                     {
-                        field[i, j].Detonate();
+                        this.field[i, j].Detonate();
                     }
                 }
             }
@@ -100,24 +101,24 @@ namespace BattleField
             int x = mine.X;
             int y = mine.Y;
 
-            if (IsInsideField(x - 2, y))
+            if (this.IsInsideField(x - 2, y))
             {
-                field[x - 2, y].Detonate();
+                this.field[x - 2, y].Detonate();
             }
 
-            if (IsInsideField(x + 2, y))
+            if (this.IsInsideField(x + 2, y))
             {
-                field[x + 2, y].Detonate();
+                this.field[x + 2, y].Detonate();
             }
 
-            if (IsInsideField(x, y - 2))
+            if (this.IsInsideField(x, y - 2))
             {
-                field[x, y - 2].Detonate();
+                this.field[x, y - 2].Detonate();
             }
 
-            if (IsInsideField(x, y + 2))
+            if (this.IsInsideField(x, y + 2))
             {
-                field[x, y + 2].Detonate();
+                this.field[x, y + 2].Detonate();
             }
         }
 
@@ -152,9 +153,9 @@ namespace BattleField
                         continue;
                     }
 
-                    if (IsInsideField(i, j))
+                    if (this.IsInsideField(i, j))
                     {
-                        field[i, j].Detonate();
+                        this.field[i, j].Detonate();
                     }
                 }
             }
@@ -166,9 +167,9 @@ namespace BattleField
             {
                 for (int j = mine.Y - 2; j <= mine.Y + 2; j++)
                 {
-                    if (IsInsideField(i, j))
+                    if (this.IsInsideField(i, j))
                     {
-                        field[i, j].Detonate();
+                        this.field[i, j].Detonate();
                     }
                 }
             }
@@ -178,9 +179,9 @@ namespace BattleField
         {
             bool isInsideField = false;
 
-            if (0 <= x && x < field.GetLength(0))
+            if (0 <= x && x < this.field.GetLength(0))
             {
-                if (0 <= y && y < field.GetLength(1))
+                if (0 <= y && y < this.field.GetLength(1))
                 {
                     isInsideField = true;
                 }
