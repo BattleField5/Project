@@ -7,6 +7,7 @@ namespace BattleField
         Cell[,] Field
         {
             get;
+            set;
         }
 
         int MinesCount

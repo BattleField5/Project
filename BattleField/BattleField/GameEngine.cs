@@ -1,4 +1,5 @@
 ﻿using System;
+using BattleField.DetonationPatterns;
 
 namespace BattleField
 {
@@ -6,21 +7,20 @@ namespace BattleField
     {
         private IGameController gameController;
         private IGameboard board;
-        private IDetonator detonator;
+        private IDetonationPatternFactory detonationFactory;
         private int blownMines;
 
         public GameEngine()
-            : this(new Detonator(), new GameController())
+            : this(new DetonationFactory(), new GameController())
         {
         }
 
-        public GameEngine(IDetonator detonator, IGameController gameController)
+        public GameEngine(IDetonationPatternFactory detonationFactory, IGameController gameController)
         {
             this.gameController = gameController;
-            this.detonator = detonator;
+            this.detonationFactory = detonationFactory;
             int size = this.gameController.GetPlaygroundSizeFromUser();
             this.board = Gameboard.Initialize(size);
-            this.detonator.Field = this.board.Field;
             this.blownMines = 0;
         }
 
@@ -30,7 +30,11 @@ namespace BattleField
             {
                 this.gameController.ShowPlayground(this.board.Field);
                 Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
-                this.detonator.Detonate(positionToBlow);
+                Cell[,] field = this.board.Field;
+                DetonationPattern detonationPattern = this.detonationFactory.GetDetonationPattern(positionToBlow, field);
+                
+                detonationPattern.Detonate(positionToBlow, ref field);
+                this.board.Field = field;
                 this.blownMines++;
             }
 

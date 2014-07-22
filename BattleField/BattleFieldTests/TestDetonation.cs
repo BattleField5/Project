@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BattleField;
+using BattleField.DetonationPatterns;
 
 namespace BattleFieldTests
 {
@@ -26,9 +27,8 @@ namespace BattleFieldTests
         {
             Cell[,] field = GenerateMatrix(5);
             field[1, 1] = new Mine(1, 1, MineRadius.MineRadiusOne);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(1, 1));
+            DetonationPattern detonator = new DetonateRadiusOne();
+            detonator.Detonate(new Position(1, 1), ref field);
             bool patternOneDetonatesFiveCells =
                     field[1, 1].Exploded &&
                     field[0, 0].Exploded &&
@@ -45,9 +45,8 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[1, 1] = new Mine(1, 1, MineRadius.MineRadiusOne);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(1, 1));
+            DetonationPattern detonator = new DetonateRadiusOne();
+            detonator.Detonate(new Position(1, 1), ref field);
             bool patternOneDetonatesMoreThanFiveCells = false;
             int i = 0;
             int j = 0;
@@ -82,9 +81,8 @@ namespace BattleFieldTests
         {
             Cell[,] field = GenerateMatrix(5);
             field[0, 0] = new Mine(0, 0, MineRadius.MineRadiusOne);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(0, 0));
+            DetonationPattern detonator = new DetonateRadiusOne();
+            detonator.Detonate(new Position(0, 0), ref field);
             bool twoCellsAreDetonated = (field[0, 0].Exploded && field[1, 1].Exploded);
 
             Assert.IsTrue(twoCellsAreDetonated);
@@ -96,9 +94,8 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[0, 0] = new Mine(0, 0, MineRadius.MineRadiusOne);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(0, 0));
+            DetonationPattern detonator = new DetonateRadiusOne();
+            detonator.Detonate(new Position(0, 0), ref field);
             int i = 0;
             int j = 0;
             bool moreThanOneCellIsDetonated = false;
@@ -128,9 +125,8 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[2, 2] = new Mine(2, 2, MineRadius.MineRadiusTwo);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(2, 2));
+            DetonationPattern detonator = new DetonateRadiusTwo();
+            detonator.Detonate(new Position(2, 2), ref field);
             bool nineCellsAreDetonated = true;
             for (int i = 1; i <= 3; i++)
             {
@@ -158,9 +154,8 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[2, 2] = new Mine(2, 2, MineRadius.MineRadiusTwo);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(2, 2));
+            DetonationPattern detonator = new DetonateRadiusTwo();
+            detonator.Detonate(new Position(2, 2), ref field);
             bool moreThanNineCellsAreDetonated = false;
             int i = 0;
             int j = 0;
@@ -193,9 +188,8 @@ namespace BattleFieldTests
             int n = 5;
             Cell[,] field = GenerateMatrix(n);
             field[4, 0] = new Mine(4, 0, MineRadius.MineRadiusTwo);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(new Position(4, 0));
+            DetonationPattern detonator = new DetonateRadiusTwo();
+            detonator.Detonate(new Position(4, 0), ref field);
             bool fourCellsAreDetonated =
                     field[3, 0].Exploded &&
                     field[3, 1].Exploded &&
@@ -212,9 +206,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(3, 3);
             field[3, 3] = new Mine(position, MineRadius.MineRadiusThree);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusThree();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
@@ -249,9 +242,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(4, 4);
             field[4, 4] = new Mine(position, MineRadius.MineRadiusThree);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusThree();
+            detonator.Detonate(position, ref field);
             bool moreThanThirteenCellsDetonated = false;
             int i = 0;
             int j = 0;
@@ -289,9 +281,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(6, 6);
             field[6, 6] = new Mine(position, MineRadius.MineRadiusThree);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusThree();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated =
                     field[4, 6].Exploded == field[5, 5].Exploded &&
                     field[5, 5].Exploded == field[5, 6].Exploded &&
@@ -310,9 +301,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(3, 3);
             field[3, 3] = new Mine(position, MineRadius.MineRadiusFour);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusFour();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
@@ -349,9 +339,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(4, 4);
             field[4, 4] = new Mine(position, MineRadius.MineRadiusFour);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusFour();
+            detonator.Detonate(position, ref field);
             bool moreThan21CellsAreDetonated = false;
             int i = 0;
             int j = 0;
@@ -389,9 +378,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(0, 6);
             field[0, 6] = new Mine(position, MineRadius.MineRadiusFour);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusFour();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated =
                     field[0, 4].Exploded == field[0, 5].Exploded &&
                     field[0, 5].Exploded == field[0, 6].Exploded &&
@@ -412,9 +400,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(4, 4);
             field[4, 4] = new Mine(position, MineRadius.MineRadiusFive);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusFive();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 6; i++)
             {
@@ -442,9 +429,8 @@ namespace BattleFieldTests
             Cell[,] field = GenerateMatrix(n);
             Position position = new Position(4, 4);
             field[4, 4] = new Mine(position, MineRadius.MineRadiusFive);
-            IDetonator detonator = new Detonator();
-            detonator.Field = field;
-            detonator.Detonate(position);
+            DetonationPattern detonator = new DetonateRadiusFive();
+            detonator.Detonate(position, ref field);
             bool cellsAreDetonated = false;
             for (int i = 0; i < n; i++)
             {

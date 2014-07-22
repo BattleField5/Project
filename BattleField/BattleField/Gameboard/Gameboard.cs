@@ -28,7 +28,7 @@ namespace BattleField
         public Cell[,] Field
         {
             get { return this.field; }
-            private set { this.field = value; }
+            set { this.field = value; }
         }
 
         /// <summary>

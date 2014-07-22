@@ -41,15 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetonationPatterns\DetonateRadiusFive.cs" />
+    <Compile Include="DetonationPatterns\DetonateRadiusFour.cs" />
+    <Compile Include="DetonationPatterns\DetonateRadiusThree.cs" />
+    <Compile Include="DetonationPatterns\DetonateRadiusTwo.cs" />
+    <Compile Include="DetonationPatterns\DetonateRadiusOne.cs" />
+    <Compile Include="DetonationPatterns\IDetonationPattern.cs" />
     <Compile Include="EmptyCell.cs" />
     <Compile Include="GameControllerMessenger.cs" />
     <Compile Include="ConsoleReader.cs" />
-    <Compile Include="Detonator.cs" />
+    <Compile Include="DetonationFactory.cs" />
     <Compile Include="Gameboard\FieldGenerator.cs" />
     <Compile Include="Gameboard\Gameboard.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="Interfaces\IDetonator.cs" />
+    <Compile Include="Interfaces\IDetonationPatternFactory.cs" />
     <Compile Include="Interfaces\IGameboard.cs" />
     <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IInputReader.cs" />
