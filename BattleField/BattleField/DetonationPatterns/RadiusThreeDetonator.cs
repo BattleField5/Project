@@ -2,7 +2,7 @@
 
 namespace BattleField.DetonationPatterns
 {
-    public class DetonateRadiusThree : DetonationPattern
+    public class RadiusThreeDetonator : DetonationPattern
     {
         public override void Detonate(Position position, ref Cell[,] field)
         {

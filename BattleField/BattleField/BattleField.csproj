@@ -41,12 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetonationPatterns\DetonateRadiusFive.cs" />
-    <Compile Include="DetonationPatterns\DetonateRadiusFour.cs" />
-    <Compile Include="DetonationPatterns\DetonateRadiusThree.cs" />
-    <Compile Include="DetonationPatterns\DetonateRadiusTwo.cs" />
-    <Compile Include="DetonationPatterns\DetonateRadiusOne.cs" />
-    <Compile Include="DetonationPatterns\IDetonationPattern.cs" />
+    <Compile Include="DetonationPatterns\RadiusFiveDetonator.cs" />
+    <Compile Include="DetonationPatterns\RadiusFourDetonator.cs" />
+    <Compile Include="DetonationPatterns\RadiusThreeDetonator.cs" />
+    <Compile Include="DetonationPatterns\RadiusTwoDetonator.cs" />
+    <Compile Include="DetonationPatterns\RadiusOneDetonator.cs" />
+    <Compile Include="DetonationPatterns\DetonationPattern.cs" />
     <Compile Include="EmptyCell.cs" />
     <Compile Include="GameControllerMessenger.cs" />
     <Compile Include="ConsoleReader.cs" />

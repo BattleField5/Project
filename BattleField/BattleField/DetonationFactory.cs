@@ -22,27 +22,27 @@ namespace BattleField
             {
                 case MineRadius.MineRadiusOne:
                     {
-                        detonationPattern = new DetonateRadiusOne();
+                        detonationPattern = new RadiusOneDetonator();
                         break;
                     }
                 case MineRadius.MineRadiusTwo:
                     {
-                        detonationPattern = new DetonateRadiusTwo();
+                        detonationPattern = new RadiusTwoDetonator();
                         break;
                     }
                 case MineRadius.MineRadiusThree:
                     {
-                        detonationPattern = new DetonateRadiusThree();
+                        detonationPattern = new RadiusThreeDetonator();
                         break;
                     }
                 case MineRadius.MineRadiusFour:
                     {
-                        detonationPattern = new DetonateRadiusFour();
+                        detonationPattern = new RadiusFourDetonator();
                         break;
                     }
                 case MineRadius.MineRadiusFive:
                     {
-                        detonationPattern = new DetonateRadiusFive();
+                        detonationPattern = new RadiusFiveDetonator();
                         break;
                     }
                 default:
