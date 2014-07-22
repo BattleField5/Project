@@ -8,8 +8,8 @@ namespace BattleField
 
         int GetPlaygroundSizeFromUser();
         
-        Position GetNextPositionForPlayFromUser(Cell[,] field);
-        
-        void ShowPlayground(Cell[,] field);
+        Position GetNextPositionForPlayFromUser(IGameboard gameboard);
+
+        void ShowPlayground(IGameboard gameboard);
     }
 }

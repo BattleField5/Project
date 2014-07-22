@@ -29,13 +29,14 @@ namespace BattleField
         {
             while (this.board.MinesCount > 0)
             {
-                this.gameController.ShowPlayground(this.board.Field);
-                Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
+                this.gameController.ShowPlayground(this.board);
+
+                Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board);
                 this.board.Detonate(positionToBlow);
                 this.blownMines++;
             }
 
-            this.gameController.ShowPlayground(this.board.Field);
+            this.gameController.ShowPlayground(this.board);
             this.gameController.GameOver(this.blownMines);
         }
     }

@@ -4,6 +4,6 @@ namespace BattleField
 {
     public interface IPlaygroundRender
     {
-        void RenderPlayground(Cell[,] field);
+        void RenderPlayground(IGameboard gameboard);
     }
 }

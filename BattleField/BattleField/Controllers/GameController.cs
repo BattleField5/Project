@@ -35,9 +35,9 @@ namespace BattleField
             this.playgroundRender = playgroundRender;
         }
 
-        public void ShowPlayground(Cell[,] field)
+        public void ShowPlayground(IGameboard gameboard)
         {
-            this.playgroundRender.RenderPlayground(field);
+            this.playgroundRender.RenderPlayground(gameboard);
         }
 
         public void GameOver(int detonatedMines)
@@ -59,7 +59,7 @@ namespace BattleField
             return int.Parse(userInput);
         }
 
-        public Position GetNextPositionForPlayFromUser(Cell[,] field)
+        public Position GetNextPositionForPlayFromUser(IGameboard gameboard)
         {
             while (true)
             {
@@ -73,7 +73,7 @@ namespace BattleField
                 }
 
                 Position validPosition = this.ExtractPositionFromString(userInput);
-                if (InputValidator.IsValidMove(field, validPosition.X, validPosition.Y))
+                if (InputValidator.IsValidMove(gameboard, validPosition.X, validPosition.Y))
                 {
                     return validPosition;
                 }

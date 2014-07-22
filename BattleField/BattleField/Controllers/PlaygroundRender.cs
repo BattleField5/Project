@@ -15,11 +15,13 @@ namespace BattleField
             this.render = render;
         }
 
-        public void RenderPlayground(Cell[,] field)
+        public void RenderPlayground(IGameboard gameboard)
         {
+            int size = gameboard.Size;
+            var field = gameboard.Field;
+
             StringBuilder result = new StringBuilder();
             result.Append("   ");
-            int size = field.GetLength(0);
             for (int i = 0; i < size; i++)
             {
                 result.Append(i + " ");

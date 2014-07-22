@@ -8,6 +8,10 @@ namespace BattleField
     /// </summary>
     internal static class InputValidator
     {
+        private const int FIELD_MIN_SIZE = 2;
+        private const int FIELD_MAX_SIZE = 10;
+        private const int COMMAND_LENGTH = 3;
+
         /// <summary>
         /// Returns true if input for the field size is valid
         /// </summary>
@@ -20,7 +24,7 @@ namespace BattleField
                 return false;
             }
 
-            if (1 < size && size <= 10)
+            if (FIELD_MIN_SIZE <= size && size <= FIELD_MAX_SIZE)
             {
                 return true;
             }
@@ -36,7 +40,7 @@ namespace BattleField
         /// <param name="input">Input for position string</param>
         internal static bool IsValidInputForNextPosition(string input)
         {
-            if (input.Length != 3)
+            if (input.Length != COMMAND_LENGTH)
             {
                 return false;
             }
@@ -52,12 +56,12 @@ namespace BattleField
         /// <param name="field">The field to check on</param>
         /// <param name="x">The X position on the field</param>
         /// <param name="y">The Y position on the field</param>
-        internal static bool IsValidMove(Cell[,] field, int x, int y)
+        internal static bool IsValidMove(IGameboard gameboard, int x, int y)
         {
-            bool isInsideField = IsInsideField(field, x, y);
+            bool isInsideField = IsInsideField(gameboard, x, y);
             if (isInsideField)
             {
-                if (field[x, y].IsMine && !field[x, y].Exploded)
+                if (gameboard.Field[x, y].IsMine && !gameboard.Field[x, y].Exploded)
                 {
                     return true;
                 }
@@ -72,9 +76,9 @@ namespace BattleField
         /// <param name="field">The field to check on</param>
         /// <param name="x">The X position on the field</param>
         /// <param name="y">The Y position on the field</param>
-        private static bool IsInsideField(Cell[,] field, int x, int y)
+        private static bool IsInsideField(IGameboard gameboard, int x, int y)
         {
-            bool isInsideField = (0 <= x && x < field.GetLength(0)) && (0 <= y && y < field.GetLength(1));
+            bool isInsideField = (0 <= x && x < gameboard.Size) && (0 <= y && y < gameboard.Size);
 
             return isInsideField;
         }
