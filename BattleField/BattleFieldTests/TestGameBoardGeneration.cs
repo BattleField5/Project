@@ -11,8 +11,9 @@ namespace BattleFieldTests
         public void TestGameboardOfDimention10HasBetween15And30PercentMines()
         {
             int size = 10;
-            var fieldGenerator = new FieldGenerator();
-            Cell[,] field = fieldGenerator.GenerateField(size);
+            var fieldGenerator = new GameboardGenerator(0.15, 0.3, RandomGenerator.Instance);
+            IGameboard gameboard = fieldGenerator.Generate(size);
+            Cell[,] field = gameboard.Field;
             int numberOfMines = GetNumberOfMines(field);
             double percentage = (double)numberOfMines / (size * size);
             bool isBetween15And30Percent = (0.15 <= percentage && percentage <= 0.30);
@@ -23,8 +24,8 @@ namespace BattleFieldTests
         public void TestGameboardOfDimention5HasBetween15And30PercentMines()
         {
             int size = 5;
-            var fieldGenerator = new FieldGenerator();
-            Cell[,] field = fieldGenerator.GenerateField(size);
+            var fieldGenerator = new GameboardGenerator(0.15, 0.3, RandomGenerator.Instance);
+            Cell[,] field = (fieldGenerator.Generate(size)).Field;
             int numberOfMines = GetNumberOfMines(field);
             double percentage = (double)numberOfMines / (size * size);
             bool isBetween15And30Percent = (0.15 <= percentage && percentage <= 0.30);

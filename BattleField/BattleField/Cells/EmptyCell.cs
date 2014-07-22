@@ -10,14 +10,16 @@ namespace BattleField
         /// <summary>
         /// Creates an Empty Cell.
         /// </summary>
-        /// <param name="position">Position of the Cell</param>
-        public EmptyCell(Position position): base(position)
+        public EmptyCell()
         {
         }
 
-        public EmptyCell(int x, int y)
-            : base(x, y)
+        public override bool IsMine
         {
+            get
+            {
+                return false;
+            }
         }
     }
 }

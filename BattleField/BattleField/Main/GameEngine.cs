@@ -10,22 +10,24 @@ namespace BattleField
         private int blownMines;
 
         public GameEngine()
-            : this(new DetonationFactory(), new GameController())
+            : this(new GameController(), new GameboardGenerator(0.15, 0.3, RandomGenerator.Instance), new DetonationFactory())
         {
         }
 
-        public GameEngine(IDetonationPatternFactory detonationFactory, IGameController gameController)
+        public GameEngine(IGameController gameController, IGameboardGenerator fieldGenerator, IDetonationPatternFactory detonationFactory)
         {
             this.gameController = gameController;
             int size = this.gameController.GetPlaygroundSizeFromUser();
-            this.board = Gameboard.Initialize(size);
+
+            this.board = fieldGenerator.Generate(size);
             this.board.SetDetonationFactory(detonationFactory);
+            
             this.blownMines = 0;
         }
 
         public void Start()
         {
-            while (this.ContainsMines(this.board.Field))
+            while (this.board.MinesCount > 0)
             {
                 this.gameController.ShowPlayground(this.board.Field);
                 Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
@@ -35,23 +37,6 @@ namespace BattleField
 
             this.gameController.ShowPlayground(this.board.Field);
             this.gameController.GameOver(this.blownMines);
-        }
-
-        private bool ContainsMines(Cell[,] field)
-        {
-            for (int row = 0; row < field.GetLength(0); row++)
-            {
-                for (int col = 0; col < field.GetLength(1); col++)
-                {
-                    Mine mine = field[row, col] as Mine;
-                    if (mine != null && !mine.IsDetonated)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }

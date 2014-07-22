@@ -12,11 +12,11 @@ namespace BattleFieldTests
         internal static Cell[,] GenerateFieldWithSizeTwo()
         {
             Cell[,] field = new Cell[2, 2];
-            field[0, 0] = new Mine(new Position(0,0) , MineRadius.MineRadiusOne);
-            field[0, 1] = new EmptyCell(0, 1);
+            field[0, 0] = new Mine(MineRadius.MineRadiusOne);
+            field[0, 1] = new EmptyCell();
             field[0, 1].Explode();
-            field[1, 0] = new EmptyCell(1, 0);
-            field[1, 1] = new EmptyCell(1, 1);
+            field[1, 0] = new EmptyCell();
+            field[1, 1] = new EmptyCell();
             return field;
         }
 
@@ -27,7 +27,7 @@ namespace BattleFieldTests
             {
                 for (int k = 0; k < field.GetLength(1); k++)
                 {
-                    field[i, k] = new EmptyCell(i, k);
+                    field[i, k] = new EmptyCell();
                 }
             }
 

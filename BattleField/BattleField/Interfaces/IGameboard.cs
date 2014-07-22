@@ -13,11 +13,13 @@ namespace BattleField
         int MinesCount
         {
             get;
+            set;
         }
 
         int Size
         {
             get;
+            set;
         }
 
         void SetDetonationFactory(IDetonationPatternFactory detonationFactory);

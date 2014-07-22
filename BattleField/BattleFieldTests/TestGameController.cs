@@ -61,7 +61,7 @@ namespace BattleFieldTests
             messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
             messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
             Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = (field[0, 0].X == returnedPosition.X && field[0, 0].Y == returnedPosition.Y);
+            bool isTheSameCell = (0 == returnedPosition.X && 0 == returnedPosition.Y);
             Assert.IsTrue(isTheSameCell);
         }
 
@@ -114,7 +114,7 @@ namespace BattleFieldTests
                 .Returns(() =>arrayWithCoordinates[currentIndex])
                 .Callback(()=>currentIndex++);
             Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = (field[0, 0].X == returnedPosition.X && field[0, 0].Y == returnedPosition.Y);
+            bool isTheSameCell = (0 == returnedPosition.X && 0 == returnedPosition.Y);
             Assert.IsTrue(isTheSameCell);
         }
     }
