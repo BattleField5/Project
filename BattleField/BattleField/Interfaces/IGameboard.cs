@@ -19,5 +19,9 @@ namespace BattleField
         {
             get;
         }
+
+        void SetDetonationFactory(IDetonationPatternFactory detonationFactory);
+
+        void Detonate(Position position);
     }
 }

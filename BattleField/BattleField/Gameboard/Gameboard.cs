@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleField.DetonationPatterns;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,9 +11,11 @@ namespace BattleField
     public class Gameboard : IGameboard
     {
         private static IGameboard gameboard = null;
-        private Cell[,] field = null;
-        private int minesCount = 0;
-        private int size = 0;
+        
+        private Cell[,] field;
+        private int minesCount;
+        private int size;
+        private IDetonationPatternFactory detonationFactory;
 
         protected Gameboard(int size)
         {
@@ -49,6 +52,11 @@ namespace BattleField
             private set { this.size = value; }
         }
 
+        public void SetDetonationFactory(IDetonationPatternFactory detonationFactory)
+        {
+            this.detonationFactory = detonationFactory;
+        }
+
         /// <summary>
         /// Creates or returns the instanced Gameboard
         /// </summary>
@@ -61,6 +69,12 @@ namespace BattleField
             }
 
             return gameboard;
-        }        
+        }
+
+        public void Detonate(Position position)
+        {
+            DetonationPattern detonationPattern = this.detonationFactory.GetDetonationPattern(position, field);
+            detonationPattern.Detonate(position, ref this.field);
+        }
     }
 }

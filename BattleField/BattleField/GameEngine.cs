@@ -7,7 +7,6 @@ namespace BattleField
     {
         private IGameController gameController;
         private IGameboard board;
-        private IDetonationPatternFactory detonationFactory;
         private int blownMines;
 
         public GameEngine()
@@ -18,9 +17,9 @@ namespace BattleField
         public GameEngine(IDetonationPatternFactory detonationFactory, IGameController gameController)
         {
             this.gameController = gameController;
-            this.detonationFactory = detonationFactory;
             int size = this.gameController.GetPlaygroundSizeFromUser();
             this.board = Gameboard.Initialize(size);
+            this.board.SetDetonationFactory(detonationFactory);
             this.blownMines = 0;
         }
 
@@ -30,11 +29,7 @@ namespace BattleField
             {
                 this.gameController.ShowPlayground(this.board.Field);
                 Position positionToBlow = this.gameController.GetNextPositionForPlayFromUser(this.board.Field);
-                Cell[,] field = this.board.Field;
-                DetonationPattern detonationPattern = this.detonationFactory.GetDetonationPattern(positionToBlow, field);
-                
-                detonationPattern.Detonate(positionToBlow, ref field);
-                this.board.Field = field;
+                this.board.Detonate(positionToBlow);
                 this.blownMines++;
             }
 
