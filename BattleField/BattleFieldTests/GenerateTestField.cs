@@ -9,29 +9,34 @@ namespace BattleFieldTests
 {
     internal static class GenerateTestField
     {
-        internal static Cell[,] GenerateFieldWithSizeTwo()
+        internal static IGameboard GenerateFieldWithSizeTwo()
         {
-            Cell[,] field = new Cell[2, 2];
-            field[0, 0] = new Mine(MineRadius.MineRadiusOne);
-            field[0, 1] = new EmptyCell();
-            field[0, 1].Explode();
-            field[1, 0] = new EmptyCell();
-            field[1, 1] = new EmptyCell();
-            return field;
+            var gameboard = new Gameboard();
+            gameboard.Size = 2;
+            gameboard.Field = new Cell[2, 2];
+            gameboard.Field[0, 0] = new Mine(MineRadius.MineRadiusOne);
+            gameboard.Field[0, 1] = new EmptyCell();
+            gameboard.Field[0, 1].Explode();
+            gameboard.Field[1, 0] = new EmptyCell();
+            gameboard.Field[1, 1] = new EmptyCell();
+            return gameboard;
         }
 
-        internal static Cell[,] GenerateFieldWithSizeTenWithEmptyCells()
+        internal static IGameboard GenerateFieldWithSizeTenWithEmptyCells()
         {
-            var field = new Cell[10, 10];
-            for (int i = 0; i < field.GetLength(0); i++)
+            var gameboard = new Gameboard();
+            
+            gameboard.Field = new Cell[10, 10];
+            gameboard.Size = 10;
+            for (int i = 0; i < gameboard.Field.GetLength(0); i++)
             {
-                for (int k = 0; k < field.GetLength(1); k++)
+                for (int k = 0; k < gameboard.Field.GetLength(1); k++)
                 {
-                    field[i, k] = new EmptyCell();
+                    gameboard.Field[i, k] = new EmptyCell();
                 }
             }
 
-            return field;
+            return gameboard;
         }
     }
 }
