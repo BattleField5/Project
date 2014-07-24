@@ -44,7 +44,11 @@ namespace BattleField
         {
             this.messenger.MessageForGameOver(detonatedMines);
         }
-        
+
+        /// <summary>
+        /// Method ask user for correct Playground size untill get correct result.
+        /// </summary>
+        /// <returns>Integer betwweeen 2-10</returns>
         public int GetPlaygroundSizeFromUser()
         {
             this.messenger.AskForGameboardSize();
@@ -59,6 +63,11 @@ namespace BattleField
             return int.Parse(userInput);
         }
 
+        /// <summary>
+        /// Get coordinates from user , untill find correct position for play.
+        /// </summary>
+        /// <param name="gameboard"></param>
+        /// <returns>Valid position</returns>
         public Position GetNextPositionForPlayFromUser(IGameboard gameboard)
         {
             while (true)
