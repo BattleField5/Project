@@ -5,12 +5,15 @@ namespace BattleField
 {
     public class GameEngine
     {
+        private readonly double lowerBoundMines = 0.15;
+        private readonly double upperBoundMines = 0.3;
+
         private IGameController gameController;
         private IGameboard board;
         private int blownMines;
 
         public GameEngine()
-            : this(new GameController(), new GameboardGenerator(0.15, 0.3, RandomGenerator.Instance), new DetonationFactory())
+            : this(new GameController(), new GameboardGenerator(RandomGenerator.Instance), new DetonationFactory())
         {
         }
 
@@ -19,7 +22,8 @@ namespace BattleField
             this.gameController = gameController;
             int size = this.gameController.GetPlaygroundSizeFromUser();
 
-            this.board = fieldGenerator.Generate(size);
+            double minesPercentage = DetermineMinesPercentage();
+            this.board = fieldGenerator.Generate(size, minesPercentage);
             this.board.SetDetonationFactory(detonationFactory);
             
             this.blownMines = 0;
@@ -38,6 +42,12 @@ namespace BattleField
 
             this.gameController.ShowPlayground(this.board);
             this.gameController.GameOver(this.blownMines);
+        }
+
+        private double DetermineMinesPercentage()
+        {
+            double minesPercentage = RandomGenerator.Instance.GetRandom(this.lowerBoundMines, this.upperBoundMines);
+            return minesPercentage;
         }
     }
 }

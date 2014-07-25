@@ -24,5 +24,11 @@ namespace BattleField
         {
             return this.random.Next(min, max);
         }
+
+        public double GetRandom(double min, double max)
+        {
+            double next = this.random.NextDouble();
+            return min + (max - min) * next;
+        }
     }
 }

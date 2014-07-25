@@ -8,17 +8,13 @@ namespace BattleField
     /// </summary>
     public class GameboardGenerator : IGameboardGenerator
     {
-        private readonly double lowerBoundMines;
-        private readonly double upperBoundMines;
         private readonly IRandomGenerator rand;
         
         /// <summary>
         /// Creates a new instance of GameboardGenerator
         /// </summary>
-        public GameboardGenerator(double lowerBoundMines, double upperBoundMines, IRandomGenerator randomGenerator)
+        public GameboardGenerator(IRandomGenerator randomGenerator)
         {
-            this.lowerBoundMines = lowerBoundMines;
-            this.upperBoundMines = upperBoundMines;
             this.rand = randomGenerator;
         }
 
@@ -26,10 +22,10 @@ namespace BattleField
         /// Generates a gameboard
         /// </summary>
         /// <param name="size">Number of cells in width and height</param>
-        public IGameboard Generate(int size)
+        public IGameboard Generate(int size, double minesPercentage)
         {
             var field = this.GenerateEmptyField(size);
-            int minesCount = this.DetermineMineCount(size);
+            int minesCount = this.DetermineMineCount(size, minesPercentage);
             field = this.GenerateMinesInField(field, minesCount, size);
 
             IGameboard gameboard = new Gameboard();
@@ -80,12 +76,10 @@ namespace BattleField
             return field;
         }
 
-        private int DetermineMineCount(int size)
+        private int DetermineMineCount(int size, double percentage)
         {
             double totalNumberOfCells = (double)size * size;
-            int lowBound = (int)Math.Round(lowerBoundMines * totalNumberOfCells);
-            int upperBound = (int)Math.Round(upperBoundMines * totalNumberOfCells);
-            int minesCount = this.rand.GetRandom(lowBound, upperBound + 1);
+            int minesCount = (int)Math.Round(totalNumberOfCells * percentage);
 
             return minesCount;
         }
