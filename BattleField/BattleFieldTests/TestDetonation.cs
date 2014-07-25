@@ -8,7 +8,7 @@ namespace BattleFieldTests
     [TestClass]
     public class TestDetonation
     {
-        private Gameboard GenerateMatrix(int n)
+        private Gameboard GenerateGameboard(int n)
         {
             Gameboard gameboard = new Gameboard();
             gameboard.Size = n;
@@ -21,16 +21,16 @@ namespace BattleFieldTests
                 }
             }
 
+            IDetonationPatternFactory detonationFactory = new DetonationFactory();
+            gameboard.SetDetonationFactory(detonationFactory);
             return gameboard;
         }
 
         [TestMethod]
         public void TestDetonate1WithAllMinesInsideFieldDetonates5Cells()
         {
-            Gameboard board = GenerateMatrix(5);
+            Gameboard board = GenerateGameboard(5);
             board.Field[1, 1] = new Mine(MineRadius.MineRadiusOne);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesFiveCells =
                     board.Field[1, 1].Exploded &&
@@ -46,10 +46,8 @@ namespace BattleFieldTests
         public void TestDetonate1WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             board.Field[1, 1] = new Mine(MineRadius.MineRadiusOne);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesMoreThanFiveCells = false;
             int i = 0;
@@ -83,10 +81,8 @@ namespace BattleFieldTests
         [TestMethod]
         public void TestDetonate1With2MinesInsideFieldDetonates2Cells()
         {
-            Gameboard board = GenerateMatrix(5);
+            Gameboard board = GenerateGameboard(5);
             board.Field[0, 0] = new Mine(MineRadius.MineRadiusOne);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(0, 0));
             bool twoCellsAreDetonated = (board.Field[0, 0].Exploded && board.Field[1, 1].Exploded);
 
@@ -97,10 +93,8 @@ namespace BattleFieldTests
         public void TestDetonate1With2MinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             board.Field[0, 0] = new Mine(MineRadius.MineRadiusOne);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(0, 0));
             int i = 0;
             int j = 0;
@@ -129,10 +123,8 @@ namespace BattleFieldTests
         public void TestDetonate2WithAllMinesInsideFieldDetonates9Cells()
         {
             int n = 5;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             board.Field[2, 2] = new Mine(MineRadius.MineRadiusTwo);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(2, 2));
             bool nineCellsAreDetonated = true;
             for (int i = 1; i <= 3; i++)
@@ -159,10 +151,8 @@ namespace BattleFieldTests
         public void TestDetonate2WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             board.Field[2, 2] = new Mine(MineRadius.MineRadiusTwo);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(2, 2));
             bool moreThanNineCellsAreDetonated = false;
             int i = 0;
@@ -194,10 +184,8 @@ namespace BattleFieldTests
         public void TestDetonate2With4MinesInsideFieldDetonates4Cells()
         {
             int n = 5;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             board.Field[4, 0] = new Mine(MineRadius.MineRadiusTwo);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(new Position(4, 0));
             bool fourCellsAreDetonated =
                     board.Field[3, 0].Exploded &&
@@ -212,11 +200,9 @@ namespace BattleFieldTests
         public void TestDetonate3WithAllMinesInsideFieldDetonates13Cells()
         {
             int n = 7;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(3, 3);
             board.Field[3, 3] = new Mine(MineRadius.MineRadiusThree);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
@@ -249,11 +235,9 @@ namespace BattleFieldTests
         public void TestDetonate3WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
             board.Field[4, 4] = new Mine(MineRadius.MineRadiusThree);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool moreThanThirteenCellsDetonated = false;
             int i = 0;
@@ -289,11 +273,9 @@ namespace BattleFieldTests
         public void TestDetonate3With6MinesInsideFieldDetonates6Cells()
         {
             int n = 7;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(6, 6);
             board.Field[6, 6] = new Mine(MineRadius.MineRadiusThree);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated =
                     board.Field[4, 6].Exploded == board.Field[5, 5].Exploded &&
@@ -310,11 +292,9 @@ namespace BattleFieldTests
         public void TestDetonate4WithAllMinesInsideFieldDetonates21Cells()
         {
             int n = 7;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(3, 3);
             board.Field[3, 3] = new Mine(MineRadius.MineRadiusFour);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
@@ -349,11 +329,9 @@ namespace BattleFieldTests
         public void TestDetonate4WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
             board.Field[4, 4] = new Mine(MineRadius.MineRadiusFour);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool moreThan21CellsAreDetonated = false;
             int i = 0;
@@ -389,11 +367,9 @@ namespace BattleFieldTests
         public void TestDetonate4With8MinesInsideFieldDetonates8Cells()
         {
             int n = 7;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(0, 6);
             board.Field[0, 6] = new Mine(MineRadius.MineRadiusFour);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated =
                     board.Field[0, 4].Exploded == board.Field[0, 5].Exploded &&
@@ -412,11 +388,9 @@ namespace BattleFieldTests
         public void TestDetonate5WithAllMinesInsideFieldDetonates25Cells()
         {
             int n = 9;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
             board.Field[4, 4] = new Mine(MineRadius.MineRadiusFive);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 6; i++)
@@ -442,11 +416,9 @@ namespace BattleFieldTests
         public void TestDetonate5WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = GenerateMatrix(n);
+            Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
             board.Field[4, 4] = new Mine(MineRadius.MineRadiusFive);
-            IDetonationPatternFactory detonationFactory = new DetonationFactory();
-            board.SetDetonationFactory(detonationFactory);
             board.Detonate(position);
             bool cellsAreDetonated = false;
             for (int i = 0; i < n; i++)
