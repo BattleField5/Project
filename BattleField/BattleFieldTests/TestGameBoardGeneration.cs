@@ -8,6 +8,30 @@ namespace BattleFieldTests
     public class TestGameBoardGeneration
     {
         [TestMethod]
+        public void TestGameboardOfDimention10AndPercentageOfMines15Has15Mines()
+        {
+            int size = 10;
+            var fieldGenerator = new GameboardGenerator(0.15, 0.15, RandomGenerator.Instance);
+            IGameboard gameboard = fieldGenerator.Generate(size);
+            Cell[,] field = gameboard.Field;
+            int numberOfMines = GetNumberOfMines(field);
+            bool numberOfMinesIs15 = (numberOfMines == 15);
+            Assert.IsTrue(numberOfMinesIs15, String.Format("Number of mines is {0}. Should be 15.", numberOfMines));
+        }
+
+        [TestMethod]
+        public void TestGameboardOfDimention10AndPercentageOfMines30Has30Mines()
+        {
+            int size = 10;
+            var fieldGenerator = new GameboardGenerator(0.3, 0.3, RandomGenerator.Instance);
+            IGameboard gameboard = fieldGenerator.Generate(size);
+            Cell[,] field = gameboard.Field;
+            int numberOfMines = GetNumberOfMines(field);
+            bool numberOfMinesIs30 = (numberOfMines == 30);
+            Assert.IsTrue(numberOfMinesIs30, String.Format("Number of mines is {0}. Should be 30.", numberOfMines));
+        }
+
+        [TestMethod]
         public void TestGameboardOfDimention10HasBetween15And30PercentMines()
         {
             int size = 10;
@@ -39,7 +63,7 @@ namespace BattleFieldTests
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if (field[i, j] is Mine)
+                    if (field[i, j].IsMine)
                     {
                         count++;
                     }
