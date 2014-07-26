@@ -55,16 +55,16 @@
     <Compile Include="Gameboard\Gameboard.cs" />
     <Compile Include="Main\GameEngine.cs" />
     <Compile Include="Cells\Cell.cs" />
-    <Compile Include="Interfaces\IDetonationPatternFactory.cs" />
-    <Compile Include="Interfaces\IGameboardGenerator.cs" />
-    <Compile Include="Interfaces\IGameboard.cs" />
-    <Compile Include="Interfaces\IGameController.cs" />
-    <Compile Include="Interfaces\IInputReader.cs" />
-    <Compile Include="Interfaces\IControllerMessenger.cs" />
+    <Compile Include="Contracts\IDetonationPatternFactory.cs" />
+    <Compile Include="Contracts\IGameboardGenerator.cs" />
+    <Compile Include="Contracts\IGameboard.cs" />
+    <Compile Include="Contracts\IGameController.cs" />
+    <Compile Include="Contracts\IInputReader.cs" />
+    <Compile Include="Contracts\IControllerMessenger.cs" />
     <Compile Include="Controllers\InputValidator.cs" />
-    <Compile Include="Interfaces\IPlaygroundRender.cs" />
-    <Compile Include="Interfaces\IRandomGenerator.cs" />
-    <Compile Include="Interfaces\IUIRender.cs" />
+    <Compile Include="Contracts\IPlaygroundRender.cs" />
+    <Compile Include="Contracts\IRandomGenerator.cs" />
+    <Compile Include="Contracts\IUIRender.cs" />
     <Compile Include="Main\Entry.cs" />
     <Compile Include="Cells\Mine.cs" />
     <Compile Include="Enumerations\MineRadius.cs" />
@@ -77,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="BattlefieldClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -45,9 +45,9 @@ namespace BattleField
                     {
                         result.Append(ExplodedCellSymbol + " ");
                     }
-                    else if(field[i, j] is Mine)
+                    else if(field[i, j].IsMine)
                     {
-                        int mineType = (int)(field[i, j] as Mine).Radius + 1;
+                        int mineType = (int)((Mine)field[i, j]).Radius + 1;
                         result.Append(mineType + " ");
                     }
                     else

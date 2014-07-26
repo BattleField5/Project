@@ -5,8 +5,8 @@ namespace BattleField
 {
     public class GameEngine
     {
-        private readonly double lowerBoundMines = 0.15;
-        private readonly double upperBoundMines = 0.3;
+        private readonly double LOWER_BOUND_MINES = 0.15;
+        private readonly double UPPER_BOUND_MINES = 0.3;
 
         private IGameController gameController;
         private IGameboard board;
@@ -46,7 +46,7 @@ namespace BattleField
 
         private double DetermineMinesPercentage()
         {
-            double minesPercentage = RandomGenerator.Instance.GetRandom(this.lowerBoundMines, this.upperBoundMines);
+            double minesPercentage = RandomGenerator.Instance.GetRandom(this.LOWER_BOUND_MINES, this.UPPER_BOUND_MINES);
             return minesPercentage;
         }
     }
