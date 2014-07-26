@@ -54,7 +54,7 @@
     <Compile Include="Gameboard\GameboardGenerator.cs" />
     <Compile Include="Gameboard\Gameboard.cs" />
     <Compile Include="Main\GameEngine.cs" />
-    <Compile Include="Cells\Cell.cs" />
+    <Compile Include="Contracts\ICell.cs" />
     <Compile Include="Contracts\IDetonationPatternFactory.cs" />
     <Compile Include="Contracts\IGameboardGenerator.cs" />
     <Compile Include="Contracts\IGameboard.cs" />

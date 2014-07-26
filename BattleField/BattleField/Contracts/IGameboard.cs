@@ -5,7 +5,7 @@ namespace BattleField
 {
     public interface IGameboard
     {
-        Cell this[int x, int y]
+        ICell this[int x, int y]
         {
             get;
             set;

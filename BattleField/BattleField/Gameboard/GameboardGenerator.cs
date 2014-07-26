@@ -65,7 +65,7 @@ namespace BattleField
                 usedPositions.Add(position);
                 int cellType = rand.GetRandom(0, mineRadiusMaxIndex);
                 MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
-                Cell currentCell = new Mine(randomRadius);
+                ICell currentCell = new Mine(randomRadius);
                 gameboard[cellX, cellY] = currentCell;
             }
         }

@@ -5,21 +5,43 @@ namespace BattleField
     /// <summary>
     /// Repersents a Cell that is empty.
     /// </summary>
-    public class EmptyCell: Cell
+    public class EmptyCell: ICell
     {
-        /// <summary>
-        /// Creates an Empty Cell.
-        /// </summary>
-        public EmptyCell()
-        {
-        }
+        private bool exploded;
 
-        public override bool IsMine
+        /// <summary>
+        /// Defines if a cell is mine.
+        /// </summary>
+        public bool IsMine
         {
             get
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Defines if a cell has exploded.
+        /// </summary>
+        public bool Exploded
+        {
+            get
+            {
+                return this.exploded;
+            }
+
+            protected set
+            {
+                this.exploded = value;
+            }
+        }
+
+        /// <summary>
+        /// Explodes the current cell.
+        /// </summary>
+        public virtual void Explode()
+        {
+            this.Exploded = true;
         }
     }
 }

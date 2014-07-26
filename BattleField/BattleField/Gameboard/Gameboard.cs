@@ -9,7 +9,7 @@ namespace BattleField
     /// </summary>
     public class Gameboard : IGameboard
     {        
-        private Cell[][] field;
+        private ICell[][] field;
         private int minesCount;
         private int size;
         private IDetonationPatternFactory detonationFactory;
@@ -19,10 +19,10 @@ namespace BattleField
         /// </summary>
         public Gameboard(int size)
         {
-            this.field = new Cell[size][];
+            this.field = new ICell[size][];
             for (int i = 0; i < size; i++)
             {
-                this.field[i] = new Cell[size];
+                this.field[i] = new ICell[size];
             }
 
             this.Size = size;
@@ -31,7 +31,7 @@ namespace BattleField
         /// <summary>
         /// Gets/Sets the Gameboard's cell at position.
         /// </summary>
-        public Cell this[int x, int y]
+        public ICell this[int x, int y]
         {
             get
             {
