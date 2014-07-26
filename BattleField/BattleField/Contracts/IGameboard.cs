@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BattleField
 {
     public interface IGameboard
     {
-        Cell[,] Field
+        Cell this[int x, int y]
         {
             get;
             set;
@@ -19,7 +20,6 @@ namespace BattleField
         int Size
         {
             get;
-            set;
         }
 
         void SetDetonationFactory(IDetonationPatternFactory detonationFactory);

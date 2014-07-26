@@ -24,34 +24,30 @@ namespace BattleField
         /// <param name="size">Number of cells in width and height</param>
         public IGameboard Generate(int size, double minesPercentage)
         {
-            var field = this.GenerateEmptyField(size);
+            IGameboard gameboard = new Gameboard(size);
             int minesCount = this.DetermineMineCount(size, minesPercentage);
-            field = this.GenerateMinesInField(field, minesCount, size);
-
-            IGameboard gameboard = new Gameboard();
-            gameboard.Size = size;
             gameboard.MinesCount = minesCount;
-            gameboard.Field = field;
-
+            this.GenerateEmptyField(gameboard);
+            this.GenerateMinesInField(gameboard, minesCount);
+            
             return gameboard;
         }
 
-        private Cell[,] GenerateEmptyField(int size)
+        private void GenerateEmptyField(IGameboard gameboard)
         {
-            var field = new Cell[size, size];
+            int size = gameboard.Size;
             for (int row = 0; row < size; row++)
             {
                 for (int col = 0; col < size; col++)
                 {
-                    field[row, col] = new EmptyCell();
+                    gameboard[row, col] = new EmptyCell();
                 }
             }
-
-            return field;
         }
 
-        private Cell[,] GenerateMinesInField(Cell[,] field, int minesCount, int size)
+        private void GenerateMinesInField(IGameboard gameboard, int minesCount)
         {
+            int size = gameboard.Size;
             Array mineRadiusValues = Enum.GetValues(typeof(MineRadius));
             int mineRadiusMaxIndex = mineRadiusValues.Length - 1;
 
@@ -70,10 +66,8 @@ namespace BattleField
                 int cellType = rand.GetRandom(0, mineRadiusMaxIndex);
                 MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
                 Cell currentCell = new Mine(randomRadius);
-                field[cellX, cellY] = currentCell;
+                gameboard[cellX, cellY] = currentCell;
             }
-
-            return field;
         }
 
         private int DetermineMineCount(int size, double percentage)

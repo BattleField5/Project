@@ -13,11 +13,11 @@ namespace BattleField
         /// </summary>
         /// <param name="position">The position to be detonated</param>
         /// <param name="field">The field to which the position belongs</param>
-        public DetonationPattern GetDetonationPattern(Position position, Cell[,] field)
+        public DetonationPattern GetDetonationPattern(Position position, IGameboard gameboard)
         {
             DetonationPattern detonationPattern = null;
 
-            Mine mine = (Mine) field[position.X, position.Y];
+            Mine mine = (Mine)gameboard[position.X, position.Y];
             switch (mine.Radius)
             {
                 case MineRadius.MineRadiusOne:
@@ -47,7 +47,6 @@ namespace BattleField
                     }
                 default:
                     {
-                        //TODO: Custom exception
                         throw new InvalidOperationException("No detonation pattern exists!");
                     }
             }

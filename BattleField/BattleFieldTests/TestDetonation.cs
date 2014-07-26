@@ -10,14 +10,12 @@ namespace BattleFieldTests
     {
         private Gameboard GenerateGameboard(int n)
         {
-            Gameboard gameboard = new Gameboard();
-            gameboard.Size = n;
-            gameboard.Field = new Cell[n, n];
+            Gameboard gameboard = new Gameboard(n);
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    gameboard.Field[i, j] = new EmptyCell();
+                    gameboard[i, j] = new EmptyCell();
                 }
             }
 
@@ -30,14 +28,14 @@ namespace BattleFieldTests
         public void TestDetonate1WithAllMinesInsideFieldDetonates5Cells()
         {
             Gameboard board = GenerateGameboard(5);
-            board.Field[1, 1] = new Mine(MineRadius.MineRadiusOne);
+            board[1, 1] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesFiveCells =
-                    board.Field[1, 1].Exploded &&
-                    board.Field[0, 0].Exploded &&
-                    board.Field[0, 2].Exploded &&
-                    board.Field[2, 2].Exploded &&
-                    board.Field[2, 0].Exploded;
+                    board[1, 1].Exploded &&
+                    board[0, 0].Exploded &&
+                    board[0, 2].Exploded &&
+                    board[2, 2].Exploded &&
+                    board[2, 0].Exploded;
 
             Assert.IsTrue(patternOneDetonatesFiveCells);
         }
@@ -47,7 +45,7 @@ namespace BattleFieldTests
         {
             int n = 5;
             Gameboard board = GenerateGameboard(n);
-            board.Field[1, 1] = new Mine(MineRadius.MineRadiusOne);
+            board[1, 1] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesMoreThanFiveCells = false;
             int i = 0;
@@ -62,7 +60,7 @@ namespace BattleFieldTests
                             (i != 0 && j != 2) &&
                             (i != 2 && j != 2) &&
                             (i != 2 && j != 0))
-                            && board.Field[i, j].Exploded)
+                            && board[i, j].Exploded)
                     {
                         patternOneDetonatesMoreThanFiveCells = true;
                         break;
@@ -82,9 +80,9 @@ namespace BattleFieldTests
         public void TestDetonate1With2MinesInsideFieldDetonates2Cells()
         {
             Gameboard board = GenerateGameboard(5);
-            board.Field[0, 0] = new Mine(MineRadius.MineRadiusOne);
+            board[0, 0] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(0, 0));
-            bool twoCellsAreDetonated = (board.Field[0, 0].Exploded && board.Field[1, 1].Exploded);
+            bool twoCellsAreDetonated = (board[0, 0].Exploded && board[1, 1].Exploded);
 
             Assert.IsTrue(twoCellsAreDetonated);
         }
@@ -94,7 +92,7 @@ namespace BattleFieldTests
         {
             int n = 5;
             Gameboard board = GenerateGameboard(n);
-            board.Field[0, 0] = new Mine(MineRadius.MineRadiusOne);
+            board[0, 0] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(0, 0));
             int i = 0;
             int j = 0;
@@ -103,7 +101,7 @@ namespace BattleFieldTests
             {
                 for (; j < n; j++)
                 {
-                    if (i != 0 && j != 0 && i != 1 && j != 1 && !board.Field[i, j].Exploded)
+                    if (i != 0 && j != 0 && i != 1 && j != 1 && !board[i, j].Exploded)
                     {
                         moreThanOneCellIsDetonated = true;
                         break;
@@ -124,14 +122,14 @@ namespace BattleFieldTests
         {
             int n = 5;
             Gameboard board = GenerateGameboard(n);
-            board.Field[2, 2] = new Mine(MineRadius.MineRadiusTwo);
+            board[2, 2] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(2, 2));
             bool nineCellsAreDetonated = true;
             for (int i = 1; i <= 3; i++)
             {
                 for (int j = 1; j < 3; j++)
                 {
-                    if (!board.Field[i, j].Exploded)
+                    if (!board[i, j].Exploded)
                     {
                         nineCellsAreDetonated = false;
                         break;
@@ -152,7 +150,7 @@ namespace BattleFieldTests
         {
             int n = 5;
             Gameboard board = GenerateGameboard(n);
-            board.Field[2, 2] = new Mine(MineRadius.MineRadiusTwo);
+            board[2, 2] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(2, 2));
             bool moreThanNineCellsAreDetonated = false;
             int i = 0;
@@ -163,7 +161,7 @@ namespace BattleFieldTests
                 {
                     if (!((1 <= i) && (i <= 3) && (1 <= j) && (j <= 3)))
                     {
-                        if (board.Field[i, j].Exploded)
+                        if (board[i, j].Exploded)
                         {
                             moreThanNineCellsAreDetonated = true;
                             break;
@@ -185,13 +183,13 @@ namespace BattleFieldTests
         {
             int n = 5;
             Gameboard board = GenerateGameboard(n);
-            board.Field[4, 0] = new Mine(MineRadius.MineRadiusTwo);
+            board[4, 0] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(4, 0));
             bool fourCellsAreDetonated =
-                    board.Field[3, 0].Exploded &&
-                    board.Field[3, 1].Exploded &&
-                    board.Field[4, 0].Exploded &&
-                    board.Field[4, 1].Exploded;
+                    board[3, 0].Exploded &&
+                    board[3, 1].Exploded &&
+                    board[4, 0].Exploded &&
+                    board[4, 1].Exploded;
 
             Assert.IsTrue(fourCellsAreDetonated);
         }
@@ -202,14 +200,14 @@ namespace BattleFieldTests
             int n = 7;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(3, 3);
-            board.Field[3, 3] = new Mine(MineRadius.MineRadiusThree);
+            board[3, 3] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
                 for (int j = 2; j <= 4; j++)
                 {
-                    if (!board.Field[i, j].Exploded)
+                    if (!board[i, j].Exploded)
                     {
                         cellsAreDetonated = false;
                         break;
@@ -223,10 +221,10 @@ namespace BattleFieldTests
             }
 
             cellsAreDetonated = cellsAreDetonated &&
-                    board.Field[1, 3].Exploded == board.Field[3, 5].Exploded &&
-                    board.Field[3, 5].Exploded == board.Field[5, 3].Exploded &&
-                    board.Field[5, 3].Exploded == board.Field[3, 1].Exploded &&
-                    board.Field[3, 1].Exploded == true;
+                    board[1, 3].Exploded == board[3, 5].Exploded &&
+                    board[3, 5].Exploded == board[5, 3].Exploded &&
+                    board[5, 3].Exploded == board[3, 1].Exploded &&
+                    board[3, 1].Exploded == true;
 
             Assert.IsTrue(cellsAreDetonated);
         }
@@ -237,7 +235,7 @@ namespace BattleFieldTests
             int n = 9;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
-            board.Field[4, 4] = new Mine(MineRadius.MineRadiusThree);
+            board[4, 4] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
             bool moreThanThirteenCellsDetonated = false;
             int i = 0;
@@ -252,7 +250,7 @@ namespace BattleFieldTests
                         (i != 6 && j != 4) &&
                         (i != 2 && j != 2))
                     {
-                        if (board.Field[i, j].Exploded)
+                        if (board[i, j].Exploded)
                         {
                             moreThanThirteenCellsDetonated = true;
                             break;
@@ -275,15 +273,15 @@ namespace BattleFieldTests
             int n = 7;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(6, 6);
-            board.Field[6, 6] = new Mine(MineRadius.MineRadiusThree);
+            board[6, 6] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
             bool cellsAreDetonated =
-                    board.Field[4, 6].Exploded == board.Field[5, 5].Exploded &&
-                    board.Field[5, 5].Exploded == board.Field[5, 6].Exploded &&
-                    board.Field[5, 6].Exploded == board.Field[6, 4].Exploded &&
-                    board.Field[6, 4].Exploded == board.Field[6, 5].Exploded &&
-                    board.Field[6, 5].Exploded == board.Field[6, 6].Exploded &&
-                    board.Field[6, 6].Exploded == true;
+                    board[4, 6].Exploded == board[5, 5].Exploded &&
+                    board[5, 5].Exploded == board[5, 6].Exploded &&
+                    board[5, 6].Exploded == board[6, 4].Exploded &&
+                    board[6, 4].Exploded == board[6, 5].Exploded &&
+                    board[6, 5].Exploded == board[6, 6].Exploded &&
+                    board[6, 6].Exploded == true;
 
             Assert.IsTrue(cellsAreDetonated);
         }
@@ -294,14 +292,14 @@ namespace BattleFieldTests
             int n = 7;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(3, 3);
-            board.Field[3, 3] = new Mine(MineRadius.MineRadiusFour);
+            board[3, 3] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 4; i++)
             {
                 for (int j = 1; j <= 5; j++)
                 {
-                    if (!board.Field[i, j].Exploded)
+                    if (!board[i, j].Exploded)
                     {
                         cellsAreDetonated = false;
                         break;
@@ -315,12 +313,12 @@ namespace BattleFieldTests
             }
 
             cellsAreDetonated = cellsAreDetonated &&
-                    board.Field[1, 2].Exploded == board.Field[1, 3].Exploded &&
-                    board.Field[1, 3].Exploded == board.Field[1, 4].Exploded &&
-                    board.Field[1, 4].Exploded == board.Field[5, 2].Exploded &&
-                    board.Field[5, 2].Exploded == board.Field[5, 3].Exploded &&
-                    board.Field[5, 3].Exploded == board.Field[5, 4].Exploded &&
-                    board.Field[5, 4].Exploded == true;
+                    board[1, 2].Exploded == board[1, 3].Exploded &&
+                    board[1, 3].Exploded == board[1, 4].Exploded &&
+                    board[1, 4].Exploded == board[5, 2].Exploded &&
+                    board[5, 2].Exploded == board[5, 3].Exploded &&
+                    board[5, 3].Exploded == board[5, 4].Exploded &&
+                    board[5, 4].Exploded == true;
 
             Assert.IsTrue(cellsAreDetonated);
         }
@@ -331,7 +329,7 @@ namespace BattleFieldTests
             int n = 9;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
-            board.Field[4, 4] = new Mine(MineRadius.MineRadiusFour);
+            board[4, 4] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
             bool moreThan21CellsAreDetonated = false;
             int i = 0;
@@ -346,7 +344,7 @@ namespace BattleFieldTests
                             (i == 6 && j == 6) ||
                             (i == 6 && j == 2))
                     {
-                        if (board.Field[i, j].Exploded)
+                        if (board[i, j].Exploded)
                         {
                             moreThan21CellsAreDetonated = false;
                             break;
@@ -369,17 +367,17 @@ namespace BattleFieldTests
             int n = 7;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(0, 6);
-            board.Field[0, 6] = new Mine(MineRadius.MineRadiusFour);
+            board[0, 6] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
             bool cellsAreDetonated =
-                    board.Field[0, 4].Exploded == board.Field[0, 5].Exploded &&
-                    board.Field[0, 5].Exploded == board.Field[0, 6].Exploded &&
-                    board.Field[0, 6].Exploded == board.Field[1, 4].Exploded &&
-                    board.Field[1, 4].Exploded == board.Field[1, 5].Exploded &&
-                    board.Field[1, 5].Exploded == board.Field[1, 6].Exploded &&
-                    board.Field[1, 6].Exploded == board.Field[2, 5].Exploded &&
-                    board.Field[2, 5].Exploded == board.Field[2, 6].Exploded &&
-                    board.Field[2, 6].Exploded == true;
+                    board[0, 4].Exploded == board[0, 5].Exploded &&
+                    board[0, 5].Exploded == board[0, 6].Exploded &&
+                    board[0, 6].Exploded == board[1, 4].Exploded &&
+                    board[1, 4].Exploded == board[1, 5].Exploded &&
+                    board[1, 5].Exploded == board[1, 6].Exploded &&
+                    board[1, 6].Exploded == board[2, 5].Exploded &&
+                    board[2, 5].Exploded == board[2, 6].Exploded &&
+                    board[2, 6].Exploded == true;
 
             Assert.IsTrue(cellsAreDetonated);
         }
@@ -390,14 +388,14 @@ namespace BattleFieldTests
             int n = 9;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
-            board.Field[4, 4] = new Mine(MineRadius.MineRadiusFive);
+            board[4, 4] = new Mine(MineRadius.MineRadiusFive);
             board.Detonate(position);
             bool cellsAreDetonated = true;
             for (int i = 2; i <= 6; i++)
             {
                 for (int j = 2; j <= 6; j++)
                 {
-                    if (!board.Field[i, j].Exploded)
+                    if (!board[i, j].Exploded)
                     {
                         cellsAreDetonated = false;
                         break;
@@ -418,7 +416,7 @@ namespace BattleFieldTests
             int n = 9;
             Gameboard board = GenerateGameboard(n);
             Position position = new Position(4, 4);
-            board.Field[4, 4] = new Mine(MineRadius.MineRadiusFive);
+            board[4, 4] = new Mine(MineRadius.MineRadiusFive);
             board.Detonate(position);
             bool cellsAreDetonated = false;
             for (int i = 0; i < n; i++)
@@ -427,7 +425,7 @@ namespace BattleFieldTests
                 {
                     if (!((2 <= i) && (i <= 6) && (2 <= j) && (j <= 6)))
                     {
-                        if (board.Field[i, j].Exploded)
+                        if (board[i, j].Exploded)
                         {
                             cellsAreDetonated = true;
                             break;

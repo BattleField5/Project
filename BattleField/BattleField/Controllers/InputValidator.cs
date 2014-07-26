@@ -61,7 +61,7 @@ namespace BattleField
             bool isInsideField = IsInsideField(gameboard, x, y);
             if (isInsideField)
             {
-                if (gameboard.Field[x, y].IsMine && !gameboard.Field[x, y].Exploded)
+                if (gameboard[x, y].IsMine && !gameboard[x, y].Exploded)
                 {
                     return true;
                 }

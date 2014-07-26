@@ -18,7 +18,6 @@ namespace BattleField
         public void RenderPlayground(IGameboard gameboard)
         {
             int size = gameboard.Size;
-            var field = gameboard.Field;
 
             StringBuilder result = new StringBuilder();
             result.Append("   ");
@@ -41,13 +40,13 @@ namespace BattleField
                 result.Append(i + " |");
                 for (int j = 0; j < size; j++)
                 {
-                    if (field[i, j].Exploded)
+                    if (gameboard[i, j].Exploded)
                     {
                         result.Append(ExplodedCellSymbol + " ");
                     }
-                    else if(field[i, j].IsMine)
+                    else if (gameboard[i, j].IsMine)
                     {
-                        int mineType = (int)((Mine)field[i, j]).Radius + 1;
+                        int mineType = (int)((Mine)gameboard[i, j]).Radius + 1;
                         result.Append(mineType + " ");
                     }
                     else

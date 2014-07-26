@@ -5,6 +5,6 @@ namespace BattleField
 {
     public interface IDetonationPatternFactory
     {
-        DetonationPattern GetDetonationPattern(Position position, Cell[,] field);
+        DetonationPattern GetDetonationPattern(Position position, IGameboard gameboard);
     }
 }
