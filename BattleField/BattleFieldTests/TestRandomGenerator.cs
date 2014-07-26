@@ -25,6 +25,7 @@ namespace BattleFieldTests
                     counter++;
                 }
             }
+
             Assert.IsTrue(counter == 0, string.Format("The random method returned {0} values below the set minimum value", counter));
         }
         /// <summary>
