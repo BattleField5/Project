@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using BattleField.Contracts;
+﻿namespace BattleField.Controllers
+{
+    using System;
+    using System.Linq;
+    using BattleField.Contracts;
 
-namespace BattleField.Controllers
-{    
     /// <summary>
     /// Writes on the Console.
     /// </summary>

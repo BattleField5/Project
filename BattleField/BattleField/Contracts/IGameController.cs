@@ -1,8 +1,8 @@
-﻿using System;
-using BattleField.Helpers;
-
-namespace BattleField.Contracts
+﻿namespace BattleField.Contracts
 {
+    using System;
+    using BattleField.Helpers;
+
     public interface IGameController
     {
         void GameOver(int detonatedMines);

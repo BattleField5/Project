@@ -1,8 +1,8 @@
-﻿using System;
-using BattleField.Contracts;
-
-namespace BattleField.Contracts
+﻿namespace BattleField.Contracts
 {
+    using System;
+    using BattleField.Contracts;
+
     public interface IRandomGenerator
     {
         int GetRandom(int min, int max);

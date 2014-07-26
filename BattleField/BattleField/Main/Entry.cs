@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BattleField.GameEngine
+﻿namespace BattleField.GameEngine
 {
+    using System;
+
     public class Entry
     {
         /// <summary>

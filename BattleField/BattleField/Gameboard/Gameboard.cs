@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using BattleField.Cells;
-using BattleField.Contracts;
-using BattleField.Controllers;
-using BattleField.Detonation;
-using BattleField.Enumerations;
-using BattleField.Gameboard;
-using BattleField.GameEngine;
-using BattleField.Helpers;
-
-namespace BattleField.Gameboard
+﻿namespace BattleField.Gameboard
 {
+    using System;
+    using System.Collections.Generic;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using BattleField.Detonation;
+    using BattleField.Enumerations;
+    using BattleField.Gameboard;
+    using BattleField.GameEngine;
+    using BattleField.Helpers;
+
     /// <summary>
     /// Represents the Gameboard with a field.
     /// </summary>
@@ -33,22 +33,6 @@ namespace BattleField.Gameboard
             }
 
             this.Size = size;
-        }
-
-        /// <summary>
-        /// Gets/Sets the Gameboard's cell at position.
-        /// </summary>
-        public ICell this[int x, int y]
-        {
-            get
-            {
-                return this.field[x][y];
-            }
-
-            set
-            {
-                this.field[x][y] = value;
-            }
         }
 
         /// <summary>
@@ -80,6 +64,22 @@ namespace BattleField.Gameboard
             set
             {
                 this.size = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets/Sets the Gameboard's cell at position.
+        /// </summary>
+        public ICell this[int x, int y]
+        {
+            get
+            {
+                return this.field[x][y];
+            }
+
+            set
+            {
+                this.field[x][y] = value;
             }
         }
 

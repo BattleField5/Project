@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using BattleField.Contracts;
-
-namespace BattleField.Controllers
+﻿namespace BattleField.Controllers
 {
+    using System;
+    using System.Text.RegularExpressions;
+    using BattleField.Contracts;
+
     /// <summary>
     /// Used for validating player input.
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BattleField.Contracts
+﻿namespace BattleField.Contracts
 {
+    using System;
+
     public interface IPlaygroundRender
     {
         void RenderPlayground(IGameboard gameboard);

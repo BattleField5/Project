@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BattleField.Contracts
+﻿namespace BattleField.Contracts
 {
+    using System;
+
     public interface IControllerMessenger
     {
         void MessageForGameOver(int detonatedMines);

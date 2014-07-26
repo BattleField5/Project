@@ -1,8 +1,8 @@
-﻿using System;
-using BattleField.Contracts;
-
-namespace BattleField.Controllers
+﻿namespace BattleField.Controllers
 {
+    using System;
+    using BattleField.Contracts;
+
     /// <summary>
     /// Knows the events messages of the game.
     /// Uses a IUiRender for rendering.

@@ -1,9 +1,9 @@
-﻿using System;
-using BattleField.Contracts;
-using BattleField.Helpers;
-
-namespace BattleField.Detonation
+﻿namespace BattleField.Detonation
 {
+    using System;
+    using BattleField.Contracts;
+    using BattleField.Helpers;
+
     public class RadiusFourDetonator : DetonationPattern
     {
         public override void Detonate(Position position, IGameboard gameboard)

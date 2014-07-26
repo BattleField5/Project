@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using BattleField.Cells;
-using BattleField.Contracts;
-using BattleField.Controllers;
-using BattleField.Enumerations;
-
-namespace BattleField.Controllers
+﻿namespace BattleField.Controllers
 {
+    using System;
+    using System.Text;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using BattleField.Enumerations;
+
     public class PlaygroundRender : IPlaygroundRender
     {
         private const char EmptyCellSymbol = '-';

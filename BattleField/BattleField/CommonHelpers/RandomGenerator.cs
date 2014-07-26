@@ -1,8 +1,8 @@
-﻿using System;
-using BattleField.Contracts;
-
-namespace BattleField.Helpers
+﻿namespace BattleField.Helpers
 {
+    using System;
+    using BattleField.Contracts;
+
     public sealed class RandomGenerator : IRandomGenerator
     {
         internal static readonly RandomGenerator RandomGeneratorInstance = new RandomGenerator();
@@ -29,7 +29,7 @@ namespace BattleField.Helpers
         public double GetRandom(double min, double max)
         {
             double next = this.random.NextDouble();
-            return min + (max - min) * next;
+            return min + ((max - min) * next);
         }
     }
 }

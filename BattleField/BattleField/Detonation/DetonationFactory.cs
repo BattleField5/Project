@@ -1,11 +1,11 @@
-﻿using System;
-using BattleField.Cells;
-using BattleField.Contracts;
-using BattleField.Enumerations;
-using BattleField.Helpers;
-
-namespace BattleField.Detonation
+﻿namespace BattleField.Detonation
 {
+    using System;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Enumerations;
+    using BattleField.Helpers;
+
     /// <summary>
     /// A Factory method class that creates a detonator depending on the mine radius.
     /// </summary>
@@ -28,26 +28,31 @@ namespace BattleField.Detonation
                         detonationPattern = new RadiusOneDetonator();
                         break;
                     }
+
                 case MineRadius.MineRadiusTwo:
                     {
                         detonationPattern = new RadiusTwoDetonator();
                         break;
                     }
+
                 case MineRadius.MineRadiusThree:
                     {
                         detonationPattern = new RadiusThreeDetonator();
                         break;
                     }
+
                 case MineRadius.MineRadiusFour:
                     {
                         detonationPattern = new RadiusFourDetonator();
                         break;
                     }
+
                 case MineRadius.MineRadiusFive:
                     {
                         detonationPattern = new RadiusFiveDetonator();
                         break;
                     }
+
                 default:
                     {
                         throw new InvalidOperationException("No detonation pattern exists!");

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using BattleField.Cells;
-using BattleField.Contracts;
-using BattleField.Controllers;
-using BattleField.Detonation;
-using BattleField.Enumerations;
-using BattleField.Gameboard;
-using BattleField.GameEngine;
-using BattleField.Helpers;
-
-namespace BattleField.Gameboard
+﻿namespace BattleField.Gameboard
 {
+    using System;
+    using System.Collections.Generic;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using BattleField.Detonation;
+    using BattleField.Enumerations;
+    using BattleField.Gameboard;
+    using BattleField.GameEngine;
+    using BattleField.Helpers;
+
     /// <summary>
     /// Can generate a gameboard.
     /// </summary>
@@ -71,7 +71,7 @@ namespace BattleField.Gameboard
                 }
 
                 usedPositions.Add(position);
-                int cellType = rand.GetRandom(0, mineRadiusMaxIndex);
+                int cellType = this.rand.GetRandom(0, mineRadiusMaxIndex);
                 MineRadius randomRadius = (MineRadius)mineRadiusValues.GetValue(cellType);
                 ICell currentCell = new Mine(randomRadius);
                 gameboard[cellX, cellY] = currentCell;

@@ -1,13 +1,13 @@
-﻿using System;
-using BattleField.Contracts;
-using BattleField.Enumerations;
-
-namespace BattleField.Cells
+﻿namespace BattleField.Cells
 {
+    using System;
+    using BattleField.Contracts;
+    using BattleField.Enumerations;
+
     /// <summary>
     /// Represents a Cell that is a Mine.
     /// </summary>
-    public class Mine: ICell
+    public class Mine : ICell
     {
         private MineRadius radius;
         private bool exploded;

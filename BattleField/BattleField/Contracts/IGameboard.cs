@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using BattleField.Helpers;
-
-namespace BattleField.Contracts
+﻿namespace BattleField.Contracts
 {
+    using System;
+    using System.Collections.Generic;
+    using BattleField.Helpers;
+
     public interface IGameboard
     {
-        ICell this[int x, int y]
-        {
-            get;
-            set;
-        }
-
         int MinesCount
         {
             get;
@@ -21,6 +15,12 @@ namespace BattleField.Contracts
         int Size
         {
             get;
+        }
+
+        ICell this[int x, int y]
+        {
+            get;
+            set;
         }
 
         void SetDetonationFactory(IDetonationPatternFactory detonationFactory);

@@ -1,8 +1,8 @@
-﻿using System;
-using BattleField.Contracts;
-
-namespace BattleField.Controllers
+﻿namespace BattleField.Controllers
 {
+    using System;
+    using BattleField.Contracts;
+
     /// <summary>
     /// Reades user input from the Console.
     /// </summary>

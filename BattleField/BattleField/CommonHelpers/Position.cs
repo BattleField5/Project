@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BattleField.Helpers
+﻿namespace BattleField.Helpers
 {
+    using System;
+
     /// <summary>
     /// Represents a x, y position.
     /// </summary>
@@ -9,6 +9,17 @@ namespace BattleField.Helpers
     {
         private int x;
         private int y;
+
+        /// <summary>
+        /// Creates a Position with X and Y.
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        public Position(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
 
         /// <summary>
         /// Get's sets X position.
@@ -40,17 +51,6 @@ namespace BattleField.Helpers
             {
                 this.y = value;
             }
-        }
-
-        /// <summary>
-        /// Creates a Position with X and Y.
-        /// </summary>
-        /// <param name="x">X position</param>
-        /// <param name="y">Y position</param>
-        public Position(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
         }
     }
 }

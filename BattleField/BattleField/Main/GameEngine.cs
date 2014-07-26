@@ -1,15 +1,15 @@
-﻿using System;
-using BattleField.Cells;
-using BattleField.Contracts;
-using BattleField.Controllers;
-using BattleField.Detonation;
-using BattleField.Enumerations;
-using BattleField.Gameboard;
-using BattleField.GameEngine;
-using BattleField.Helpers;
-
-namespace BattleField.GameEngine
+﻿namespace BattleField.GameEngine
 {
+    using System;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using BattleField.Detonation;
+    using BattleField.Enumerations;
+    using BattleField.Gameboard;
+    using BattleField.GameEngine;
+    using BattleField.Helpers;
+
     public class GameEngine
     {
         private readonly double LOWER_BOUND_MINES = 0.15;
@@ -29,7 +29,7 @@ namespace BattleField.GameEngine
             this.gameController = gameController;
             int size = this.gameController.GetPlaygroundSizeFromUser();
 
-            double minesPercentage = DetermineMinesPercentage();
+            double minesPercentage = this.DetermineMinesPercentage();
             this.board = fieldGenerator.Generate(size, minesPercentage);
             this.board.SetDetonationFactory(detonationFactory);
             

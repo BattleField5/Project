@@ -1,9 +1,9 @@
-﻿using System;
-using BattleField.Contracts;
-using BattleField.Helpers;
-
-namespace BattleField.Controllers
+﻿namespace BattleField.Controllers
 {
+    using System;
+    using BattleField.Contracts;
+    using BattleField.Helpers;
+
     public class GameController : IGameController
     {
         private IInputReader inputReader;

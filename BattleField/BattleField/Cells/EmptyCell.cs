@@ -1,12 +1,12 @@
-﻿using System;
-using BattleField.Contracts;
-
-namespace BattleField.Cells
+﻿namespace BattleField.Cells
 {
+    using System;
+    using BattleField.Contracts;
+
     /// <summary>
     /// Repersents a Cell that is empty.
     /// </summary>
-    public class EmptyCell: ICell
+    public class EmptyCell : ICell
     {
         private bool exploded;
 
