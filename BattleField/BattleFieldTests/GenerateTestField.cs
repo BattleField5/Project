@@ -1,16 +1,15 @@
-﻿using BattleField;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BattleField.Contracts;
-using BattleField.Gameboard;
-using BattleField.Cells;
-using BattleField.Enumerations;
-
-namespace BattleFieldTests
+﻿namespace BattleFieldTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using BattleField.Cells;
+    using BattleField.Contracts;
+    using BattleField.Enumerations;
+    using BattleField.Gameboard;
+
     internal static class GenerateTestField
     {
         internal static IGameboard GenerateFieldWithSizeTwo()

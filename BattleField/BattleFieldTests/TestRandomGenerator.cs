@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BattleField;
-using BattleField.Contracts;
-using BattleField.Helpers;
-
-namespace BattleFieldTests
+﻿namespace BattleFieldTests
 {
+    using System;
+    using BattleField;
+    using BattleField.Contracts;
+    using BattleField.Helpers;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class TestRandomGenerator
     {
@@ -21,7 +21,7 @@ namespace BattleFieldTests
             int counter = 0;
             for (int i = 0; i < 1000; i++)
             {
-                testValue = rand.GetRandom(1, 5);
+                testValue = this.rand.GetRandom(1, 5);
                 if (testValue < 1)
                 {
                     counter++;
@@ -30,6 +30,7 @@ namespace BattleFieldTests
 
             Assert.IsTrue(counter == 0, string.Format("The random method returned {0} values below the set minimum value", counter));
         }
+
         /// <summary>
         /// Method testing the RandomGenerator.GetRandom method for correct max values
         /// </summary>
@@ -43,12 +44,13 @@ namespace BattleFieldTests
             int counter = 0;
             for (int i = 0; i < 1000; i++)
             {
-                testValue = rand.GetRandom(1, 5);
+                testValue = this.rand.GetRandom(1, 5);
                 if (testValue > 5)
                 {
                     counter++;
                 }
             }
+
             Assert.IsTrue(counter == 0, string.Format("The random method returned {0} values equal or above the set maximum value", counter));
         }
 
@@ -59,7 +61,7 @@ namespace BattleFieldTests
         public void TestRandomGeneratorInstance()
         {
             IRandomGenerator secondRand = RandomGenerator.Instance;
-            Assert.AreEqual(rand, secondRand, "The two generated random generators should be the same object due to the implementation of Singleton pattern on RandomGenerator.cs!");
+            Assert.AreEqual(this.rand, secondRand, "The two generated random generators should be the same object due to the implementation of Singleton pattern on RandomGenerator.cs!");
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BattleField;
-using Moq;
-using System.Linq;
-using BattleField.Contracts;
-using BattleField.Controllers;
-
-namespace BattleFieldTests
+﻿namespace BattleFieldTests
 {
+    using System;
+    using System.Linq;
+    using BattleField;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class TestPlaygroundRender
     {

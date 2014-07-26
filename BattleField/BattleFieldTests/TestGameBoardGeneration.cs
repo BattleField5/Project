@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BattleField;
-using BattleField.Gameboard;
-using BattleField.Contracts;
-using BattleField.Helpers;
-
-namespace BattleFieldTests
+﻿namespace BattleFieldTests
 {
+    using System;
+    using BattleField;
+    using BattleField.Contracts;
+    using BattleField.Gameboard;
+    using BattleField.Helpers;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class TestGameBoardGeneration
     {
@@ -16,8 +16,8 @@ namespace BattleFieldTests
             int size = 10;
             var fieldGenerator = new GameboardGenerator(RandomGenerator.Instance);
             IGameboard gameboard = fieldGenerator.Generate(size, 0.15);
-            int numberOfMines = GetNumberOfMines(gameboard);
-            bool numberOfMinesIs15 = (numberOfMines == 15);
+            int numberOfMines = this.GetNumberOfMines(gameboard);
+            bool numberOfMinesIs15 = numberOfMines == 15;
             Assert.IsTrue(numberOfMinesIs15, String.Format("Number of mines is {0}. Should be 15.", numberOfMines));
         }
 
@@ -27,8 +27,8 @@ namespace BattleFieldTests
             int size = 10;
             var fieldGenerator = new GameboardGenerator(RandomGenerator.Instance);
             IGameboard gameboard = fieldGenerator.Generate(size, 0.3);
-            int numberOfMines = GetNumberOfMines(gameboard);
-            bool numberOfMinesIs30 = (numberOfMines == 30);
+            int numberOfMines = this.GetNumberOfMines(gameboard);
+            bool numberOfMinesIs30 = numberOfMines == 30;
             Assert.IsTrue(numberOfMinesIs30, String.Format("Number of mines is {0}. Should be 30.", numberOfMines));
         }
 
@@ -38,8 +38,8 @@ namespace BattleFieldTests
             int size = 10;
             var fieldGenerator = new GameboardGenerator(RandomGenerator.Instance);
             IGameboard gameboard = fieldGenerator.Generate(size, 0.2);
-            int numberOfMines = GetNumberOfMines(gameboard);
-            bool numberOfMinesIs20 = (numberOfMines == 20);
+            int numberOfMines = this.GetNumberOfMines(gameboard);
+            bool numberOfMinesIs20 = numberOfMines == 20;
             Assert.IsTrue(numberOfMinesIs20, String.Format("Percentage of mines is {0}. Should be 20.", numberOfMines));
         }
 
@@ -49,8 +49,8 @@ namespace BattleFieldTests
             int size = 5;
             var fieldGenerator = new GameboardGenerator(RandomGenerator.Instance);
             IGameboard gameboard = fieldGenerator.Generate(size, 0.2);
-            int numberOfMines = GetNumberOfMines(gameboard);
-            bool numberOfMinesIs5 = (numberOfMines == 5);
+            int numberOfMines = this.GetNumberOfMines(gameboard);
+            bool numberOfMinesIs5 = numberOfMines == 5;
             Assert.IsTrue(numberOfMinesIs5, String.Format("Number of mines is {0}. Should be 5.", numberOfMines));
         }
 

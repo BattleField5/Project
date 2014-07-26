@@ -1,13 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using BattleField;
-using BattleField.Contracts;
-using BattleField.Controllers;
-using BattleField.Helpers;
-
-namespace BattleFieldTests
+﻿namespace BattleFieldTests
 {
+    using System;
+    using BattleField;
+    using BattleField.Contracts;
+    using BattleField.Controllers;
+    using BattleField.Helpers;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class TestGameController
     {
@@ -22,15 +22,15 @@ namespace BattleFieldTests
             this.inputReader = new Mock<IInputReader>();
             this.messenger = new Mock<IControllerMessenger>();
             this.playgroundRender = new Mock<IPlaygroundRender>();
-            this.gameController = new GameController(inputReader.Object, messenger.Object, playgroundRender.Object);
+            this.gameController = new GameController(this.inputReader.Object, this.messenger.Object, this.playgroundRender.Object);
         }
 
         [TestMethod]
         public void GetPlaygroundSizeFromUserTestWithFive()
         {
-            inputReader.Setup(x => x.GetUserInput()).Returns("5");
-            messenger.Setup(x => x.MessageForWrongGameboardSize()).Throws(new ArgumentException("Invalid Size"));
-            var controllerResult = gameController.GetPlaygroundSizeFromUser();
+            this.inputReader.Setup(x => x.GetUserInput()).Returns("5");
+            this.messenger.Setup(x => x.MessageForWrongGameboardSize()).Throws(new ArgumentException("Invalid Size"));
+            var controllerResult = this.gameController.GetPlaygroundSizeFromUser();
             var expectedResult = 5;
             Assert.AreEqual(expectedResult, controllerResult);
         }
@@ -39,19 +39,20 @@ namespace BattleFieldTests
         [ExpectedException(typeof(ArgumentException))]
         public void GetPlaygroundSizeFromUserTestForInvalidMessage()
         {
-            inputReader.Setup(x => x.GetUserInput()).Returns("0");
-            messenger.Setup(x => x.MessageForWrongGameboardSize()).Throws(new ArgumentException("Invalid Size"));
-            var controllerResult = gameController.GetPlaygroundSizeFromUser();
+            this.inputReader.Setup(x => x.GetUserInput()).Returns("0");
+            this.messenger.Setup(x => x.MessageForWrongGameboardSize()).Throws(new ArgumentException("Invalid Size"));
+            var controllerResult = this.gameController.GetPlaygroundSizeFromUser();
         }
+
         [Timeout(5000)]
         [TestMethod]
         public void GetPlaygroundSizeFromUserTestAskingForNumberUntilTakeItCorrect()
         {
             int userInput = -1;
-            inputReader.Setup(x => x.GetUserInput())
+            this.inputReader.Setup(x => x.GetUserInput())
                 .Returns(() => userInput.ToString())
                 .Callback(() => userInput++);
-            var controllerResult = gameController.GetPlaygroundSizeFromUser();
+            var controllerResult = this.gameController.GetPlaygroundSizeFromUser();
             var expectedResult = 2;
             Assert.AreEqual(expectedResult, controllerResult);
         }
@@ -60,11 +61,11 @@ namespace BattleFieldTests
         public void GetNextPositionForPlayFromUserTestForCorrectPositionWithMine()
         {
             var field = GenerateTestField.GenerateFieldWithSizeTwo();
-            inputReader.Setup(x => x.GetUserInput()).Returns("0 0");
-            messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
-            messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-            Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = (0 == returnedPosition.X && 0 == returnedPosition.Y);
+            this.inputReader.Setup(x => x.GetUserInput()).Returns("0 0");
+            this.messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
+            this.messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
+            Position returnedPosition = this.gameController.GetNextPositionForPlayFromUser(field);
+            bool isTheSameCell = 0 == returnedPosition.X && 0 == returnedPosition.Y;
             Assert.IsTrue(isTheSameCell);
         }
 
@@ -75,10 +76,10 @@ namespace BattleFieldTests
             try
             {
                 var field = GenerateTestField.GenerateFieldWithSizeTwo();
-                inputReader.Setup(x => x.GetUserInput()).Returns("1 1");
-                messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
-                messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-                Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
+                this.inputReader.Setup(x => x.GetUserInput()).Returns("1 1");
+                this.messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
+                this.messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
+                Position returnedPosition = this.gameController.GetNextPositionForPlayFromUser(field);
             }
             catch (ArgumentException ex)
             {
@@ -94,10 +95,10 @@ namespace BattleFieldTests
             try
             {
                 var field = GenerateTestField.GenerateFieldWithSizeTwo();
-                inputReader.Setup(x => x.GetUserInput()).Returns("111");
-                messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
-                messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
-                Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
+                this.inputReader.Setup(x => x.GetUserInput()).Returns("111");
+                this.messenger.Setup(x => x.MessageForWrongCoordinates()).Throws(new ArgumentException("Invalid Coordinates"));
+                this.messenger.Setup(x => x.MessageForInvalidMove()).Throws(new ArgumentException("Invalid Move"));
+                Position returnedPosition = this.gameController.GetNextPositionForPlayFromUser(field);
             }
             catch (ArgumentException ex)
             {
@@ -110,14 +111,14 @@ namespace BattleFieldTests
         [TestMethod]
         public void GetNextPositionForPlayFromUserTestForAskUntilGetCorrectCoordinate()
         {
-            var arrayWithCoordinates = new String[] { "111", "", "1 1", "-5 5", "0 0" };
+            var arrayWithCoordinates = new String[] { "111", String.Empty, "1 1", "-5 5", "0 0" };
             var currentIndex = 0;
             var field = GenerateTestField.GenerateFieldWithSizeTwo();
-            inputReader.Setup(x => x.GetUserInput())
+            this.inputReader.Setup(x => x.GetUserInput())
                 .Returns(() => arrayWithCoordinates[currentIndex])
                 .Callback(() => currentIndex++);
-            Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
-            bool isTheSameCell = (0 == returnedPosition.X && 0 == returnedPosition.Y);
+            Position returnedPosition = this.gameController.GetNextPositionForPlayFromUser(field);
+            bool isTheSameCell = 0 == returnedPosition.X && 0 == returnedPosition.Y;
             Assert.IsTrue(isTheSameCell);
         }
     }
