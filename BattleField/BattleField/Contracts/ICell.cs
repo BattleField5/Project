@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BattleField
+namespace BattleField.Contracts
 {
     /// <summary>
     /// Cell interface.

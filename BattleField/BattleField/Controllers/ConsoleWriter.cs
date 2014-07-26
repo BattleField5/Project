@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using BattleField.Contracts;
 
-namespace BattleField
+namespace BattleField.Controllers
 {    
     /// <summary>
     /// Writes on the Console.

@@ -1,7 +1,10 @@
 ﻿using System;
-using BattleField.DetonationPatterns;
+using BattleField.Cells;
+using BattleField.Contracts;
+using BattleField.Enumerations;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.Detonation
 {
     /// <summary>
     /// A Factory method class that creates a detonator depending on the mine radius.

@@ -1,7 +1,8 @@
 ﻿using System;
-using BattleField.DetonationPatterns;
+using BattleField.Detonation;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.Contracts
 {
     public interface IDetonationPatternFactory
     {

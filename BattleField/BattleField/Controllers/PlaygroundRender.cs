@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Text;
+using BattleField.Cells;
+using BattleField.Contracts;
+using BattleField.Controllers;
+using BattleField.Enumerations;
 
-namespace BattleField
+namespace BattleField.Controllers
 {
     public class PlaygroundRender : IPlaygroundRender
     {

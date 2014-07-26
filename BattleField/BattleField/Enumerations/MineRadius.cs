@@ -1,4 +1,4 @@
-﻿namespace BattleField
+﻿namespace BattleField.Enumerations
 {
     public enum MineRadius
     {

@@ -1,6 +1,8 @@
 ﻿using System;
+using BattleField.Contracts;
+using BattleField.Helpers;
 
-namespace BattleField.DetonationPatterns
+namespace BattleField.Detonation
 {
     public class RadiusOneDetonator : DetonationPattern
     {

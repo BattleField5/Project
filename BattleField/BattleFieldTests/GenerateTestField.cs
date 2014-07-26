@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BattleField.Contracts;
+using BattleField.Gameboard;
+using BattleField.Cells;
+using BattleField.Enumerations;
 
 namespace BattleFieldTests
 {

@@ -1,7 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BattleField;
-using BattleField.DetonationPatterns;
+using BattleField.Gameboard;
+using BattleField.Cells;
+using BattleField.Helpers;
+using BattleField.Enumerations;
+using BattleField.Contracts;
+using BattleField.Detonation;
 
 namespace BattleFieldTests
 {

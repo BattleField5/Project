@@ -1,6 +1,8 @@
 ﻿using System;
+using BattleField.Contracts;
+using BattleField.Enumerations;
 
-namespace BattleField
+namespace BattleField.Cells
 {
     /// <summary>
     /// Represents a Cell that is a Mine.

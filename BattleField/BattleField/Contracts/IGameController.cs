@@ -1,6 +1,7 @@
 ﻿using System;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.Contracts
 {
     public interface IGameController
     {

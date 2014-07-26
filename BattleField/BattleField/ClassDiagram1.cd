@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleField.Cells.EmptyCell" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAgAgAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cells\EmptyCell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Cells.Mine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAgACAAAAAAAAAAAAAgAgAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cells\Mine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Helpers.RandomGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>CommonHelpers\RandomGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Controllers.ConsoleReader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ConsoleReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Controllers.ConsoleWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Controllers\ConsoleWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Controllers.GameController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAkAAACAAAAAAAkAAAAAAIEAABAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Controllers\GameController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Controllers.GameControllerMessenger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgABAAABAAEAAAAAAAAAAAAAAAAAAAAAASAgA=</HashCode>
+      <FileName>Controllers\GameControllerMessenger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Controllers.InputValidator" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAUAAAAAHAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>Controllers\InputValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Controllers.PlaygroundRender" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAIAQAAA=</HashCode>
+      <FileName>Controllers\PlaygroundRender.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Detonation.DetonationFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\DetonationFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Detonation.DetonationPattern" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAEgAAAAAAAA=</HashCode>
+      <FileName>Detonation\DetonationPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonation.RadiusFiveDetonator" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\RadiusFiveDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonation.RadiusFourDetonator" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\RadiusFourDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonation.RadiusOneDetonator" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\RadiusOneDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonation.RadiusThreeDetonator" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\RadiusThreeDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Detonation.RadiusTwoDetonator" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Detonation\RadiusTwoDetonator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.Gameboard.Gameboard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgAAACIAAAAAAAAAAAAIAAAEAIAABAIA=</HashCode>
+      <FileName>Gameboard\Gameboard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.Gameboard.GameboardGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAUgAAAA=</HashCode>
+      <FileName>Gameboard\GameboardGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BattleField.GameEngine.Entry" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Main\Entry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleField.GameEngine.GameEngine" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAgCAAAAAQAAAAAAAAAAAAAAAAIgAAAAAAAAA=</HashCode>
+      <FileName>Main\GameEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="BattleField.Helpers.Position" Collapsed="true">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAA=</HashCode>
+      <FileName>CommonHelpers\Position.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="BattleField.Contracts.ICell" Collapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAgAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\ICell.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IControllerMessenger" Collapsed="true">
+    <Position X="13.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgABAAABAAEAAAAAAAAAAAAAAAAAAAAAACAgA=</HashCode>
+      <FileName>Contracts\IControllerMessenger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IDetonationPatternFactory" Collapsed="true">
+    <Position X="15.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\IDetonationPatternFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IGameboard" Collapsed="true">
+    <Position X="17.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAACAAAAAAAAAAAAAIAAAEAIAAAAAA=</HashCode>
+      <FileName>Contracts\IGameboard.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IGameboardGenerator" Collapsed="true">
+    <Position X="12" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Contracts\IGameboardGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IGameController" Collapsed="true">
+    <Position X="13.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\IGameController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IInputReader" Collapsed="true">
+    <Position X="15.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\IInputReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IPlaygroundRender" Collapsed="true">
+    <Position X="17.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\IPlaygroundRender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IRandomGenerator" Collapsed="true">
+    <Position X="12" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contracts\IRandomGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BattleField.Contracts.IUiRender" Collapsed="true">
+    <Position X="13.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Contracts\IUIRender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

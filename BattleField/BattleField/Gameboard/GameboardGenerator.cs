@@ -1,7 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using BattleField.Cells;
+using BattleField.Contracts;
+using BattleField.Controllers;
+using BattleField.Detonation;
+using BattleField.Enumerations;
+using BattleField.Gameboard;
+using BattleField.GameEngine;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.Gameboard
 {
     /// <summary>
     /// Can generate a gameboard.

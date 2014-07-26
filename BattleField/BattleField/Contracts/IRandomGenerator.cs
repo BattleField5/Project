@@ -1,6 +1,7 @@
 ﻿using System;
+using BattleField.Contracts;
 
-namespace BattleField
+namespace BattleField.Contracts
 {
     public interface IRandomGenerator
     {

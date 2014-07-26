@@ -1,7 +1,14 @@
 ﻿using System;
-using BattleField.DetonationPatterns;
+using BattleField.Cells;
+using BattleField.Contracts;
+using BattleField.Controllers;
+using BattleField.Detonation;
+using BattleField.Enumerations;
+using BattleField.Gameboard;
+using BattleField.GameEngine;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.GameEngine
 {
     public class GameEngine
     {

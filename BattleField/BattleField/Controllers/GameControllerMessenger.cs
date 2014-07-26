@@ -1,6 +1,7 @@
 ﻿using System;
+using BattleField.Contracts;
 
-namespace BattleField
+namespace BattleField.Controllers
 {
     /// <summary>
     /// Knows the events messages of the game.

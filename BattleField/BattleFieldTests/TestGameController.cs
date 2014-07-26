@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using BattleField;
+using BattleField.Contracts;
+using BattleField.Controllers;
+using BattleField.Helpers;
 
 namespace BattleFieldTests
 {
@@ -107,12 +110,12 @@ namespace BattleFieldTests
         [TestMethod]
         public void GetNextPositionForPlayFromUserTestForAskUntilGetCorrectCoordinate()
         {
-            var arrayWithCoordinates = new String[] {"111" , "" , "1 1" , "-5 5" , "0 0" };
+            var arrayWithCoordinates = new String[] { "111", "", "1 1", "-5 5", "0 0" };
             var currentIndex = 0;
             var field = GenerateTestField.GenerateFieldWithSizeTwo();
             inputReader.Setup(x => x.GetUserInput())
-                .Returns(() =>arrayWithCoordinates[currentIndex])
-                .Callback(()=>currentIndex++);
+                .Returns(() => arrayWithCoordinates[currentIndex])
+                .Callback(() => currentIndex++);
             Position returnedPosition = gameController.GetNextPositionForPlayFromUser(field);
             bool isTheSameCell = (0 == returnedPosition.X && 0 == returnedPosition.Y);
             Assert.IsTrue(isTheSameCell);

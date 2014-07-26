@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using BattleField.Helpers;
 
-namespace BattleField
+namespace BattleField.Contracts
 {
     public interface IGameboard
     {

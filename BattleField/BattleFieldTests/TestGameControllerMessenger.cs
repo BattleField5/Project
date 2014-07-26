@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using BattleField;
+using BattleField.Contracts;
+using BattleField.Controllers;
 
 namespace BattleFieldTests
 {
@@ -50,18 +52,21 @@ namespace BattleFieldTests
             this.CheckForExpectedMessageWithWriteLine("Wrong input! Coordinates must be 2 numbers between 0-9 , separated by space");
         }
 
+        
         [TestMethod]
         public void MessageForWrongGameboardSizeTest()
         {
             messenger.MessageForWrongGameboardSize();
             this.CheckForExpectedMessageWithWriteLine("Wrong input! Size must be number between 2-10");
         }
+        
         [TestMethod]
         public void AskForGameboardSizeTest()
         {
             messenger.AskForGameboardSize();
             this.CheckForExpectedMessageWithWrite("Please enter the size of the gameboard: ");
         }
+
         [TestMethod]
         public void AskForNewCoordinatesTest()
         {

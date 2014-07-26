@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BattleField;
 using Moq;
 using System.Linq;
+using BattleField.Contracts;
+using BattleField.Controllers;
 
 namespace BattleFieldTests
 {

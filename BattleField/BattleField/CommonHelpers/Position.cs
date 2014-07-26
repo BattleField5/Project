@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BattleField
+namespace BattleField.Helpers
 {
     /// <summary>
     /// Represents a x, y position.

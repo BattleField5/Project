@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BattleField;
+using BattleField.Contracts;
+using BattleField.Helpers;
 
 namespace BattleFieldTests
 {
