@@ -16,7 +16,7 @@
         [TestMethod]
         public void TestDetonate1WithAllMinesInsideFieldDetonates5Cells()
         {
-            Gameboard board = this.GenerateGameboard(5);
+            IGameboard board = this.GenerateGameboard(5);
             board[1, 1] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesFiveCells =
@@ -33,7 +33,7 @@
         public void TestDetonate1WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             board[1, 1] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(1, 1));
             bool patternOneDetonatesMoreThanFiveCells = false;
@@ -68,7 +68,7 @@
         [TestMethod]
         public void TestDetonate1With2MinesInsideFieldDetonates2Cells()
         {
-            Gameboard board = this.GenerateGameboard(5);
+            IGameboard board = this.GenerateGameboard(5);
             board[0, 0] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(0, 0));
             bool twoCellsAreDetonated = board[0, 0].Exploded && board[1, 1].Exploded;
@@ -80,7 +80,7 @@
         public void TestDetonate1With2MinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             board[0, 0] = new Mine(MineRadius.MineRadiusOne);
             board.Detonate(new Position(0, 0));
             int i = 0;
@@ -110,7 +110,7 @@
         public void TestDetonate2WithAllMinesInsideFieldDetonates9Cells()
         {
             int n = 5;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             board[2, 2] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(2, 2));
             bool nineCellsAreDetonated = true;
@@ -138,7 +138,7 @@
         public void TestDetonate2WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 5;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             board[2, 2] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(2, 2));
             bool moreThanNineCellsAreDetonated = false;
@@ -171,7 +171,7 @@
         public void TestDetonate2With4MinesInsideFieldDetonates4Cells()
         {
             int n = 5;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             board[4, 0] = new Mine(MineRadius.MineRadiusTwo);
             board.Detonate(new Position(4, 0));
             bool fourCellsAreDetonated =
@@ -187,7 +187,7 @@
         public void TestDetonate3WithAllMinesInsideFieldDetonates13Cells()
         {
             int n = 7;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(3, 3);
             board[3, 3] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
@@ -222,7 +222,7 @@
         public void TestDetonate3WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(4, 4);
             board[4, 4] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
@@ -260,7 +260,7 @@
         public void TestDetonate3With6MinesInsideFieldDetonates6Cells()
         {
             int n = 7;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(6, 6);
             board[6, 6] = new Mine(MineRadius.MineRadiusThree);
             board.Detonate(position);
@@ -279,7 +279,7 @@
         public void TestDetonate4WithAllMinesInsideFieldDetonates21Cells()
         {
             int n = 7;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(3, 3);
             board[3, 3] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
@@ -316,7 +316,7 @@
         public void TestDetonate4WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(4, 4);
             board[4, 4] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
@@ -354,7 +354,7 @@
         public void TestDetonate4With8MinesInsideFieldDetonates8Cells()
         {
             int n = 7;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(0, 6);
             board[0, 6] = new Mine(MineRadius.MineRadiusFour);
             board.Detonate(position);
@@ -375,7 +375,7 @@
         public void TestDetonate5WithAllMinesInsideFieldDetonates25Cells()
         {
             int n = 9;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(4, 4);
             board[4, 4] = new Mine(MineRadius.MineRadiusFive);
             board.Detonate(position);
@@ -404,7 +404,7 @@
         public void TestDetonate5WithAllMinesInsideFieldDoesNotDetonateUnnecessaryCells()
         {
             int n = 9;
-            Gameboard board = this.GenerateGameboard(n);
+            IGameboard board = this.GenerateGameboard(n);
             Position position = new Position(4, 4);
             board[4, 4] = new Mine(MineRadius.MineRadiusFive);
             board.Detonate(position);
@@ -432,9 +432,9 @@
             Assert.IsFalse(cellsAreDetonated);
         }
 
-        private Gameboard GenerateGameboard(int n)
+        private IGameboard GenerateGameboard(int n)
         {
-            Gameboard gameboard = new Gameboard(n);
+            IGameboard gameboard = new Gameboard(n);
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
